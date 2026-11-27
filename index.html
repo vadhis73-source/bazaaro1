@@ -172,6 +172,11 @@
       color: #fff;
       border: none;
     }
+    .pill-btn.cart-pill {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
     .pill-btn.you-btn {
       background: linear-gradient(135deg, #10b981, #059669);
       color: #fff;
@@ -431,14 +436,33 @@
       padding: 12px;
       margin-bottom: 12px;
     }
+    .clickable-open-area {
+      cursor: pointer;
+    }
+    .item-photo-wrap {
+      position: relative;
+      margin-bottom: 9px;
+    }
     .item-photo {
       width: 100%;
       max-height: 230px;
       object-fit: cover;
       border-radius: 11px;
-      margin-bottom: 9px;
       border: 1px solid var(--border);
       background: #0f172a;
+      display: block;
+    }
+    .photo-count-badge {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #f8fafc;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     .item-top {
       display: flex;
@@ -456,7 +480,7 @@
       color: #60a5fa;
     }
     .item-price-tag {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 800;
       color: #fbbf24;
     }
@@ -469,16 +493,51 @@
       font-size: 12.5px;
       color: var(--text-muted);
       line-height: 1.45;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .tap-hint-text {
+      font-size: 11px;
+      color: #60a5fa;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+    .item-actions-row {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 9px;
+    }
+    .cart-add-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #0f172a;
+      border: none;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 7px 11px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+    .details-open-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 7px 11px;
+      border-radius: 9px;
+      cursor: pointer;
     }
     .item-link-btn {
       display: inline-block;
-      margin-top: 9px;
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       text-decoration: none;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
-      padding: 7px 12px;
+      padding: 7px 11px;
       border-radius: 9px;
     }
     .item-footer {
@@ -519,18 +578,46 @@
       cursor: pointer;
     }
 
-    .photo-preview-box {
+    .photo-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
       margin-top: 8px;
-      border-radius: 11px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      display: none;
     }
-    .photo-preview-box img {
+    .photo-preview-thumb {
       width: 100%;
-      max-height: 165px;
+      height: 78px;
       object-fit: cover;
-      display: block;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+    }
+
+    .detail-main-photo {
+      width: 100%;
+      max-height: 270px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .detail-thumbs-row {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .detail-thumb-img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 9px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .detail-thumb-img.active {
+      border-color: var(--accent);
     }
 
     .btn {
@@ -540,6 +627,9 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
     }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-success { background: var(--success); color: #fff; }
@@ -658,7 +748,7 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       width: 100%;
-      max-width: 470px;
+      max-width: 480px;
       max-height: 88vh;
       overflow-y: auto;
       padding: 18px;
@@ -761,8 +851,9 @@
     </div>
 
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product / Add Link</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item (+ Photo)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openModal('cartModal')">🛒 My Cart (<span id="drawerCartCount">0</span>)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product (Up to 6 Photos)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item (Up to 6 Photos)</button>
     <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Verification</button>
     <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
@@ -779,6 +870,7 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="pill-btn cart-pill" onclick="openModal('cartModal')">🛒 <span id="headerCartCount">0</span></button>
       <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit Site</button>
       <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Create Account</button>
     </div>
@@ -799,18 +891,18 @@
             </div>
             <div class="cube-box">
               <span class="cube-label">Date</span>
-              <span class="cube-val" id="liveDate">27</span>
+              <span class="cube-val" id="liveDate">28</span>
             </div>
             <div class="cube-box gold-glow">
               <span class="cube-label">Day</span>
-              <span class="cube-val" id="liveDay">Fri</span>
+              <span class="cube-val" id="liveDay">Sat</span>
             </div>
           </div>
           <div class="live-dot-tag" id="syncStatusBadge">● FIREBASE LIVE</div>
         </div>
         <div class="time-row-3d">
           <span style="font-size:11px; color:#94a3b8; font-weight:700;">TIME (H : M : S)</span>
-          <span class="clock-3d-display" id="liveClockHMS">11:42:00 PM</span>
+          <span class="clock-3d-display" id="liveClockHMS">12:09:00 AM</span>
         </div>
       </div>
     </div>
@@ -858,13 +950,13 @@
     <div class="card">
       <div class="card-head">
         <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
-        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item / Link</button>
+        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
       </div>
 
       <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px; flex-wrap:wrap;">
         <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം</button>
         <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English</button>
-        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food (+ Photo)</button>
+        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food (+6 Photos)</button>
       </div>
 
       <div id="categoryItemsContainer"></div>
@@ -880,8 +972,8 @@
     <button class="nav-btn" onclick="openSellModal('PRODUCTS')">
       <span>🛒</span><span>Sell Item</span>
     </button>
-    <button class="nav-btn" onclick="openSellModal('FOOD')">
-      <span>🍲</span><span>Sell Food</span>
+    <button class="nav-btn" onclick="openModal('cartModal')">
+      <span>🛍️</span><span>Cart (<span id="bottomCartCount">0</span>)</span>
     </button>
     <button class="nav-btn" onclick="openModal('qrModal')">
       <span>📱</span><span>QR/UPI</span>
@@ -890,6 +982,32 @@
       <span>👤</span><span id="bottomAccountLabel">Account</span>
     </button>
   </nav>
+
+  <!-- Full Product / Item Details Modal -->
+  <div class="modal-backdrop" id="itemDetailsModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="detailModalTitle">Item Details</h3>
+        <button class="close-x" onclick="closeModal('itemDetailsModal')">✕</button>
+      </div>
+      <div id="detailModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="modal-backdrop" id="cartModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>🛒 Shopping Cart</h3>
+        <button class="close-x" onclick="closeModal('cartModal')">✕</button>
+      </div>
+      <div id="cartItemsContainer"></div>
+      <div style="margin-top:12px; display:flex; gap:8px;">
+        <button class="btn btn-success" style="flex:1;" onclick="checkoutCart()">⚡ Proceed to Buy / UPI</button>
+        <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Create Account Modal -->
   <div class="modal-backdrop" id="createAccountModal">
@@ -983,7 +1101,7 @@
     </div>
   </div>
 
-  <!-- Add / Edit Item & Product Link Modal -->
+  <!-- Add / Edit Item Modal (Up to 6 Photos + Store Link + Details for ALL Categories) -->
   <div class="modal-backdrop" id="postModal">
     <div class="modal">
       <div class="modal-head">
@@ -1018,23 +1136,21 @@
         <input type="url" id="postProductLink" class="form-control" placeholder="https://www.meesho.com/... or https://amzn.to/..." />
       </div>
       <div class="form-group">
-        <label>Photo from Gallery / Camera</label>
-        <input type="file" id="postPhotoFile" accept="image/*" class="form-control" onchange="handlePostPhotoUpload(event)" />
+        <label>Select up to 6 Photos from Gallery / Camera</label>
+        <input type="file" id="postPhotoFiles" accept="image/*" multiple class="form-control" onchange="handleMultiplePhotosUpload(event)" />
       </div>
       <div class="form-group">
-        <label>Or Photo Link (Optional)</label>
-        <input type="url" id="postPhotoUrl" class="form-control" placeholder="https://..." oninput="handlePostPhotoUrlInput(event)" />
+        <label>Or Photo Links (Up to 6 links — one link per line)</label>
+        <textarea id="postPhotoUrls" class="form-control" rows="2" placeholder="https://...&#10;https://..." oninput="handlePhotoUrlsInput(event)"></textarea>
       </div>
-      <div class="photo-preview-box" id="postPhotoPreviewBox">
-        <img id="postPhotoPreviewImg" src="" alt="Preview" />
-      </div>
+      <div class="photo-preview-grid" id="postPhotoPreviewGrid"></div>
       <div class="form-group" style="margin-top:10px;">
         <label>Seller Name & Contact Number</label>
         <input type="text" id="postSellerContact" class="form-control" placeholder="Name & Phone number" />
       </div>
       <div class="form-group">
-        <label>Details</label>
-        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+        <label>Full Details</label>
+        <textarea id="postContent" class="form-control" rows="4" placeholder="Enter full specifications, size, delivery, or details..."></textarea>
       </div>
       <button class="btn btn-success" id="savePostBtn" style="width:100%;" onclick="savePublicPost()">Publish Live to Everyone</button>
     </div>
@@ -1087,6 +1203,7 @@
   <script>
     const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
+    const MAX_PHOTOS = 6;
 
     const CATEGORY_DEFAULT_IMAGES = {
       PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=70",
@@ -1126,7 +1243,7 @@
         title: "ചിക്കൻ ബിരിയാണി (Chicken Biryani)",
         price: "Recipe",
         link: "",
-        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
+        photos: [CATEGORY_DEFAULT_IMAGES.FOOD],
         descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി, ചിക്കൻ, സവാള, തക്കാളി, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. രീതി: മസാല ചിക്കൻ വേവിച്ച്, നെയ്യിൽ വേവിച്ച അരി ചേർത്ത് ദം ഇടുക.",
         descEn: "Ingredients: Kaima/Basmati rice, chicken, onion, tomato, ginger-garlic paste, curd, biryani masala, ghee, coriander & mint. Method: Cook spiced chicken, layer with ghee-cooked rice, and dum cook.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1137,42 +1254,9 @@
         title: "കുഴിമന്തി (Kuzhi Mandi)",
         price: "Recipe",
         link: "",
-        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
+        photos: ["https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=800&auto=format&fit=crop"],
         descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ. രീതി: ചിക്കൻ വേവിച്ച് അരിക്ക് മുകളിൽ വെച്ച് ചാർക്കോൾ പുക നൽകുക.",
         descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal. Method: Steam/roast chicken over spiced rice and smoke with charcoal.",
-        by: "MUHAMMED ADHIL • 9778197726"
-      },
-      {
-        id: "r3",
-        cat: "FOOD",
-        title: "അൽഫാം ചിക്കൻ (Alfaham Chicken)",
-        price: "Recipe",
-        link: "",
-        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
-        descMl: "ചേരുവകൾ: ചിക്കൻ, തൈര്, ഇഞ്ചി-വെളുത്തുള്ളി, മുളകുപൊടി, കുരുമുളക്, ജീരകം, നാരങ്ങാനീര്, ഓയിൽ. രീതി: മസാല പുരട്ടി ഗ്രില്ലിലോ കനലിലോ ചുട്ടെടുക്കുക.",
-        descEn: "Ingredients: Chicken, curd, ginger-garlic, chili powder, pepper, cumin, lemon juice, oil. Method: Marinate and grill over charcoal or oven until done.",
-        by: "MUHAMMED ADHIL • 9778197726"
-      },
-      {
-        id: "r4",
-        cat: "FOOD",
-        title: "ചിക്കൻ പൊള്ളിച്ചത് (Chicken Pollichathu)",
-        price: "Recipe",
-        link: "",
-        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
-        descMl: "ചേരുവകൾ: വറുത്ത ചിക്കൻ, ചെറിയ ഉള്ളി, തക്കാളി, പച്ചമുളക്, കറിവേപ്പില, തേങ്ങാപ്പാൽ, വാഴയില. രീതി: മസാലയിൽ ചേർത്ത് വാഴയിലയിൽ പൊതിഞ്ഞ് തവയിൽ പൊള്ളിക്കുക.",
-        descEn: "Ingredients: Fried chicken, shallots, tomato, green chili, curry leaves, coconut milk, banana leaf. Method: Coat in masala, wrap in banana leaf, and roast on tawa.",
-        by: "MUHAMMED ADHIL • 9778197726"
-      },
-      {
-        id: "r5",
-        cat: "FOOD",
-        title: "ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes)",
-        price: "Recipe",
-        link: "",
-        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
-        descMl: "പഴങ്ങൾ/കട്ടപ്പാൽ, പഞ്ചസാര, ഐസ് ക്യൂബ്സ്, ചോക്ലേറ്റ്/ബൂസ്റ്റ്/ഓറിയോ എന്നിവ ചേർത്ത് മിക്സിയിൽ ബ്ലെൻഡ് ചെയ്ത് ഫ്രഷ് ജ്യൂസും ഷേക്കും തയ്യാറാക്കാം.",
-        descEn: "Blend fresh fruits or chilled/frozen milk with sugar, ice, cocoa/Boost/Oreo for quick juices and shakes.",
         by: "MUHAMMED ADHIL • 9778197726"
       }
     ];
@@ -1188,14 +1272,16 @@
       isOwnerVerified: false,
       followers: 0,
       following: 0,
+      cart: [],
       items: starterFoodRecipes
     };
 
-    let state = JSON.parse(localStorage.getItem("bazaaro_fb_link_v1")) || defaultData;
+    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v3")) || defaultData;
+    if (!Array.isArray(state.cart)) state.cart = [];
     let currentCategory = "ALL";
     let foodLang = "ml";
     let uploadedLogoTemp = null;
-    let postPhotoTemp = "";
+    let postPhotosTemp = [];
 
     window.addEventListener("load", async () => {
       updateLiveDateTime();
@@ -1205,6 +1291,16 @@
       setInterval(() => pullFromFirebase(false), 4000);
       setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1000);
     });
+
+    function normalizeItemPhotos(item) {
+      if (Array.isArray(item.photos) && item.photos.length > 0) {
+        return item.photos.slice(0, MAX_PHOTOS);
+      }
+      if (item.photo) {
+        return [item.photo];
+      }
+      return [CATEGORY_DEFAULT_IMAGES[item.cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
+    }
 
     async function pullFromFirebase(seedIfEmpty) {
       try {
@@ -1224,7 +1320,7 @@
             state.upi = cloud.site.upi || state.upi;
             if (cloud.site.logo) state.logo = cloud.site.logo;
           }
-          localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
+          localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
           renderCategoryItems();
           syncHeaderHeroOnly();
         } else if (seedIfEmpty) {
@@ -1260,12 +1356,12 @@
     }
 
     function persistLocalOnly() {
-      localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
       syncUI();
     }
 
     async function persistAndSyncCloud() {
-      localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
       syncUI();
       await pushPublicStateToFirebase();
     }
@@ -1274,6 +1370,16 @@
       if (state.isOwnerVerified) return true;
       if (state.user && OWNER_NUMBERS.includes(state.user.phone)) return true;
       return false;
+    }
+
+    function updateCartBadges() {
+      const count = (state.cart || []).length;
+      const h = document.getElementById("headerCartCount");
+      const b = document.getElementById("bottomCartCount");
+      const d = document.getElementById("drawerCartCount");
+      if (h) h.textContent = count;
+      if (b) b.textContent = count;
+      if (d) d.textContent = count;
     }
 
     function syncHeaderHeroOnly() {
@@ -1291,6 +1397,7 @@
       document.getElementById("heroUpiBadge").textContent = "UPI: " + state.upi;
       document.getElementById("qrUpiDisplay").textContent = state.upi;
       document.getElementById("youPostsCount").textContent = state.items.length;
+      updateCartBadges();
     }
 
     function syncUI() {
@@ -1330,6 +1437,7 @@
       document.getElementById("inputUpi").value = state.upi;
 
       renderCategoryItems();
+      renderCartItems();
     }
 
     function handleAccountClick() {
@@ -1373,7 +1481,7 @@
     function previewLogoFile(e) {
       const f = e.target.files[0];
       if (!f) return;
-      compressImageFile(f, 240, 0.75, dataUrl => {
+      compressImageFile(f, 240, 0.72, dataUrl => {
         uploadedLogoTemp = dataUrl;
       });
     }
@@ -1404,32 +1512,43 @@
       reader.readAsDataURL(file);
     }
 
-    function handlePostPhotoUpload(e) {
-      const f = e.target.files[0];
-      if (!f) return;
-      compressImageFile(f, 640, 0.68, dataUrl => {
-        postPhotoTemp = dataUrl;
-        document.getElementById("postPhotoUrl").value = "";
-        showPhotoPreview(dataUrl);
+    function handleMultiplePhotosUpload(e) {
+      const files = Array.from(e.target.files || []).slice(0, MAX_PHOTOS);
+      if (!files.length) return;
+      postPhotosTemp = [];
+      let processed = 0;
+
+      files.forEach(file => {
+        compressImageFile(file, 540, 0.58, dataUrl => {
+          postPhotosTemp.push(dataUrl);
+          processed++;
+          if (processed === files.length) {
+            renderPhotoPreviews();
+          }
+        });
       });
     }
 
-    function handlePostPhotoUrlInput(e) {
-      const url = e.target.value.trim();
-      postPhotoTemp = url;
-      showPhotoPreview(url);
+    function handlePhotoUrlsInput(e) {
+      const lines = e.target.value
+        .split(/\n|,/)
+        .map(s => s.trim())
+        .filter(Boolean)
+        .slice(0, MAX_PHOTOS);
+      postPhotosTemp = lines;
+      renderPhotoPreviews();
     }
 
-    function showPhotoPreview(src) {
-      const box = document.getElementById("postPhotoPreviewBox");
-      const img = document.getElementById("postPhotoPreviewImg");
-      if (src) {
-        img.src = src;
-        box.style.display = "block";
-      } else {
-        img.src = "";
-        box.style.display = "none";
+    function renderPhotoPreviews() {
+      const grid = document.getElementById("postPhotoPreviewGrid");
+      if (!postPhotosTemp.length) {
+        grid.innerHTML = "";
+        return;
       }
+      grid.innerHTML = postPhotosTemp
+        .slice(0, MAX_PHOTOS)
+        .map(src => `<img class="photo-preview-thumb" src="${src}" alt="Preview" />`)
+        .join("");
     }
 
     function normalizeLink(raw) {
@@ -1441,11 +1560,11 @@
 
     function detectStoreLabel(url) {
       const u = (url || "").toLowerCase();
-      if (u.includes("meesho")) return "🛒 Open on Meesho";
-      if (u.includes("flipkart")) return "🛍️ Open on Flipkart";
-      if (u.includes("myntra")) return "👗 Open on Myntra";
-      if (u.includes("amazon") || u.includes("amzn")) return "📦 Open on Amazon";
-      return "🔗 Open Product Link";
+      if (u.includes("meesho")) return "🛒 Buy on Meesho";
+      if (u.includes("flipkart")) return "🛍️ Buy on Flipkart";
+      if (u.includes("myntra")) return "👗 Buy on Myntra";
+      if (u.includes("amazon") || u.includes("amzn")) return "📦 Buy on Amazon";
+      return "⚡ Buy / Open Link";
     }
 
     async function saveSiteSettings() {
@@ -1516,16 +1635,16 @@
     function openSellModal(defaultCat) {
       document.getElementById("editingItemId").value = "";
       document.getElementById("postModalHeading").textContent =
-        defaultCat === "FOOD" ? "🍲 Sell Food Item (+ Photo)" : "🛒 Sell Product / Add Link";
+        defaultCat === "FOOD" ? "🍲 Sell Food Item (Up to 6 Photos)" : "🛒 Sell Product / Add Item (Up to 6 Photos)";
       document.getElementById("savePostBtn").textContent = "Publish Live to Everyone";
       document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
       document.getElementById("postTitle").value = "";
       document.getElementById("postPrice").value = "";
       document.getElementById("postProductLink").value = "";
-      document.getElementById("postPhotoFile").value = "";
-      document.getElementById("postPhotoUrl").value = "";
-      postPhotoTemp = "";
-      showPhotoPreview("");
+      document.getElementById("postPhotoFiles").value = "";
+      document.getElementById("postPhotoUrls").value = "";
+      postPhotosTemp = [];
+      renderPhotoPreviews();
       document.getElementById("postSellerContact").value = state.user
         ? `${state.user.name} • ${state.user.phone}`
         : "";
@@ -1537,18 +1656,19 @@
       const target = state.items.find(x => x.id === id);
       if (!target) return;
 
+      const existingPhotos = normalizeItemPhotos(target);
       document.getElementById("editingItemId").value = target.id;
-      document.getElementById("postModalHeading").textContent = "✏️ Edit Item, Photo & Link";
+      document.getElementById("postModalHeading").textContent = "✏️ Edit Item, Photos & Link";
       document.getElementById("savePostBtn").textContent = "Save Changes Live";
       document.getElementById("postCategory").value = target.cat || "PRODUCTS";
       document.getElementById("postTitle").value = target.title || "";
       document.getElementById("postPrice").value = target.price || "";
       document.getElementById("postProductLink").value = target.link || "";
-      document.getElementById("postPhotoFile").value = "";
-      postPhotoTemp = target.photo || "";
-      document.getElementById("postPhotoUrl").value =
-        target.photo && target.photo.startsWith("http") ? target.photo : "";
-      showPhotoPreview(postPhotoTemp);
+      document.getElementById("postPhotoFiles").value = "";
+      postPhotosTemp = [...existingPhotos];
+      const httpUrls = existingPhotos.filter(p => /^https?:\/\//i.test(p));
+      document.getElementById("postPhotoUrls").value = httpUrls.join("\n");
+      renderPhotoPreviews();
       document.getElementById("postSellerContact").value = target.by || "";
       document.getElementById("postContent").value = target.descMl || target.descEn || "";
       openModal("postModal");
@@ -1566,14 +1686,14 @@
       const txt = document.getElementById("postContent").value.trim();
 
       if (!title || !txt) {
-        alert("Please enter Name and Details.");
+        alert("Please enter Name and Full Details.");
         return;
       }
 
-      const finalPhoto =
-        postPhotoTemp ||
-        CATEGORY_DEFAULT_IMAGES[cat] ||
-        CATEGORY_DEFAULT_IMAGES.PRODUCTS;
+      const finalPhotos =
+        postPhotosTemp.length > 0
+          ? postPhotosTemp.slice(0, MAX_PHOTOS)
+          : [CATEGORY_DEFAULT_IMAGES[cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
 
       if (editId) {
         state.items = state.items.map(item =>
@@ -1584,7 +1704,8 @@
                 title,
                 price,
                 link,
-                photo: finalPhoto,
+                photos: finalPhotos,
+                photo: finalPhotos[0],
                 descMl: txt,
                 descEn: txt,
                 by: contact
@@ -1598,14 +1719,15 @@
           title,
           price,
           link,
-          photo: finalPhoto,
+          photos: finalPhotos,
+          photo: finalPhotos[0],
           descMl: txt,
           descEn: txt,
           by: contact
         });
       }
 
-      postPhotoTemp = "";
+      postPhotosTemp = [];
       document.getElementById("editingItemId").value = "";
       await persistAndSyncCloud();
       closeModal("postModal");
@@ -1614,6 +1736,126 @@
     async function deleteItem(id) {
       state.items = state.items.filter(x => x.id !== id);
       await persistAndSyncCloud();
+    }
+
+    function openItemDetailsModal(id) {
+      const item = state.items.find(x => x.id === id);
+      if (!item) return;
+
+      const photos = normalizeItemPhotos(item);
+      const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
+      const fullDesc = foodLang === "ml" ? item.descMl : item.descEn;
+
+      document.getElementById("detailModalTitle").textContent = item.title;
+      document.getElementById("detailModalBody").innerHTML = `
+        <img id="detailActivePhoto" class="detail-main-photo" src="${photos[0]}" alt="${item.title}" />
+        ${
+          photos.length > 1
+            ? `<div class="detail-thumbs-row">
+                ${photos
+                  .map(
+                    (src, idx) =>
+                      `<img class="detail-thumb-img ${idx === 0 ? "active" : ""}" src="${src}" onclick="switchDetailPhoto(this, '${src}')" alt="Photo ${idx + 1}" />`
+                  )
+                  .join("")}
+              </div>`
+            : ""
+        }
+        <div class="item-top">
+          <span class="item-cat-tag">${item.cat}</span>
+          <span class="item-price-tag">${item.price}</span>
+        </div>
+        <div style="font-size:16px; font-weight:800; margin:6px 0;">${item.title}</div>
+        <div style="font-size:13px; color:var(--text-muted); line-height:1.55; white-space:pre-line;">${fullDesc}</div>
+        <div style="margin-top:10px; font-size:12px; color:var(--text-muted);">
+          <strong>Seller / Contact:</strong> ${item.by}
+        </div>
+        <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-accent" style="flex:1;" onclick="addToCart('${item.id}')">🛒 Add to Cart</button>
+          ${
+            safeLink
+              ? `<a class="btn btn-primary" style="flex:1;" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>`
+              : `<button class="btn btn-success" style="flex:1;" onclick="addToCart('${item.id}'); closeModal('itemDetailsModal'); openModal('cartModal')">⚡ Buy Now</button>`
+          }
+        </div>
+      `;
+      openModal("itemDetailsModal");
+    }
+
+    function switchDetailPhoto(thumbEl, src) {
+      document.getElementById("detailActivePhoto").src = src;
+      document.querySelectorAll(".detail-thumb-img").forEach(el => el.classList.remove("active"));
+      if (thumbEl) thumbEl.classList.add("active");
+    }
+
+    function addToCart(id) {
+      const item = state.items.find(x => x.id === id);
+      if (!item) return;
+      const photos = normalizeItemPhotos(item);
+      state.cart.push({
+        cartId: "c_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        photo: photos[0],
+        link: item.link || "",
+        by: item.by
+      });
+      persistLocalOnly();
+      renderCartItems();
+      alert("Added to Cart: " + item.title);
+    }
+
+    function removeFromCart(cartId) {
+      state.cart = (state.cart || []).filter(c => c.cartId !== cartId);
+      persistLocalOnly();
+      renderCartItems();
+    }
+
+    function clearCart() {
+      state.cart = [];
+      persistLocalOnly();
+      renderCartItems();
+    }
+
+    function renderCartItems() {
+      const box = document.getElementById("cartItemsContainer");
+      if (!box) return;
+      const list = state.cart || [];
+      if (!list.length) {
+        box.innerHTML = `<div style="text-align:center; padding:16px; color:var(--text-muted); font-size:13px;">Your cart is empty.</div>`;
+        return;
+      }
+      box.innerHTML = list
+        .map(
+          c => `
+        <div class="item-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <div>
+              <div class="item-title">${c.title}</div>
+              <div style="font-size:12px; color:#fbbf24; font-weight:800;">${c.price}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${c.by}</div>
+            </div>
+            <button class="del-btn" onclick="removeFromCart('${c.cartId}')">Remove</button>
+          </div>
+          ${
+            c.link
+              ? `<a class="item-link-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(c.link)}</a>`
+              : ""
+          }
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    function checkoutCart() {
+      if (!state.cart || !state.cart.length) {
+        alert("Cart is empty.");
+        return;
+      }
+      closeModal("cartModal");
+      openModal("qrModal");
     }
 
     function renderCategoryItems() {
@@ -1628,24 +1870,37 @@
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
         container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">
-          No items listed here yet. Tap <b>+ Add Item / Link</b> to add products, photos, or store links.
+          No items listed here yet. Tap <b>+ Add Item</b> to add up to 6 photos, links, and full details.
         </div>`;
         return;
       }
 
       container.innerHTML = filtered.map(item => {
-        const imgSrc = item.photo || CATEGORY_DEFAULT_IMAGES[item.cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS;
+        const photos = normalizeItemPhotos(item);
+        const imgSrc = photos[0];
         const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
         return `
           <div class="item-card">
-            <img class="item-photo" src="${imgSrc}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
-            <div class="item-top">
-              <span class="item-cat-tag">${item.cat}</span>
-              <span class="item-price-tag">${item.price}</span>
+            <div class="clickable-open-area" onclick="openItemDetailsModal('${item.id}')">
+              <div class="item-photo-wrap">
+                <img class="item-photo" src="${imgSrc}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
+                ${photos.length > 1 ? `<span class="photo-count-badge">📷 ${photos.length} Photos</span>` : ""}
+              </div>
+              <div class="item-top">
+                <span class="item-cat-tag">${item.cat}</span>
+                <span class="item-price-tag">${item.price}</span>
+              </div>
+              <div class="item-title">${item.title}</div>
+              <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
+              <div class="tap-hint-text">Tap to view full details & photos ↗</div>
             </div>
-            <div class="item-title">${item.title}</div>
-            <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
-            ${safeLink ? `<a class="item-link-btn" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>` : ""}
+
+            <div class="item-actions-row">
+              <button class="cart-add-btn" onclick="addToCart('${item.id}')">🛒 Add to Cart</button>
+              <button class="details-open-btn" onclick="openItemDetailsModal('${item.id}')">🔍 Details & Buy</button>
+              ${safeLink ? `<a class="item-link-btn" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>` : ""}
+            </div>
+
             <div class="item-footer">
               <span><strong>${item.by}</strong></span>
               <div class="item-actions">
@@ -1663,7 +1918,7 @@
       if (!q) return;
       const rep = document.getElementById("aiReply");
       rep.style.display = "block";
-      rep.innerHTML = `<strong>AI Help:</strong> Paste any Meesho, Flipkart, Myntra, or Amazon link when adding an item to show a direct buy/open button.`;
+      rep.innerHTML = `<strong>AI Help:</strong> Tap any item card to open full details and photos, add items to Cart, or upload up to 6 photos per item.`;
     }
 
     function openModal(id) { document.getElementById(id).classList.add("open"); }
