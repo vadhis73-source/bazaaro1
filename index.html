@@ -1,1642 +1,1439 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#070b14" />
-  <title>BAZAARO — MY BOSS: MUHAMMED ADHIL</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071124'/%3E%3Cpolygon points='16,20 24,11 32,19 40,11 48,20' fill='%23fbbf24'/%3E%3Crect x='17' y='21' width='30' height='32' rx='6' fill='%231d4ed8' stroke='%23fbbf24' stroke-width='2.5'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <title>BAZAARO — India's Trending Public Super-Hub</title>
   <style>
-    :root[data-theme="dark"] {
-      --bg: #070b14;
-      --surface: #0f172a;
-      --surface-2: #17233b;
+    :root {
+      --bg: #0b1120;
+      --surface: #131c31;
+      --surface-2: #1c2842;
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --border: #25344f;
-      --primary: #3b82f6;
-      --primary-2: #1d4ed8;
-      --gold: #fbbf24;
-      --success: #22c55e;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --accent: #f59e0b;
+      --success: #10b981;
       --danger: #ef4444;
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.52);
+      --border: rgba(255, 255, 255, 0.09);
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     }
 
-    :root[data-theme="light"] {
+    body.light-theme {
       --bg: #f1f5f9;
       --surface: #ffffff;
-      --surface-2: #f8fafc;
+      --surface-2: #e2e8f0;
       --text: #0f172a;
       --text-muted: #475569;
-      --border: #cbd5e1;
-      --primary: #2563eb;
-      --primary-2: #1e40af;
-      --gold: #d97706;
-      --success: #16a34a;
-      --danger: #dc2626;
-      --shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      --border: rgba(15, 23, 42, 0.1);
+      --shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', 'Noto Sans Malayalam', 'Noto Sans Tamil', 'Noto Sans Devanagari', sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      padding-bottom: 88px;
-      line-height: 1.48;
+      padding-bottom: 92px;
+      transition: background 0.25s, color 0.25s;
     }
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 14px;
+    /* Splash Screen */
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #172554 0%, #090d16 100%);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      box-shadow: var(--shadow);
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    #splashScreen.hide {
+      opacity: 0;
+      visibility: hidden;
     }
-
-    .brand-logo-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: #071124;
-      border: 1.5px solid rgba(251, 191, 36, 0.55);
-      display: grid;
-      place-items: center;
+    .splash-logo {
+      width: 105px;
+      height: 105px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #1d4ed8, #f59e0b);
+      padding: 4px;
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.45);
+      animation: pulseLogo 1.3s infinite alternate;
       overflow: hidden;
-      flex-shrink: 0;
-      box-shadow: 0 0 16px rgba(59, 130, 246, 0.28);
     }
-
-    .brand-logo-wrap img {
+    .splash-logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 22px;
+      background: #0b1120;
     }
-
-    .brand-title {
+    @keyframes pulseLogo {
+      from { transform: scale(0.95); }
+      to { transform: scale(1.05); }
+    }
+    .splash-title {
+      margin-top: 16px;
+      font-size: 26px;
       font-weight: 800;
-      font-size: 1.05rem;
-      letter-spacing: 0.4px;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+    .splash-sub {
+      margin-top: 5px;
+      font-size: 12px;
+      color: #fbbf24;
+      letter-spacing: 0.7px;
     }
 
-    .brand-sub {
-      font-size: 0.66rem;
-      color: var(--gold);
+    /* Top Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(19, 28, 49, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+    body.light-theme header {
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .menu-btn {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .site-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 2px solid var(--accent);
+      object-fit: cover;
+      background: #1e293b;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-size: 16px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .boss-tag {
+      font-size: 9.5px;
       font-weight: 700;
+      color: var(--accent);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .pill-btn {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .pill-btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+    }
+    .pill-btn.you-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+    }
+    .pill-btn.admin {
+      background: #0f172a;
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
     }
 
-    .header-actions {
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    /* 3D Glowing Live Date Bar (Home Screen Only) */
+    .date-3d-wrapper {
+      perspective: 900px;
+      margin-bottom: 12px;
+    }
+    .date-3d-card {
+      background: linear-gradient(145deg, #0f172a, #1e1b4b 50%, #090d16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      padding: 11px 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.55),
+        0 0 18px rgba(59, 130, 246, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.22);
+      transform: rotateX(6deg);
+      position: relative;
+      overflow: hidden;
+    }
+    .date-3d-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -30%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+      transform: rotate(25deg);
+      animation: lightSweep 4s infinite linear;
+      pointer-events: none;
+    }
+    @keyframes lightSweep {
+      0% { left: -60%; }
+      100% { left: 140%; }
+    }
+    .date-3d-cubes {
       display: flex;
       align-items: center;
       gap: 6px;
       flex-wrap: wrap;
     }
-
-    .btn {
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: var(--text);
-      padding: 7px 10px;
-      border-radius: 9px;
-      font-size: 0.75rem;
+    .cube-box {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: 3px solid #2563eb;
+      border-radius: 11px;
+      padding: 5px 10px;
+      text-align: center;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45), 0 0 10px rgba(37, 99, 235, 0.3);
+    }
+    .cube-box.gold-glow {
+      border-bottom-color: #f59e0b;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45), 0 0 12px rgba(245, 158, 11, 0.35);
+    }
+    .cube-label {
+      display: block;
+      font-size: 8.5px;
       font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      text-decoration: none;
+      letter-spacing: 0.7px;
+      color: #94a3b8;
+      text-transform: uppercase;
     }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      border-color: var(--primary);
-      color: #fff;
+    .cube-val {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 2px 0 #1d4ed8, 0 4px 10px rgba(56, 189, 248, 0.85);
     }
-
-    .btn-gold {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #070b14;
+    .cube-box.gold-glow .cube-val {
+      color: #fde68a;
+      text-shadow: 0 2px 0 #b45309, 0 4px 10px rgba(245, 158, 11, 0.85);
     }
-
-    .btn-success {
-      background: var(--success);
-      border-color: var(--success);
-      color: #06130a;
-    }
-
-    .btn-sm {
-      padding: 5px 9px;
-      font-size: 0.72rem;
-      border-radius: 8px;
-    }
-
-    .container {
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 14px;
-    }
-
-    .hero-card {
-      background: linear-gradient(135deg, var(--surface-2), var(--surface));
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow);
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 3px 9px;
+    .live-dot-tag {
+      font-size: 10px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 4px 8px;
       border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      background: rgba(59, 130, 246, 0.15);
-      color: var(--primary);
-      border: 1px solid rgba(59, 130, 246, 0.35);
+      white-space: nowrap;
     }
 
-    .pill-gold {
-      background: rgba(251, 191, 36, 0.16);
-      color: var(--gold);
-      border-color: rgba(251, 191, 36, 0.38);
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #172554 0%, #1e1b4b 55%, #0f172a 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      padding: 15px;
+      color: #fff;
+      box-shadow: var(--shadow);
+      margin-bottom: 12px;
     }
-
-    .pill-ok {
-      background: rgba(34, 197, 94, 0.16);
-      color: var(--success);
-      border-color: rgba(34, 197, 94, 0.38);
-    }
-
-    .pill-warn {
-      background: rgba(239, 68, 68, 0.16);
-      color: var(--danger);
-      border-color: rgba(239, 68, 68, 0.38);
-    }
-
-    .tabs {
+    .hero-top {
       display: flex;
-      gap: 7px;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 15px;
+      border: 2px solid #f59e0b;
+      object-fit: cover;
+      background: #0b1120;
+      flex-shrink: 0;
+    }
+    .hero-title {
+      font-size: 17px;
+      font-weight: 800;
+    }
+    .hero-desc {
+      font-size: 12px;
+      color: #cbd5e1;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+    .badge.gold {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+
+    /* Straight Single-Line Categories Strip on Home Page */
+    .cat-strip-wrap {
+      margin-bottom: 12px;
+    }
+    .cat-strip-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .cat-strip {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
       overflow-x: auto;
+      gap: 8px;
       padding-bottom: 6px;
-      margin-bottom: 14px;
+      -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-
-    .tabs::-webkit-scrollbar {
+    .cat-strip::-webkit-scrollbar {
       display: none;
     }
-
-    .tab {
-      white-space: nowrap;
-      padding: 8px 13px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+    .cat-pill {
+      flex: 0 0 auto;
       background: var(--surface);
-      color: var(--text-muted);
-      font-size: 0.78rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      transition: all 0.2s;
+    }
+    .cat-pill.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
     }
 
-    .tab.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
+    /* Search Bar inside Category View */
+    .search-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
+    /* Card & Items */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: 18px;
+      padding: 15px;
       margin-bottom: 12px;
       box-shadow: var(--shadow);
     }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 800;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 10px;
-    }
-
-    .field {
+    .item-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
       margin-bottom: 10px;
     }
-
-    label {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--text-muted);
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .item-cat-tag {
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+    }
+    .item-price-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: #fbbf24;
+    }
+    .item-title {
+      font-size: 14.5px;
+      font-weight: 800;
       margin-bottom: 4px;
-      font-weight: 600;
+    }
+    .item-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 9px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      font-size: 11.5px;
+      color: var(--text-muted);
     }
 
-    input, select, textarea {
-      width: 100%;
-      padding: 9px 11px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+    /* Buttons & Inputs */
+    .btn {
+      padding: 9px 13px;
+      border-radius: 12px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-accent { background: var(--accent); color: #0f172a; }
+    .btn-secondary {
       background: var(--surface-2);
       color: var(--text);
-      font-size: 0.85rem;
-      font-family: inherit;
+      border: 1px solid var(--border);
     }
-
-    .meta {
-      font-size: 0.74rem;
+    .form-group { margin-bottom: 11px; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
       color: var(--text-muted);
+      margin-bottom: 4px;
     }
-
-    .price {
-      font-weight: 800;
-      color: var(--gold);
-      margin-top: 6px;
-      font-size: 0.94rem;
-    }
-
-    .actions-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-    }
-
-    .comment-box {
-      margin-top: 10px;
+    .form-control {
+      width: 100%;
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px;
-    }
-
-    .comment-item {
-      font-size: 0.78rem;
-      padding: 4px 0;
-      border-bottom: 1px dashed var(--border);
-    }
-
-    .comment-item:last-child {
-      border-bottom: 0;
-    }
-
-    video, iframe, .post-img {
-      width: 100%;
-      max-height: 360px;
+      color: var(--text);
+      padding: 9px 11px;
       border-radius: 11px;
-      background: #000;
-      margin-top: 8px;
-      border: 0;
-      object-fit: cover;
+      font-size: 13px;
     }
 
-    .qr-preview {
-      width: 220px;
-      max-width: 100%;
+    /* Stats inside "You" Profile Modal */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+      background: var(--surface-2);
+      padding: 11px 6px;
       border-radius: 14px;
-      border: 2px solid var(--gold);
-      background: #fff;
-      display: block;
-      margin: 8px 0;
+      margin: 10px 0;
     }
+    .stat-num { font-size: 19px; font-weight: 800; color: var(--primary-light); }
+    .stat-label { font-size: 11px; color: var(--text-muted); }
 
-    .vital-num {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-top: 4px;
-    }
-
-    .lock-banner {
-      background: rgba(239, 68, 68, 0.14);
-      border: 1px solid var(--danger);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
-
-    .ai-fab {
+    /* Modals & Drawer */
+    .modal-backdrop {
       position: fixed;
-      right: 14px;
-      bottom: 76px;
-      z-index: 45;
-      background: linear-gradient(135deg, var(--gold), var(--primary));
-      color: #070b14;
-      border: 0;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-weight: 800;
-      font-size: 0.78rem;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.74);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      z-index: 500;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 470px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 18px;
+    }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .close-x {
+      background: var(--surface-2);
+      border: none;
+      color: var(--text);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
       cursor: pointer;
-      box-shadow: var(--shadow);
     }
 
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: -270px;
+      width: 260px;
+      height: 100%;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      z-index: 600;
+      padding: 16px;
+      transition: left 0.25s ease;
+    }
+    .drawer.open { left: 0; }
+    .drawer-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--surface-2);
+      color: var(--text);
+      border: none;
+      padding: 10px 12px;
+      border-radius: 11px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--surface);
+      background: rgba(19, 28, 49, 0.97);
+      backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      padding: 6px 2px;
-      z-index: 40;
+      padding: 8px 2px;
+      z-index: 200;
     }
-
+    body.light-theme .bottom-nav {
+      background: rgba(255, 255, 255, 0.97);
+    }
     .nav-btn {
-      background: transparent;
-      border: 0;
+      background: none;
+      border: none;
       color: var(--text-muted);
-      font-size: 0.69rem;
-      font-weight: 700;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      padding: 5px 2px;
+      font-size: 10.5px;
+      font-weight: 700;
       cursor: pointer;
     }
+    .nav-btn.active { color: var(--primary-light); }
 
-    .nav-btn.active {
-      color: var(--primary);
-    }
-
-    .modal-backdrop {
+    .fab-ai {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      z-index: 60;
-    }
-
-    .modal-backdrop.open {
-      display: flex;
-    }
-
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      width: 100%;
-      max-width: 540px;
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: 16px;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 122px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
+      right: 14px;
+      bottom: 72px;
+      background: linear-gradient(135deg, #2563eb, #10b981);
       color: #fff;
-      padding: 8px 16px;
+      border: none;
       border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      z-index: 80;
-      display: none;
-    }
-
-    .toast.show {
-      display: block;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.76rem;
-      margin-top: 8px;
-    }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 7px 8px;
-      text-align: left;
-    }
-
-    th {
-      background: var(--surface-2);
+      padding: 9px 13px;
+      font-size: 11.5px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      z-index: 250;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+
+  <!-- Splash Screen -->
+  <div id="splashScreen">
+    <div class="splash-logo">
+      <img id="splashLogoImg" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="BAZAARO" />
+    </div>
+    <div class="splash-title" id="splashTitleText">BAZAARO</div>
+    <div class="splash-sub" id="splashSubText">MY BOSS: MUHAMMED ADHIL</div>
+  </div>
+
+  <!-- Side Drawer -->
+  <div class="drawer" id="sideDrawer">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <strong id="drawerBrandName">BAZAARO</strong>
+      <button class="close-x" onclick="toggleDrawer()">✕</button>
+    </div>
+    <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openFoodSellModal()">🍲 Sell Food Item</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openModal('postModal')">➕ Add Public Listing</button>
+    <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner Only)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Admin Panel</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); shareApp()">📤 Share BAZAARO</button>
+  </div>
+
+  <!-- Top Header -->
   <header>
-    <div class="brand">
-      <div class="brand-logo-wrap">
-        <img src="1000081957.png" alt="BAZAARO Logo" onerror="this.style.display='none'; document.getElementById('svgLogo').style.display='block';" />
-        <svg id="svgLogo" style="display:none; width:38px; height:38px;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="bagG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#3b82f6"/>
-              <stop offset="100%" stop-color="#1e3a8a"/>
-            </linearGradient>
-            <linearGradient id="goldG" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#fde047"/>
-              <stop offset="100%" stop-color="#d97706"/>
-            </linearGradient>
-          </defs>
-          <polygon points="15,21 23,11 32,20 41,11 49,21" fill="url(#goldG)"/>
-          <polygon points="16,22 48,22 52,55 12,55" fill="url(#bagG)" stroke="url(#goldG)" stroke-width="2.4"/>
-          <path d="M24,26 C24,37 40,37 40,26" fill="none" stroke="url(#goldG)" stroke-width="2.6" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div>
-        <div class="brand-title" id="headerBrandTitle">BAZAARO</div>
-        <div class="brand-sub" id="headerBrandSub">MY BOSS: MUHAMMED ADHIL</div>
+    <div class="brand-left">
+      <button class="menu-btn" onclick="toggleDrawer()">☰</button>
+      <img id="headerLogo" class="site-avatar" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Logo" />
+      <div style="min-width:0;">
+        <div class="brand-name" id="headerSiteName">BAZAARO</div>
+        <div class="boss-tag" id="headerBossTag">MY BOSS: MUHAMMED ADHIL</div>
       </div>
     </div>
     <div class="header-actions">
-      <select id="langSelect" onchange="changeLanguage(this.value)" style="width:auto; padding:6px 8px; font-size:0.74rem;">
-        <option value="en">English</option>
-        <option value="ml">മലയാളം</option>
-        <option value="hi">हिन्दी</option>
-        <option value="ta">தமிழ்</option>
-      </select>
-      <button class="btn" id="themeBtn" onclick="toggleTheme()">☀️ Light</button>
-      <button class="btn btn-primary" onclick="openAuthModal()">👤 Join / OTP</button>
-      <button class="btn btn-gold" onclick="openAdminModal()">🛡️ Admin</button>
+      <!-- Shows "Edit Site" ONLY if logged in as Owner -->
+      <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit Site</button>
+      <!-- Switches from "Create Account" to "You" after login -->
+      <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Create Account</button>
     </div>
   </header>
 
   <div class="container">
-    <div class="hero-card">
-      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px;">
-        <div>
-          <div style="font-weight:800; font-size:0.98rem;" id="heroHeadline">BAZAARO — India's Trending Public Super-Hub</div>
-          <div class="meta">First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516</div>
+    <!-- 3D Glowing Live Date Bar (Home Screen Only) -->
+    <div class="date-3d-wrapper">
+      <div class="date-3d-card">
+        <div class="date-3d-cubes">
+          <div class="cube-box">
+            <span class="cube-label">Year</span>
+            <span class="cube-val" id="liveYear">2026</span>
+          </div>
+          <div class="cube-box gold-glow">
+            <span class="cube-label">Month</span>
+            <span class="cube-val" id="liveMonth">Nov</span>
+          </div>
+          <div class="cube-box">
+            <span class="cube-label">Date</span>
+            <span class="cube-val" id="liveDate">27</span>
+          </div>
+          <div class="cube-box gold-glow">
+            <span class="cube-label">Day</span>
+            <span class="cube-val" id="liveDay">Fri</span>
+          </div>
         </div>
-        <span class="pill pill-ok" id="statusPill">Exempt Free (9778197726)</span>
+        <div class="live-dot-tag">✨ LIVE</div>
       </div>
-      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center;" id="userSummaryBar"></div>
     </div>
 
-    <div id="planLockNotice"></div>
-
-    <div class="tabs" id="tabsBar">
-      <button class="tab active" data-tab="all" onclick="switchTab('all')">🌐 Public Feed</button>
-      <button class="tab" data-tab="shop" onclick="switchTab('shop')">🛍️ Shop & Products</button>
-      <button class="tab" data-tab="vehicles" onclick="switchTab('vehicles')">🚗 Vehicles</button>
-      <button class="tab" data-tab="edu" onclick="switchTab('edu')">📚 ₹1 Books & Classes</button>
-      <button class="tab" data-tab="jobs" onclick="switchTab('jobs')">💼 Jobs</button>
-      <button class="tab" data-tab="services" onclick="switchTab('services')">🛠️ Local Services</button>
-      <button class="tab" data-tab="doctors" onclick="switchTab('doctors')">🩺 Doctors</button>
-      <button class="tab" data-tab="apps" onclick="switchTab('apps')">📱 App & Partner Store</button>
-      <button class="tab" data-tab="paygst" onclick="switchTab('paygst')">💳 UPI, QR & GST</button>
-      <button class="tab" data-tab="reels" onclick="switchTab('reels')">🎬 Dual Reels</button>
-      <button class="tab" data-tab="health" onclick="switchTab('health')">❤️ Health Vitals</button>
-      <button class="tab" data-tab="editor" onclick="switchTab('editor')">✏️ Website & QR Studio</button>
+    <!-- Hero Card -->
+    <div class="hero-card">
+      <div class="hero-top">
+        <img id="heroLogo" class="hero-logo" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Hero Logo" />
+        <div>
+          <div class="hero-title" id="heroSiteTitle">BAZAARO — India's Trending Public Super-Hub</div>
+          <div class="hero-desc" id="heroSiteDesc">First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516</div>
+        </div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">🛡️ 100% Secured</span>
+        <span class="badge gold">100% FREE (Exempt)</span>
+        <span class="badge" id="heroUpiBadge">UPI: 9778197726@naviaxis</span>
+      </div>
     </div>
 
-    <div id="appView"></div>
+    <!-- Straight Horizontal Categories Bar on Home Page (No Followers Box on Home) -->
+    <div class="cat-strip-wrap">
+      <div class="cat-strip-title">Categories (Swipe Left/Right)</div>
+      <div class="cat-strip" id="categoryBar">
+        <button class="cat-pill active" onclick="selectCategory('ALL', this)">🌐 All (A–Z)</button>
+        <button class="cat-pill" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
+        <button class="cat-pill" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
+        <button class="cat-pill" onclick="selectCategory('SHOP', this)">🛍️ Shop & Products</button>
+        <button class="cat-pill" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books & Classes</button>
+        <button class="cat-pill" onclick="selectCategory('JOBS', this)">💼 Jobs & Services</button>
+        <button class="cat-pill" onclick="selectCategory('NEWS', this)">📰 News & Updates</button>
+        <button class="cat-pill" onclick="selectCategory('HEALTH', this)">❤️ Health & Doctors</button>
+        <button class="cat-pill" onclick="selectCategory('REELS', this)">🎬 Reels & Videos</button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search A to Z items, food, vehicles, jobs..." oninput="renderCategoryItems()" />
+      <button class="btn btn-accent" onclick="openFoodSellModal()">+ Sell Food</button>
+    </div>
+
+    <!-- Category Content Card (Shows A to Z Items for Selected Category) -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-title" id="activeCategoryHeading">🌐 All Categories — A to Z Directory</span>
+        <button class="pill-btn primary" onclick="openModal('postModal')">+ Add Item</button>
+      </div>
+
+      <!-- Language Toggle specifically shown inside Food & Kitchen -->
+      <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px;">
+        <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം Recipes</button>
+        <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English Recipes</button>
+        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openFoodSellModal()">🍲 Sell Food</button>
+      </div>
+
+      <div id="categoryItemsContainer"></div>
+    </div>
   </div>
 
-  <button class="ai-fab" onclick="openAiModal()">🤖 24/7 AI Help</button>
+  <!-- Floating AI Help Button -->
+  <button class="fab-ai" onclick="openModal('aiModal')">🤖 24/7 AI Help</button>
 
+  <!-- Bottom Navigation (Includes Direct "Sell Food") -->
   <nav class="bottom-nav">
-    <button class="nav-btn active" id="bn-all" onclick="switchTab('all')"><span>🌐</span><span>Public</span></button>
-    <button class="nav-btn" id="bn-add" onclick="openCreateModal()"><span>➕</span><span>Post</span></button>
-    <button class="nav-btn" id="bn-reels" onclick="switchTab('reels')"><span>🎬</span><span>Reels</span></button>
-    <button class="nav-btn" id="bn-health" onclick="switchTab('health')"><span>❤️</span><span>Health</span></button>
-    <button class="nav-btn" id="bn-qr" onclick="switchTab('paygst')"><span>📲</span><span>QR/UPI</span></button>
+    <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
+      <span>🏠</span><span>Home</span>
+    </button>
+    <button class="nav-btn" onclick="openFoodSellModal()">
+      <span>🍲</span><span>Sell Food</span>
+    </button>
+    <button class="nav-btn" onclick="openModal('postModal')">
+      <span>➕</span><span>Add Post</span>
+    </button>
+    <button class="nav-btn" onclick="openModal('qrModal')">
+      <span>📱</span><span>QR/UPI</span>
+    </button>
+    <button class="nav-btn" onclick="handleAccountClick()">
+      <span>👤</span><span id="bottomAccountLabel">Account</span>
+    </button>
   </nav>
 
-  <!-- Create / Edit Post or Dual Reel Modal -->
-  <div class="modal-backdrop" id="createModal">
+  <!-- Create Account Modal (Shown Only Before Login) -->
+  <div class="modal-backdrop" id="createAccountModal">
     <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3 id="createModalTitle">Publish Publicly to All BAZAARO Users</h3>
-        <button class="btn btn-sm" onclick="closeModal('createModal')">✕</button>
+      <div class="modal-head">
+        <h3>👤 Create Account</h3>
+        <button class="close-x" onclick="closeModal('createAccountModal')">✕</button>
       </div>
-      <div class="field">
-        <label>Category / Type</label>
-        <select id="cType" onchange="onCreateTypeChange()">
-          <option value="shop">Shop Product</option>
-          <option value="vehicles">Vehicle</option>
-          <option value="edu">₹1 Book / Class</option>
-          <option value="jobs">Job</option>
-          <option value="services">Local Service</option>
-          <option value="doctors">Doctor / Clinic</option>
-          <option value="apps">App Center / Partner Store</option>
-          <option value="news">News / Public Post</option>
-          <option value="reel">Reel (Type 1: Link / Type 2: Video Upload)</option>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" class="form-control" placeholder="Enter your name" />
+      </div>
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" id="regPhone" class="form-control" placeholder="Enter 10-digit mobile number" />
+      </div>
+      <div class="form-group">
+        <label>City / Place</label>
+        <input type="text" id="regCity" class="form-control" placeholder="e.g., Nellikuzhy, Kothamangalam" />
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="completeAccountLogin()">Create Account & Login</button>
+    </div>
+  </div>
+
+  <!-- "You" Profile & Followers Modal (Shown After Login) -->
+  <div class="modal-backdrop" id="youModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>👤 You — Account & Profile</h3>
+        <button class="close-x" onclick="closeModal('youModal')">✕</button>
+      </div>
+      <div class="item-card">
+        <div style="font-size:16px; font-weight:800;" id="youUserName">User</div>
+        <div style="font-size:12px; color:var(--text-muted);" id="youUserPhone">Phone</div>
+        <div id="ownerBadgeInYou" style="display:none; margin-top:6px;">
+          <span class="badge gold">👑 Verified Owner — Edit Access Enabled</span>
+        </div>
+      </div>
+
+      <!-- Followers / Following / Posts Inside "You" -->
+      <div class="stats-grid">
+        <div>
+          <div class="stat-num" id="youPostsCount">0</div>
+          <div class="stat-label">Posts</div>
+        </div>
+        <div>
+          <div class="stat-num" id="youFollowersCount">0</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div>
+          <div class="stat-num" id="youFollowingCount">0</div>
+          <div class="stat-label">Following</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; margin-bottom:10px;">
+        <button class="btn btn-primary" style="flex:1;" onclick="toggleTestFollow()">➕ Follow / Test</button>
+        <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('youModal'); openModal('msgModal')">💬 Messages</button>
+      </div>
+
+      <!-- Owner-Only Edit Website Button inside "You" -->
+      <button class="btn btn-accent" id="youEditWebsiteBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openModal('editModal')">
+        ✏️ Edit Website (Name, Logo, Description)
+      </button>
+
+      <button class="btn btn-secondary" style="width:100%; color:#ef4444;" onclick="logoutAccount()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Owner-Only Edit Website Modal -->
+  <div class="modal-backdrop" id="editModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>✏️ Edit Website (Owner Only)</h3>
+        <button class="close-x" onclick="closeModal('editModal')">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Website Name</label>
+        <input type="text" id="inputSiteName" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Hero Headline</label>
+        <input type="text" id="inputHeroTitle" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Boss / Owner Subtitle</label>
+        <input type="text" id="inputBossTag" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="inputSiteDesc" class="form-control" rows="2"></textarea>
+      </div>
+      <div class="form-group">
+        <label>UPI ID</label>
+        <input type="text" id="inputUpi" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label>Upload Website Logo / Photo</label>
+        <input type="file" id="inputLogoFile" accept="image/*" class="form-control" onchange="previewLogoFile(event)" />
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="saveSiteSettings()">💾 Save Website Changes</button>
+    </div>
+  </div>
+
+  <!-- Sell Food / Add Post Modal -->
+  <div class="modal-backdrop" id="postModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="postModalHeading">➕ Add Listing / Sell Food</h3>
+        <button class="close-x" onclick="closeModal('postModal')">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Select Category</label>
+        <select id="postCategory" class="form-control">
+          <option value="FOOD">🍲 Food & Kitchen (Sell Food)</option>
+          <option value="VEHICLES">🚗 Vehicles</option>
+          <option value="SHOP">🛍️ Shop & Products</option>
+          <option value="BOOKS">📘 ₹1 Books & Classes</option>
+          <option value="JOBS">💼 Jobs & Services</option>
+          <option value="NEWS">📰 News & Updates</option>
+          <option value="HEALTH">❤️ Health & Doctors</option>
+          <option value="REELS">🎬 Reels & Videos</option>
         </select>
       </div>
-      <div class="field">
-        <label>Title / Name</label>
-        <input id="cTitle" placeholder="Enter title or name..." />
+      <div class="form-group">
+        <label>Item / Food Name</label>
+        <input type="text" id="postTitle" class="form-control" placeholder="e.g., Homemade Chicken Biryani / Activa Scooter" />
       </div>
-      <div id="standardFields">
-        <div class="field">
-          <label>Price / Salary / Fee</label>
-          <input id="cPrice" placeholder="e.g. ₹1, ₹199, ₹4,50,000, ₹18,000/mo" />
-        </div>
-        <div class="field">
-          <label>Location / Specs / Contact</label>
-          <input id="cExtra" placeholder="City, details, phone or info..." />
-        </div>
-        <div class="field">
-          <label>Photo / Image URL</label>
-          <input id="cImgUrl" placeholder="https://..." />
-        </div>
-        <div class="field">
-          <label>Or Upload Photo File</label>
-          <input type="file" id="cImgFile" accept="image/*" />
-        </div>
+      <div class="form-group">
+        <label>Price / Offer (Optional)</label>
+        <input type="text" id="postPrice" class="form-control" placeholder="e.g., ₹120 / ₹1 / Free" />
       </div>
-      <div id="reelFields" style="display:none;">
-        <div class="field">
-          <label>Reel Mode (Dual Reels)</label>
-          <select id="cReelMode">
-            <option value="link">Type 1: Video / YouTube Link</option>
-            <option value="upload">Type 2: Direct Video Upload</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Video / YouTube Link</label>
-          <input id="cVideoUrl" placeholder="https://youtube.com/shorts/... or .mp4 URL" />
-        </div>
-        <div class="field">
-          <label>Upload Video File</label>
-          <input type="file" id="cVideoFile" accept="video/*" />
-        </div>
-        <div class="field">
-          <label>Tagged Product / Buy Link</label>
-          <input id="cTagProduct" placeholder="Product name or buy link..." />
-        </div>
-        <div style="display:flex; gap:12px; margin-bottom:10px; flex-wrap:wrap;">
-          <label style="display:flex; align-items:center; gap:6px; margin:0;"><input type="checkbox" id="cMadeAi" style="width:auto;" /> Made with AI</label>
-          <label style="display:flex; align-items:center; gap:6px; margin:0;"><input type="checkbox" id="cHideComments" style="width:auto;" /> Hide Comments</label>
-        </div>
+      <div class="form-group">
+        <label>Full Details & Contact</label>
+        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter ingredients, condition, location, phone..."></textarea>
       </div>
-      <div class="field">
-        <label>Description</label>
-        <textarea id="cDesc" rows="3" placeholder="Visible to all users across BAZAARO..."></textarea>
-      </div>
-      <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="savePostOrReel()">Save & Publish Publicly</button>
+      <button class="btn btn-success" style="width:100%;" onclick="addPublicPost()">🚀 Publish Now</button>
     </div>
   </div>
 
-  <!-- Join / OTP / Address / KYC Modal -->
-  <div class="modal-backdrop" id="authModal">
+  <!-- QR / UPI Modal -->
+  <div class="modal-backdrop" id="qrModal">
     <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3>Join / Verify OTP & Profile</h3>
-        <button class="btn btn-sm" onclick="closeModal('authModal')">✕</button>
+      <div class="modal-head">
+        <h3>📱 Saved QR & UPI</h3>
+        <button class="close-x" onclick="closeModal('qrModal')">✕</button>
       </div>
-      <div class="field">
-        <label>Full Name</label>
-        <input id="aName" placeholder="Your full name" />
+      <div class="item-card" style="text-align:center;">
+        <div style="font-size:16px; font-weight:800;" id="qrUpiDisplay">9778197726@naviaxis</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">100% Secured • Exempt Numbers: 9778197726, 7012253516</div>
       </div>
-      <div class="field">
-        <label>Mobile Number (10 digits) or Email ID</label>
-        <input id="aContact" placeholder="e.g. 9778197726 or name@email.com" />
-      </div>
-      <div style="display:flex; gap:8px; align-items:flex-end; margin-bottom:10px;">
-        <div style="flex:1;">
-          <label>OTP / Verification Code</label>
-          <input id="aOtp" placeholder="Enter 6-digit code" />
-        </div>
-        <button class="btn btn-gold" type="button" onclick="sendDemoOtp()">Send OTP</button>
-      </div>
-      <div class="grid-2">
-        <div class="field">
-          <label>Address Line</label>
-          <input id="aAddress" placeholder="House / Street / Landmark" />
-        </div>
-        <div class="field">
-          <label>City / State</label>
-          <input id="aCity" placeholder="e.g. Nellikuzhi, Kerala" />
-        </div>
-      </div>
-      <div class="field">
-        <label>PIN Code</label>
-        <input id="aPin" placeholder="e.g. 686691" />
-      </div>
-      <div class="card" style="background:var(--surface-2); padding:10px; margin-bottom:12px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <b style="font-size:0.8rem;">KYC Verification (Optional)</b>
-          <button class="btn btn-sm" type="button" onclick="skipKycStep()">Skip KYC</button>
-        </div>
-        <input id="aKycId" placeholder="ID / PAN / Aadhaar Last 4 (Optional)" />
-      </div>
-      <button class="btn btn-success" style="width:100%; justify-content:center;" onclick="completeRegistration()">Verify & Enter BAZAARO</button>
     </div>
   </div>
 
-  <!-- Owner Admin Modal -->
+  <!-- Messages Modal -->
+  <div class="modal-backdrop" id="msgModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>💬 Direct Messages</h3>
+        <button class="close-x" onclick="closeModal('msgModal')">✕</button>
+      </div>
+      <div id="msgList" style="max-height:190px; overflow-y:auto; margin-bottom:10px;"></div>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="msgInput" class="form-control" placeholder="Write a message..." />
+        <button class="btn btn-primary" onclick="sendMsg()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Owner Admin Verification Modal -->
   <div class="modal-backdrop" id="adminModal">
     <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3>Owner Registration & Activity Panel</h3>
-        <button class="btn btn-sm" onclick="closeModal('adminModal')">✕</button>
+      <div class="modal-head">
+        <h3>🛡️ Owner Verification</h3>
+        <button class="close-x" onclick="closeModal('adminModal')">✕</button>
       </div>
-      <div id="adminContent"></div>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+        Website editing is restricted strictly to Owner numbers (<b>9778197726</b> / <b>7012253516</b>).
+      </p>
+      <div class="form-group">
+        <label>Enter Owner Mobile Number</label>
+        <input type="tel" id="adminVerifyPhone" class="form-control" placeholder="9778197726" />
+      </div>
+      <button class="btn btn-accent" style="width:100%;" onclick="verifyOwnerAccess()">Unlock Owner Edit</button>
     </div>
   </div>
 
-  <!-- 24/7 AI Assistant Modal -->
+  <!-- 24/7 AI Help Modal -->
   <div class="modal-backdrop" id="aiModal">
     <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3>🤖 BAZAARO 24/7 AI Assistant</h3>
-        <button class="btn btn-sm" onclick="closeModal('aiModal')">✕</button>
+      <div class="modal-head">
+        <h3>🤖 24/7 AI Help</h3>
+        <button class="close-x" onclick="closeModal('aiModal')">✕</button>
       </div>
-      <div class="meta" style="margin-bottom:8px;">Ask anything in English, Malayalam, Hindi, or Tamil about BAZAARO, UPI/QR payments, posts, reels, health vitals, or GST.</div>
-      <div id="aiChatLog" class="comment-box" style="max-height:220px; overflow-y:auto; margin-bottom:10px;"></div>
-      <div style="display:flex; gap:6px;">
-        <input id="aiQuestion" placeholder="Type your question..." />
-        <button class="btn btn-primary" onclick="askAiAssistant()">Ask</button>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="aiQuestion" class="form-control" placeholder="Ask anything about BAZAARO..." />
+        <button class="btn btn-primary" onclick="askAi()">Ask</button>
       </div>
+      <div id="aiReply" class="item-card" style="margin-top:10px; display:none;"></div>
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
-
   <script>
-    const EXEMPT_NUMBERS = ["9778197726", "7012253516"];
-    const DEFAULT_UPI_ID = "9778197726@naviaxis";
-    const DEFAULT_QR_IMAGE = "1000083624.png";
-    const DEFAULT_STUDIO_URL = "https://ai-creater.store.shoopy.in";
-    const FREE_MONTHS = 3;
-    const MONTHLY_FEE = 1;
-    const STORAGE_KEY = "BAZAARO_FULL_LIVE_V2";
+    const OWNER_NUMBERS = ["9778197726", "7012253516"];
 
-    const I18N = {
-      en: {
-        headline: "BAZAARO — India's Trending Public Super-Hub",
-        publicFeed: "🌐 All Public Posts & Listings",
-        addPost: "+ Add Post"
-      },
-      ml: {
-        headline: "BAZAARO — എല്ലാവർക്കും കാണാവുന്ന പബ്ലിക് സൂപ്പർ-ഹബ്",
-        publicFeed: "🌐 എല്ലാ പബ്ലിക് പോസ്റ്റുകളും ലിസ്റ്റിംഗുകളും",
-        addPost: "+ പോസ്റ്റ് ചേർക്കുക"
-      },
-      hi: {
-        headline: "BAZAARO — भारत का ट्रेंडिंग पब्लिक सुपर-हब",
-        publicFeed: "🌐 सभी पब्लिक पोस्ट और लिस्टिंग",
-        addPost: "+ पोस्ट जोड़ें"
-      },
-      ta: {
-        headline: "BAZAARO — இந்தியாவின் டிரெண்டிங் பப்ளிக் சூப்பர்-ஹப்",
-        publicFeed: "🌐 அனைத்து பொது பதிவுகள் மற்றும் பட்டியல்கள்",
-        addPost: "+ பதிவு சேர்க்க"
-      }
-    };
-
-    const initialState = {
-      lang: "en",
-      theme: "dark",
-      activeTab: "all",
-      editingPostId: null,
-      editingReelId: null,
-      brandTitle: "BAZAARO",
-      brandSub: "MY BOSS: MUHAMMED ADHIL",
-      upiId: DEFAULT_UPI_ID,
-      qrImage: DEFAULT_QR_IMAGE,
-      studioUrl: DEFAULT_STUDIO_URL,
-      seoKeywords: "BAZAARO, Muhammed Adhil, Nellikuzhi, Kerala Super App, Shop, Vehicles, ₹1 Books, Jobs, Services, Health",
-      currentUser: {
-        name: "Muhammed Adhil",
-        contact: "9778197726",
-        address: "Nellikuzhi",
-        city: "Kothamangalam, Kerala",
-        pin: "686691",
-        kycSkipped: true,
-        entryType: "Owner / Exempt Access",
-        joinedAt: Date.now()
-      },
-      users: [
-        {
-          id: "U-OWNER",
-          name: "Muhammed Adhil",
-          contact: "9778197726",
-          city: "Nellikuzhi, Kerala",
-          pin: "686691",
-          entryType: "Owner / Exempt Access",
-          joinedAt: Date.now(),
-          paidMonths: []
-        }
-      ],
-      posts: [],
-      reels: [],
-      vitals: [],
-      aiHistory: [
-        { from: "AI", text: "Welcome to BAZAARO 24/7 AI Help! Ask about public posting, editing/reposting, UPI/QR payments, 3-month free trial, or health vitals." }
-      ]
-    };
-
-    let generatedOtp = "";
-
-    function cloneInit() {
-      return JSON.parse(JSON.stringify(initialState));
-    }
-
-    function loadState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return cloneInit();
-        const p = JSON.parse(raw);
-        return {
-          ...cloneInit(),
-          ...p,
-          users: Array.isArray(p.users) ? p.users : cloneInit().users,
-          posts: Array.isArray(p.posts) ? p.posts : [],
-          reels: Array.isArray(p.reels) ? p.reels : [],
-          vitals: Array.isArray(p.vitals) ? p.vitals : [],
-          aiHistory: Array.isArray(p.aiHistory) && p.aiHistory.length ? p.aiHistory : cloneInit().aiHistory
-        };
-      } catch (_) {
-        return cloneInit();
-      }
-    }
-
-    let state = loadState();
-
-    function saveState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (_) {
-        showToast("Storage limit reached — try smaller image/video or URL");
-      }
-    }
-
-    function showToast(msg) {
-      const el = document.getElementById("toast");
-      el.textContent = msg;
-      el.classList.add("show");
-      setTimeout(() => el.classList.remove("show"), 2600);
-    }
-
-    function cleanDigits(val) {
-      return String(val || "").replace(/\D/g, "").slice(-10);
-    }
-
-    function isExemptContact(val) {
-      return EXEMPT_NUMBERS.includes(cleanDigits(val));
-    }
-
-    function getMonthKey(d = new Date()) {
-      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-    }
-
-    function monthsSince(ts) {
-      const s = new Date(ts || Date.now());
-      const n = new Date();
-      return (n.getFullYear() - s.getFullYear()) * 12 + (n.getMonth() - s.getMonth());
-    }
-
-    function evaluatePlan(user) {
-      if (!user || !user.contact) {
-        return { locked: false, exempt: false, inTrial: true, label: "Public Guest (3-Mo Free Trial)" };
-      }
-      if (isExemptContact(user.contact)) {
-        return { locked: false, exempt: true, inTrial: false, label: "100% FREE (Exempt)" };
-      }
-      const elapsed = monthsSince(user.joinedAt);
-      if (elapsed < FREE_MONTHS) {
-        return { locked: false, exempt: false, inTrial: true, label: `3-Mo Free Trial (${FREE_MONTHS - elapsed} mo left)` };
-      }
+    // Auto-Updating 3D Live Date
+    function updateLive3DDate() {
       const now = new Date();
-      const mk = getMonthKey(now);
-      const rec = state.users.find(u => cleanDigits(u.contact) === cleanDigits(user.contact));
-      const paid = Array.isArray(rec?.paidMonths) && rec.paidMonths.includes(mk);
-      if (now.getDate() >= 1 && !paid) {
-        return { locked: true, exempt: false, inTrial: false, monthKey: mk, label: `Monthly Lock (${mk} • ₹${MONTHLY_FEE}/mo)` };
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      document.getElementById("liveYear").textContent = now.getFullYear();
+      document.getElementById("liveMonth").textContent = months[now.getMonth()];
+      document.getElementById("liveDate").textContent = String(now.getDate()).padStart(2, "0");
+      document.getElementById("liveDay").textContent = days[now.getDay()];
+    }
+
+    // Complete A to Z Built-in Directory across All Categories
+    const builtInCatalog = [
+      // FOOD & KITCHEN (Malayalam & English)
+      {
+        cat: "FOOD",
+        title: "ചിക്കൻ ബിരിയാണി (Chicken Biryani)",
+        price: "Recipe + Sell Ready",
+        descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി (2 കപ്പ്), ചിക്കൻ (1 കി.ഗ്രാം), സവാള (4), തക്കാളി (2), ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. തയ്യാറാക്കുന്ന വിധം: ചിക്കൻ മസാല പുരട്ടി വേവിക്കുക. നെയ്യിൽ അരി വഴറ്റി തിളച്ച വെള്ളത്തിൽ വേവിച്ച് ചിക്കനുമായി ദം ഇടുക.",
+        descEn: "Ingredients: Kaima/Basmati rice (2 cups), Chicken (1 kg), Onion (4), Tomato (2), Ginger-Garlic paste, Curd, Biryani masala, Ghee, Coriander & Mint. Method: Cook spiced chicken masala, parboil rice in ghee, layer together and dum cook for 15 mins.",
+        by: "BAZAARO Kitchen Hub"
+      },
+      {
+        cat: "FOOD",
+        title: "കുഴിമന്തി (Kuzhi Mandi)",
+        price: "Recipe + Sell Ready",
+        descMl: "ചേരുവകൾ: ബസ്മതി അരി, വലിയ ചിക്കൻ കഷ്ണങ്ങൾ, മന്തി മസാല, കുരുമുളക് പൊടി, ഉണക്ക നാരങ്ങ (Loomi), ക്യാപ്സിക്കം, സൺഫ്ലവർ ഓയിൽ, ചാർക്കോൾ (പുകയ്ക്കാൻ). തയ്യാറാക്കുന്ന വിധം: മസാല പുരട്ടിയ ചിക്കൻ ആവിയിൽ/ഓവനിൽ വേവിച്ച് അരിയുടെ മുകളിൽ വെച്ച് കനൽ പുക നൽകി ദം ചെയ്യുക.",
+        descEn: "Ingredients: Long-grain Basmati rice, Chicken quarters, Mandi spice mix, Black pepper, Dried lime (Loomi), Capsicum, Oil, Charcoal. Method: Roast/steam spiced chicken, cook rice in chicken stock, place chicken on top and infuse charcoal smoke.",
+        by: "BAZAARO Kitchen Hub"
+      },
+      {
+        cat: "FOOD",
+        title: "അൽഫാം ചിക്കൻ (Alfaham Chicken)",
+        price: "Recipe + Sell Ready",
+        descMl: "ചേരുവകൾ: ചിക്കൻ, തൈര്, ഇഞ്ചി-വെളുത്തുള്ളി, കാശ്മീരി മുളകുപൊടി, കുരുമുളക്, ജീരകപ്പൊടി, നാരങ്ങാനീര്, ഒലിവ് ഓയിൽ. തയ്യാറാക്കുന്ന വിധം: മസാല പുരട്ടി 3 മണിക്കൂർ വെച്ച ശേഷം കനലിലോ ഗ്രില്ലിലോ തിരിച്ചും മറിച്ചും ചുട്ടെടുക്കുക.",
+        descEn: "Ingredients: Chicken, Thick curd, Ginger-garlic, Kashmiri chili, Pepper, Cumin, Lemon juice, Olive oil. Method: Marinate chicken for 3 hours and grill over charcoal or in an oven until smoky and tender.",
+        by: "BAZAARO Kitchen Hub"
+      },
+      {
+        cat: "FOOD",
+        title: "ചിക്കൻ പൊള്ളിച്ചത് (Chicken Pollichathu)",
+        price: "Recipe + Sell Ready",
+        descMl: "ചേരുവകൾ: ചിക്കൻ, ചെറിയ ഉള്ളി, തക്കാളി, പച്ചമുളക്, കറിവേപ്പില, തേങ്ങാപ്പാൽ, മഞ്ഞൾപ്പൊടി, മുളകുപൊടി, വാഴയില. തയ്യാറാക്കുന്ന വിധം: വറുത്ത ചിക്കൻ ഉള്ളി-തേങ്ങാപ്പാൽ മസാലയിൽ പൊതിഞ്ഞ് വാഴയിലയിൽ കെട്ടി തവയിൽ പൊള്ളിച്ചെടുക്കുക.",
+        descEn: "Ingredients: Fried chicken pieces, Shallots, Tomato, Green chilies, Curry leaves, Thick coconut milk, Banana leaf. Method: Coat fried chicken in rich coconut-shallot masala, wrap in wilted banana leaf and roast on a tawa.",
+        by: "BAZAARO Kitchen Hub"
+      },
+      {
+        cat: "FOOD",
+        title: "ഫ്രഷ് ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes)",
+        price: "₹40 – ₹90",
+        descMl: "മാംഗോ/പൈനാപ്പിൾ/വാട്ടർമെലൺ ജ്യൂസ്: പഴം, തണുത്ത വെള്ളം/പാൽ, പഞ്ചസാര, ഐസ് ക്യൂബ്സ് എന്നിവ മിക്സിയിൽ അടിച്ചെടുക്കുക. ഷാർജ/ചോക്ലേറ്റ്/ഓറിയോ ഷേക്ക്: കട്ടപ്പാൽ, പഴം/ബിസ്കറ്റ്, ബൂസ്റ്റ്/കൊക്കോ പൗഡർ, വാനില ഐസ്ക്രീം ചേർത്ത് ബ്ലെൻഡ് ചെയ്യുക.",
+        descEn: "Fresh Juices: Blend fresh fruit pulp, chilled water/milk, sugar & ice. Thick Shakes (Sharjah/Oreo/Chocolate): Blend frozen milk, banana/Oreo, cocoa/Boost, sugar & vanilla ice cream.",
+        by: "BAZAARO Juice Corner"
+      },
+      // VEHICLES
+      {
+        cat: "VEHICLES",
+        title: "Used Scooters & Bikes — Nellikuzhy & Kothamangalam",
+        price: "Starting ₹28,000",
+        descMl: "നല്ല കണ്ടീഷനിലുള്ള സ്കൂട്ടറുകളും ബൈക്കുകളും നേരിട്ട് വാങ്ങാനും വിൽക്കാനും.",
+        descEn: "Verified local two-wheelers, cars, and commercial vehicles for direct buy & sell.",
+        by: "BAZAARO Auto Hub"
+      },
+      {
+        cat: "VEHICLES",
+        title: "Goods Auto & Taxi Booking Service",
+        price: "24/7 Local",
+        descMl: "കോതമംഗലം, നെല്ലിക്കുഴി ഭാഗങ്ങളിൽ ഓട്ടോ, ടാക്സി, ഗുഡ്സ് വാഹന സേവനങ്ങൾ.",
+        descEn: "Instant local taxi, auto, and goods carrier bookings in Kothamangalam & Nellikuzhy.",
+        by: "Kerala Transport Desk"
+      },
+      // SHOP & PRODUCTS
+      {
+        cat: "SHOP",
+        title: "CM Stores Nellikuzhy — Groceries & Daily Essentials",
+        price: "Best Wholesale Rate",
+        descMl: "വീട്ടിലേക്കാവശ്യമായ പലവ്യഞ്ജനങ്ങൾ, പച്ചക്കറികൾ, നിത്യോപയോഗ സാധനങ്ങൾ.",
+        descEn: "Complete grocery, household items, and daily essentials with home delivery support.",
+        by: "CM Stores Nellikuzhy"
+      },
+      {
+        cat: "SHOP",
+        title: "Bismi Footwear & Bags — Kothamangalam",
+        price: "New Collections",
+        descMl: "ലേഡീസ്, ജെന്റ്സ്, കിഡ്സ് ചെരുപ്പുകളും സ്കൂൾ/ട്രാവൽ ബാഗുകളും.",
+        descEn: "Trendy footwear, school bags, and travel accessories at affordable prices.",
+        by: "Bismi Footwear & Bags"
+      },
+      // ₹1 BOOKS & CLASSES
+      {
+        cat: "BOOKS",
+        title: "₹1 Digital Study Notes, Spoken English & AI Classes",
+        price: "₹1 Only",
+        descMl: "വെറും 1 രൂപയ്ക്ക് പഠന നോട്ടുകൾ, AI വീഡിയോ നിർമ്മാണ ക്ലാസുകൾ, ബിസിനസ് ഗൈഡുകൾ.",
+        descEn: "Access digital e-books, exam notes, and beginner AI & digital marketing classes for just ₹1.",
+        by: "Aether AI Academy"
+      },
+      // JOBS & SERVICES
+      {
+        cat: "JOBS",
+        title: "Aether AI Creative Studio — Video, Poster & Website Services",
+        price: "From ₹100",
+        descMl: "AI പ്രൊമോഷണൽ വീഡിയോകൾ, പോസ്റ്ററുകൾ, പാട്ടുകൾ, വെബ്സൈറ്റ് നിർമ്മാണം.",
+        descEn: "Custom AI promo videos, Malayalam songs, posters, and business websites.",
+        by: "Aether AI Creative Studio"
+      },
+      {
+        cat: "JOBS",
+        title: "Local Sales, Delivery & Office Staff Openings",
+        price: "Full / Part Time",
+        descMl: "എറണാകുളം, കോതമംഗലം മേഖലകളിലെ പുതിയ തൊഴിലവസരങ്ങൾ.",
+        descEn: "Verified retail sales, delivery executive, and computer operator vacancies.",
+        by: "BAZAARO Jobs Board"
+      },
+      // NEWS
+      {
+        cat: "NEWS",
+        title: "Kerala & Local Nellikuzhy Breaking Updates",
+        price: "Live News",
+        descMl: "നാട്ടിലെ പ്രധാന വാർത്തകളും അറിയിപ്പുകളും തത്സമയം അറിയാം.",
+        descEn: "Latest local community announcements, business news, and public alerts.",
+        by: "BAZAARO News Desk"
+      },
+      // HEALTH
+      {
+        cat: "HEALTH",
+        title: "24/7 Emergency Ambulance, Clinics & Pharmacy Directory",
+        price: "Emergency Help",
+        descMl: "അടുത്തുള്ള ആശുപത്രികൾ, ഡോക്ടർമാർ, മെഡിക്കൽ സ്റ്റോറുകൾ, ആംബുലൻസ് നമ്പറുകൾ.",
+        descEn: "Quick directory for nearby doctors, clinics, pharmacies, and emergency contacts.",
+        by: "BAZAARO Health Care"
+      },
+      // REELS
+      {
+        cat: "REELS",
+        title: "BAZAARO Trending Reels & Short Videos",
+        price: "Watch Free",
+        descMl: "ഫുഡ് വ്ലോഗുകൾ, AI ഷോർട്ട് വീഡിയോകൾ, ലോക്കൽ ഓഫർ റീലുകൾ.",
+        descEn: "Watch & share short promotional reels, food reviews, and creative AI shorts.",
+        by: "Madeena Vlog & Creators"
       }
-      return { locked: false, exempt: false, inTrial: false, label: `Active (₹${MONTHLY_FEE}/mo Paid)` };
+    ];
+
+    const defaultData = {
+      siteName: "BAZAARO",
+      heroTitle: "BAZAARO — India's Trending Public Super-Hub",
+      bossTag: "MY BOSS: MUHAMMED ADHIL",
+      siteDesc: "First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516",
+      upi: "9778197726@naviaxis",
+      logo: "https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO",
+      user: null, // null until Create Account / Login is done
+      isOwnerVerified: false,
+      followers: 0,
+      following: 0,
+      isFollowed: false,
+      customPosts: [],
+      messages: []
+    };
+
+    let state = JSON.parse(localStorage.getItem("bazaaro_atoz_v4")) || defaultData;
+    let currentCategory = "ALL";
+    let foodLang = "ml";
+    let uploadedLogoTemp = null;
+
+    window.addEventListener("load", () => {
+      updateLive3DDate();
+      setInterval(updateLive3DDate, 10000);
+      syncUI();
+      setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1200);
+    });
+
+    function persist() {
+      localStorage.setItem("bazaaro_atoz_v4", JSON.stringify(state));
+      syncUI();
     }
 
-    function unlockMonthlyPass() {
-      const u = state.currentUser;
-      if (!u) return;
-      const plan = evaluatePlan(u);
-      const mk = plan.monthKey || getMonthKey();
-      const idx = state.users.findIndex(x => cleanDigits(x.contact) === cleanDigits(u.contact));
-      if (idx >= 0) {
-        const arr = Array.isArray(state.users[idx].paidMonths) ? state.users[idx].paidMonths : [];
-        if (!arr.includes(mk)) arr.push(mk);
-        state.users[idx].paidMonths = arr;
+    function isOwnerUser() {
+      if (state.isOwnerVerified) return true;
+      if (state.user && OWNER_NUMBERS.includes(state.user.phone)) return true;
+      return false;
+    }
+
+    function syncUI() {
+      document.title = state.siteName;
+      document.getElementById("splashTitleText").textContent = state.siteName;
+      document.getElementById("splashSubText").textContent = state.bossTag;
+      document.getElementById("splashLogoImg").src = state.logo;
+      document.getElementById("headerLogo").src = state.logo;
+      document.getElementById("heroLogo").src = state.logo;
+      document.getElementById("headerSiteName").textContent = state.siteName;
+      document.getElementById("drawerBrandName").textContent = state.siteName;
+      document.getElementById("headerBossTag").textContent = state.bossTag;
+      document.getElementById("heroSiteTitle").textContent = state.heroTitle;
+      document.getElementById("heroSiteDesc").textContent = state.siteDesc;
+      document.getElementById("heroUpiBadge").textContent = "UPI: " + state.upi;
+      document.getElementById("qrUpiDisplay").textContent = state.upi;
+
+      // Account Button State: "Create Account" before login -> "You" after login
+      const accHeaderBtn = document.getElementById("accountHeaderBtn");
+      const drawerAccBtn = document.getElementById("drawerAccountBtn");
+      const bottomAccLabel = document.getElementById("bottomAccountLabel");
+
+      if (state.user) {
+        accHeaderBtn.textContent = "👤 You";
+        accHeaderBtn.className = "pill-btn you-btn";
+        drawerAccBtn.textContent = "👤 You (" + state.user.name + ")";
+        bottomAccLabel.textContent = "You";
+
+        document.getElementById("youUserName").textContent = state.user.name + (state.user.city ? " • " + state.user.city : "");
+        document.getElementById("youUserPhone").textContent = "Mobile: " + state.user.phone;
+      } else {
+        accHeaderBtn.textContent = "Create Account";
+        accHeaderBtn.className = "pill-btn primary";
+        drawerAccBtn.textContent = "👤 Create Account";
+        bottomAccLabel.textContent = "Account";
       }
-      saveState();
-      renderAll();
-      showToast(`Unlocked for ${mk} via UPI (${state.upiId})`);
+
+      // Owner-Only Edit Access Check
+      const ownerAllowed = isOwnerUser();
+      document.getElementById("ownerEditTopBtn").style.display = ownerAllowed ? "inline-block" : "none";
+      document.getElementById("drawerEditSiteBtn").style.display = ownerAllowed ? "block" : "none";
+      document.getElementById("youEditWebsiteBtn").style.display = ownerAllowed ? "block" : "none";
+      document.getElementById("ownerBadgeInYou").style.display = ownerAllowed ? "block" : "none";
+
+      // Update Stats inside "You" modal
+      document.getElementById("youPostsCount").textContent = state.customPosts.length;
+      document.getElementById("youFollowersCount").textContent = state.followers;
+      document.getElementById("youFollowingCount").textContent = state.following;
+
+      // Populate Edit Form
+      document.getElementById("inputSiteName").value = state.siteName;
+      document.getElementById("inputHeroTitle").value = state.heroTitle;
+      document.getElementById("inputBossTag").value = state.bossTag;
+      document.getElementById("inputSiteDesc").value = state.siteDesc;
+      document.getElementById("inputUpi").value = state.upi;
+
+      renderCategoryItems();
+      renderMessages();
     }
 
-    function applyTheme() {
-      const t = state.theme === "light" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", t);
-      document.getElementById("themeBtn").textContent = t === "dark" ? "☀️ Light" : "🌙 Dark";
+    // Account Creation & "You" Navigation
+    function handleAccountClick() {
+      if (state.user) {
+        openModal("youModal");
+      } else {
+        openModal("createAccountModal");
+      }
     }
 
-    function toggleTheme() {
-      state.theme = state.theme === "dark" ? "light" : "dark";
-      applyTheme();
-      saveState();
-      showToast(state.theme === "dark" ? "Dark Mode Enabled" : "Light Mode Enabled");
-    }
-
-    function changeLanguage(lang) {
-      state.lang = lang;
-      saveState();
-      renderAll();
-    }
-
-    function switchTab(tab) {
-      state.activeTab = tab;
-      saveState();
-      document.querySelectorAll(".tab").forEach(el => el.classList.toggle("active", el.dataset.tab === tab));
-      document.querySelectorAll(".nav-btn").forEach(el => el.classList.remove("active"));
-      if (tab === "reels") document.getElementById("bn-reels")?.classList.add("active");
-      else if (tab === "health") document.getElementById("bn-health")?.classList.add("active");
-      else if (tab === "paygst") document.getElementById("bn-qr")?.classList.add("active");
-      else document.getElementById("bn-all")?.classList.add("active");
-      renderView();
-    }
-
-    function openModal(id) {
-      document.getElementById(id)?.classList.add("open");
-    }
-
-    function closeModal(id) {
-      document.getElementById(id)?.classList.remove("open");
-    }
-
-    function openCreateModal(presetType, editPostId = null, editReelId = null) {
-      const plan = evaluatePlan(state.currentUser);
-      if (plan.locked) {
-        showToast("Monthly lock active from 1st of month — pay ₹1 via UPI/QR to unlock");
+    function completeAccountLogin() {
+      const name = document.getElementById("regName").value.trim();
+      const phone = document.getElementById("regPhone").value.trim();
+      const city = document.getElementById("regCity").value.trim();
+      if (!name || !phone) {
+        alert("Please enter your Name and Mobile Number.");
         return;
       }
-
-      state.editingPostId = editPostId;
-      state.editingReelId = editReelId;
-
-      if (editPostId) {
-        const p = state.posts.find(x => x.id === editPostId);
-        if (p) {
-          document.getElementById("createModalTitle").textContent = "Edit & Repost Public Entry";
-          document.getElementById("cType").value = p.type;
-          onCreateTypeChange();
-          document.getElementById("cTitle").value = p.title || "";
-          document.getElementById("cPrice").value = p.price || "";
-          document.getElementById("cExtra").value = p.extra || "";
-          document.getElementById("cImgUrl").value = p.imgUrl || "";
-          document.getElementById("cDesc").value = p.desc || "";
-          openModal("createModal");
-          return;
-        }
+      state.user = { name, phone, city };
+      if (OWNER_NUMBERS.includes(phone)) {
+        state.isOwnerVerified = true;
       }
+      persist();
+      closeModal("createAccountModal");
+    }
 
-      if (editReelId) {
-        const r = state.reels.find(x => x.id === editReelId);
-        if (r) {
-          document.getElementById("createModalTitle").textContent = "Edit & Repost Reel";
-          document.getElementById("cType").value = "reel";
-          onCreateTypeChange();
-          document.getElementById("cReelMode").value = r.reelMode || "link";
-          document.getElementById("cTitle").value = r.title || "";
-          document.getElementById("cVideoUrl").value = r.videoUrl || "";
-          document.getElementById("cTagProduct").value = r.tagProduct || "";
-          document.getElementById("cMadeAi").checked = !!r.madeAi;
-          document.getElementById("cHideComments").checked = !!r.hideComments;
-          document.getElementById("cDesc").value = r.desc || "";
-          openModal("createModal");
-          return;
+    function logoutAccount() {
+      state.user = null;
+      state.isOwnerVerified = false;
+      persist();
+      closeModal("youModal");
+    }
+
+    function verifyOwnerAccess() {
+      const ph = document.getElementById("adminVerifyPhone").value.trim();
+      if (OWNER_NUMBERS.includes(ph)) {
+        state.isOwnerVerified = true;
+        if (!state.user) {
+          state.user = { name: "Muhammed Adhil", phone: ph, city: "Nellikuzhy" };
         }
+        persist();
+        closeModal("adminModal");
+        openModal("editModal");
+      } else {
+        alert("Access Denied: Only Owner can edit website details.");
       }
-
-      document.getElementById("createModalTitle").textContent = "Publish Publicly to All BAZAARO Users";
-      clearCreateForm();
-      if (presetType) document.getElementById("cType").value = presetType;
-      onCreateTypeChange();
-      openModal("createModal");
     }
 
-    function onCreateTypeChange() {
-      const isReel = document.getElementById("cType").value === "reel";
-      document.getElementById("reelFields").style.display = isReel ? "block" : "none";
-      document.getElementById("standardFields").style.display = isReel ? "none" : "block";
+    function toggleTestFollow() {
+      state.isFollowed = !state.isFollowed;
+      state.followers = state.isFollowed ? state.followers + 1 : Math.max(0, state.followers - 1);
+      persist();
     }
 
-    function clearCreateForm() {
-      ["cTitle", "cPrice", "cExtra", "cImgUrl", "cVideoUrl", "cTagProduct", "cDesc"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = "";
-      });
-      ["cImgFile", "cVideoFile"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = "";
-      });
-      document.getElementById("cMadeAi").checked = false;
-      document.getElementById("cHideComments").checked = false;
+    // Owner Save Website Settings
+    function previewLogoFile(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => uploadedLogoTemp = ev.target.result;
+      r.readAsDataURL(f);
     }
 
-    function readDataUrl(file) {
-      return new Promise((res, rej) => {
-        const r = new FileReader();
-        r.onload = () => res(r.result);
-        r.onerror = rej;
-        r.readAsDataURL(file);
-      });
-    }
-
-    async function savePostOrReel() {
-      const type = document.getElementById("cType").value;
-      const title = document.getElementById("cTitle").value.trim();
-      const desc = document.getElementById("cDesc").value.trim();
-      if (!title) {
-        showToast("Please enter a title");
+    function saveSiteSettings() {
+      if (!isOwnerUser()) {
+        alert("Only Owner can edit website settings.");
         return;
       }
+      state.siteName = document.getElementById("inputSiteName").value.trim() || "BAZAARO";
+      state.heroTitle = document.getElementById("inputHeroTitle").value.trim() || state.siteName;
+      state.bossTag = document.getElementById("inputBossTag").value.trim() || "MY BOSS: MUHAMMED ADHIL";
+      state.siteDesc = document.getElementById("inputSiteDesc").value.trim();
+      state.upi = document.getElementById("inputUpi").value.trim();
+      if (uploadedLogoTemp) {
+        state.logo = uploadedLogoTemp;
+        uploadedLogoTemp = null;
+      }
+      persist();
+      closeModal("editModal");
+    }
 
-      const authorName = state.currentUser?.name || "BAZAARO User";
-      const authorContact = state.currentUser?.contact || "";
-      const authorCity = state.currentUser?.city || "";
+    // Category Selection & A to Z Rendering
+    function selectCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      updateCategoryHeader();
+      renderCategoryItems();
+    }
 
-      if (type === "reel") {
-        const reelMode = document.getElementById("cReelMode").value;
-        const videoUrl = document.getElementById("cVideoUrl").value.trim();
-        const tagProduct = document.getElementById("cTagProduct").value.trim();
-        const madeAi = document.getElementById("cMadeAi").checked;
-        const hideComments = document.getElementById("cHideComments").checked;
-        const vFile = document.getElementById("cVideoFile").files?.[0];
+    function selectCategoryByName(cat) {
+      currentCategory = cat;
+      document.querySelectorAll(".cat-pill").forEach(p => {
+        p.classList.toggle("active", p.getAttribute("onclick").includes("'" + cat + "'"));
+      });
+      updateCategoryHeader();
+      renderCategoryItems();
+    }
 
-        let videoDataUrl = "";
-        if (vFile) {
-          if (vFile.size > 6 * 1024 * 1024) {
-            showToast("Video over 6MB — use a link or smaller clip");
-            return;
-          }
-          videoDataUrl = await readDataUrl(vFile);
-        } else if (state.editingReelId) {
-          const old = state.reels.find(x => x.id === state.editingReelId);
-          videoDataUrl = old?.videoDataUrl || "";
-        }
+    function updateCategoryHeader() {
+      const titles = {
+        ALL: "🌐 All Categories — A to Z Directory",
+        FOOD: "🍲 Food & Kitchen — Recipes & Food Sale",
+        VEHICLES: "🚗 Vehicles — Buy, Sell & Rentals",
+        SHOP: "🛍️ Shop & Products — Local Stores",
+        BOOKS: "📘 ₹1 Books & Digital Classes",
+        JOBS: "💼 Jobs & Services Directory",
+        NEWS: "📰 News & Live Public Updates",
+        HEALTH: "❤️ Health, Clinics & Emergency",
+        REELS: "🎬 Reels & Short Videos"
+      };
+      document.getElementById("activeCategoryHeading").textContent = titles[currentCategory] || titles.ALL;
+      document.getElementById("foodLangBar").style.display = (currentCategory === "FOOD" || currentCategory === "ALL") ? "flex" : "none";
+    }
 
-        if (state.editingReelId) {
-          state.reels = state.reels.filter(x => x.id !== state.editingReelId);
-        }
+    function setFoodLang(lang) {
+      foodLang = lang;
+      document.getElementById("langMlBtn").className = lang === "ml" ? "pill-btn primary" : "pill-btn";
+      document.getElementById("langEnBtn").className = lang === "en" ? "pill-btn primary" : "pill-btn";
+      renderCategoryItems();
+    }
 
-        state.reels.unshift({
-          id: "RL-" + Date.now(),
-          reelMode,
-          title,
-          desc,
-          videoUrl,
-          videoDataUrl,
-          tagProduct,
-          madeAi,
-          hideComments,
-          authorName,
-          authorContact,
-          authorCity,
-          likes: 0,
-          comments: [],
-          repostedAt: Date.now()
-        });
+    function openFoodSellModal() {
+      document.getElementById("postCategory").value = "FOOD";
+      document.getElementById("postModalHeading").textContent = "🍲 Sell Food Item";
+      openModal("postModal");
+    }
 
-        state.editingReelId = null;
-        saveState();
-        closeModal("createModal");
-        clearCreateForm();
-        switchTab("reels");
-        showToast("Reel published/reposted publicly!");
+    function addPublicPost() {
+      const cat = document.getElementById("postCategory").value;
+      const title = document.getElementById("postTitle").value.trim();
+      const price = document.getElementById("postPrice").value.trim() || "Available";
+      const txt = document.getElementById("postContent").value.trim();
+      if (!title || !txt) {
+        alert("Please enter Item/Food Name and Details.");
         return;
       }
-
-      const price = document.getElementById("cPrice").value.trim();
-      const extra = document.getElementById("cExtra").value.trim();
-      let imgUrl = document.getElementById("cImgUrl").value.trim();
-      const imgFile = document.getElementById("cImgFile").files?.[0];
-
-      if (imgFile) {
-        if (imgFile.size > 3 * 1024 * 1024) {
-          showToast("Image over 3MB — use an image link or smaller photo");
-          return;
-        }
-        imgUrl = await readDataUrl(imgFile);
-      } else if (!imgUrl && state.editingPostId) {
-        const old = state.posts.find(x => x.id === state.editingPostId);
-        imgUrl = old?.imgUrl || "";
-      }
-
-      if (state.editingPostId) {
-        state.posts = state.posts.filter(x => x.id !== state.editingPostId);
-      }
-
-      state.posts.unshift({
-        id: "PS-" + Date.now(),
-        type,
+      state.customPosts.unshift({
+        cat,
         title,
         price,
-        extra,
-        imgUrl,
-        desc,
-        authorName,
-        authorContact,
-        authorCity,
-        likes: 0,
-        comments: [],
-        repostedAt: Date.now()
+        descMl: txt,
+        descEn: txt,
+        by: state.user ? state.user.name + " (" + state.user.phone + ")" : "Public Seller"
+      });
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postPrice").value = "";
+      document.getElementById("postContent").value = "";
+      persist();
+      closeModal("postModal");
+    }
+
+    function renderCategoryItems() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      const allItems = [...state.customPosts, ...builtInCatalog];
+
+      const filtered = allItems.filter(item => {
+        const matchCat = currentCategory === "ALL" || item.cat === currentCategory;
+        const textBlob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by).toLowerCase();
+        const matchQuery = !q || textBlob.includes(q);
+        return matchCat && matchQuery;
       });
 
-      state.editingPostId = null;
-      saveState();
-      closeModal("createModal");
-      clearCreateForm();
-      switchTab(type === "news" ? "all" : type);
-      showToast("Published/reposted publicly to everyone!");
-    }
-
-    function repostExistingPost(id) {
-      const src = state.posts.find(x => x.id === id);
-      if (!src) return;
-      state.posts.unshift({
-        ...JSON.parse(JSON.stringify(src)),
-        id: "PS-" + Date.now(),
-        repostedAt: Date.now()
-      });
-      saveState();
-      renderView();
-      showToast("Reposted to top of public feed!");
-    }
-
-    function openAuthModal() {
-      const u = state.currentUser || {};
-      document.getElementById("aName").value = u.name || "";
-      document.getElementById("aContact").value = u.contact || "";
-      document.getElementById("aAddress").value = u.address || "";
-      document.getElementById("aCity").value = u.city || "";
-      document.getElementById("aPin").value = u.pin || "";
-      document.getElementById("aOtp").value = "";
-      openModal("authModal");
-    }
-
-    function sendDemoOtp() {
-      const c = document.getElementById("aContact").value.trim();
-      if (!c) {
-        showToast("Enter phone number or email first");
-        return;
-      }
-      generatedOtp = String(Math.floor(100000 + Math.random() * 900000));
-      document.getElementById("aOtp").value = generatedOtp;
-      showToast(`OTP sent (${generatedOtp}) — verified for ${c}`);
-    }
-
-    function skipKycStep() {
-      document.getElementById("aKycId").value = "SKIPPED";
-      showToast("KYC step skipped");
-    }
-
-    function completeRegistration() {
-      const name = document.getElementById("aName").value.trim() || "BAZAARO Member";
-      const contact = document.getElementById("aContact").value.trim();
-      const address = document.getElementById("aAddress").value.trim();
-      const city = document.getElementById("aCity").value.trim() || "Kerala";
-      const pin = document.getElementById("aPin").value.trim();
-      const kycVal = document.getElementById("aKycId").value.trim();
-
-      if (!contact) {
-        showToast("Enter mobile number or email ID");
+      const container = document.getElementById("categoryItemsContainer");
+      if (!filtered.length) {
+        container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">No items found in this category yet. Tap <b>+ Add Item</b> to post!</div>`;
         return;
       }
 
-      const exempt = isExemptContact(contact);
-      const existingIdx = state.users.findIndex(u => cleanDigits(u.contact) === cleanDigits(contact) || u.contact === contact);
-      const userRec = {
-        id: existingIdx >= 0 ? state.users[existingIdx].id : "U-" + Date.now(),
-        name,
-        contact,
-        address,
-        city,
-        pin,
-        kycSkipped: !kycVal || kycVal === "SKIPPED",
-        entryType: exempt ? "Owner / Exempt Access" : (contact.includes("@") ? "Email OTP Join" : "Mobile OTP Join"),
-        joinedAt: existingIdx >= 0 ? state.users[existingIdx].joinedAt : Date.now(),
-        paidMonths: existingIdx >= 0 && Array.isArray(state.users[existingIdx].paidMonths) ? state.users[existingIdx].paidMonths : []
-      };
-
-      if (existingIdx >= 0) state.users[existingIdx] = userRec;
-      else state.users.unshift(userRec);
-
-      state.currentUser = userRec;
-      saveState();
-      closeModal("authModal");
-      renderAll();
-      showToast(exempt ? "Exempt 100% Free Access Active!" : "Profile & OTP verification saved!");
-    }
-
-    function openAdminModal() {
-      const ok = isExemptContact(state.currentUser?.contact);
-      const box = document.getElementById("adminContent");
-      if (!ok) {
-        box.innerHTML = `
-          <p class="meta">Owner panel is restricted to exempt owner number <b>9778197726</b>.</p>
-          <div class="field" style="margin-top:10px;">
-            <label>Owner Number</label>
-            <input id="adminVerifyInput" placeholder="9778197726" />
+      container.innerHTML = filtered.map(item => `
+        <div class="item-card">
+          <div class="item-top">
+            <span class="item-cat-tag">${item.cat}</span>
+            <span class="item-price-tag">${item.price}</span>
           </div>
-          <button class="btn btn-gold" onclick="verifyAdminLogin()">Verify Owner</button>
-        `;
-        openModal("adminModal");
-        return;
-      }
-
-      const rows = state.users.map((u, i) => `
-        <tr>
-          <td>${i + 1}</td>
-          <td><b>${esc(u.name)}</b></td>
-          <td>${esc(u.contact)}</td>
-          <td>${esc(u.city || "-")} (${esc(u.pin || "-")})</td>
-          <td>${esc(u.entryType || "-")}</td>
-          <td>${esc(evaluatePlan(u).label)}</td>
-        </tr>
-      `).join("");
-
-      box.innerHTML = `
-        <div class="meta" style="margin-bottom:8px;">
-          Total Users: <b>${state.users.length}</b> • Public Posts: <b>${state.posts.length}</b> • Reels: <b>${state.reels.length}</b>
+          <div class="item-title">${item.title}</div>
+          <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
+          <div class="item-footer">
+            <span>By: <strong>${item.by}</strong></span>
+            <button class="pill-btn" onclick="openModal('msgModal')">💬 Contact</button>
+          </div>
         </div>
-        <div style="overflow-x:auto;">
-          <table>
-            <thead>
-              <tr><th>#</th><th>Name</th><th>Contact</th><th>City / PIN</th><th>Join Type</th><th>Plan</th></tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
-      `;
-      openModal("adminModal");
-    }
-
-    function verifyAdminLogin() {
-      const val = document.getElementById("adminVerifyInput")?.value.trim();
-      if (!isExemptContact(val)) {
-        showToast("Only owner number 9778197726 can access full admin records");
-        return;
-      }
-      state.currentUser = {
-        ...state.currentUser,
-        name: "Muhammed Adhil",
-        contact: cleanDigits(val),
-        entryType: "Owner / Exempt Access"
-      };
-      saveState();
-      openAdminModal();
-      renderAll();
-    }
-
-    async function saveStudioAndQrSettings() {
-      state.brandTitle = document.getElementById("edBrandTitle").value.trim() || "BAZAARO";
-      state.brandSub = document.getElementById("edBrandSub").value.trim() || "MY BOSS: MUHAMMED ADHIL";
-      state.upiId = document.getElementById("edUpiId").value.trim() || DEFAULT_UPI_ID;
-      state.studioUrl = document.getElementById("edStudioUrl").value.trim() || DEFAULT_STUDIO_URL;
-      state.seoKeywords = document.getElementById("edSeo").value.trim();
-
-      const customQrFile = document.getElementById("edQrFile").files?.[0];
-      if (customQrFile) {
-        if (customQrFile.size > 3 * 1024 * 1024) {
-          showToast("QR image over 3MB — use a smaller image");
-          return;
-        }
-        state.qrImage = await readDataUrl(customQrFile);
-      }
-
-      saveState();
-      renderAll();
-      showToast("Website, UPI ID & QR Scanner updated!");
-    }
-
-    function likePost(id) {
-      const p = state.posts.find(x => x.id === id);
-      if (!p) return;
-      p.likes = (p.likes || 0) + 1;
-      saveState();
-      renderView();
-    }
-
-    function addPostComment(id) {
-      const inp = document.getElementById("pc-" + id);
-      const txt = inp?.value.trim();
-      if (!txt) return;
-      const p = state.posts.find(x => x.id === id);
-      if (!p) return;
-      p.comments = p.comments || [];
-      p.comments.push({ by: state.currentUser?.name || "User", text: txt });
-      inp.value = "";
-      saveState();
-      renderView();
-    }
-
-    function likeReel(id) {
-      const r = state.reels.find(x => x.id === id);
-      if (!r) return;
-      r.likes = (r.likes || 0) + 1;
-      saveState();
-      renderView();
-    }
-
-    function addReelComment(id) {
-      const inp = document.getElementById("rc-" + id);
-      const txt = inp?.value.trim();
-      if (!txt) return;
-      const r = state.reels.find(x => x.id === id);
-      if (!r || r.hideComments) return;
-      r.comments = r.comments || [];
-      r.comments.push({ by: state.currentUser?.name || "User", text: txt });
-      inp.value = "";
-      saveState();
-      renderView();
-    }
-
-    function shareText(title, desc) {
-      const msg = encodeURIComponent(`${title}\n${desc || ""}\n${state.studioUrl}\n— ${state.brandTitle} (${state.brandSub})`);
-      window.open(`https://wa.me/?text=${msg}`, "_blank");
-    }
-
-    function bpBadge(sys, dia) {
-      if (!sys || !dia) return { txt: "Enter BP", cls: "pill" };
-      if (sys >= 140 || dia >= 90) return { txt: "High BP", cls: "pill pill-warn" };
-      if (sys < 90 || dia < 60) return { txt: "Low BP", cls: "pill pill-gold" };
-      return { txt: "Normal BP", cls: "pill pill-ok" };
-    }
-
-    function sugarBadge(v) {
-      if (!v) return { txt: "Enter Sugar", cls: "pill" };
-      if (v >= 126) return { txt: "High Sugar", cls: "pill pill-warn" };
-      if (v < 70) return { txt: "Low Sugar", cls: "pill pill-gold" };
-      return { txt: "Normal Sugar", cls: "pill pill-ok" };
-    }
-
-    function cholBadge(v) {
-      if (!v) return { txt: "Enter Chol", cls: "pill" };
-      if (v >= 200) return { txt: "High Cholesterol", cls: "pill pill-warn" };
-      return { txt: "Normal Cholesterol", cls: "pill pill-ok" };
-    }
-
-    function saveVitals() {
-      const sys = parseInt(document.getElementById("vSys").value, 10) || 0;
-      const dia = parseInt(document.getElementById("vDia").value, 10) || 0;
-      const sugar = parseFloat(document.getElementById("vSugar").value) || 0;
-      const chol = parseFloat(document.getElementById("vChol").value) || 0;
-      const med = document.getElementById("vMed").value.trim();
-
-      state.vitals.unshift({
-        id: "VT-" + Date.now(),
-        sys, dia, sugar, chol, med,
-        time: new Date().toLocaleString()
-      });
-      saveState();
-      renderView();
-      showToast("Health vitals saved!");
-    }
-
-    function calcGst() {
-      const amt = parseFloat(document.getElementById("gAmt").value) || 0;
-      const rate = parseFloat(document.getElementById("gRate").value) || 18;
-      const gst = (amt * rate) / 100;
-      const tot = amt + gst;
-      document.getElementById("gOut").innerHTML = `
-        <div class="grid-3">
-          <div><div class="meta">Base</div><div class="vital-num">₹${amt.toFixed(2)}</div></div>
-          <div><div class="meta">GST (${rate}%)</div><div class="vital-num" style="color:var(--gold);">₹${gst.toFixed(2)}</div></div>
-          <div><div class="meta">Total</div><div class="vital-num" style="color:var(--success);">₹${tot.toFixed(2)}</div></div>
-        </div>
-      `;
-    }
-
-    function openAiModal() {
-      renderAiLog();
-      openModal("aiModal");
-    }
-
-    function renderAiLog() {
-      document.getElementById("aiChatLog").innerHTML = state.aiHistory.map(m => `
-        <div class="comment-item"><b>${esc(m.from)}:</b> ${esc(m.text)}</div>
       `).join("");
     }
 
-    function askAiAssistant() {
-      const inp = document.getElementById("aiQuestion");
-      const q = inp?.value.trim();
+    // Messages & AI Help
+    function sendMsg() {
+      const inp = document.getElementById("msgInput");
+      const val = inp.value.trim();
+      if (!val) return;
+      state.messages.push({ val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
+      inp.value = "";
+      persist();
+    }
+
+    function renderMessages() {
+      const el = document.getElementById("msgList");
+      if (!state.messages.length) {
+        el.innerHTML = `<div style="font-size:12px; color:var(--text-muted); text-align:center;">No messages yet.</div>`;
+        return;
+      }
+      el.innerHTML = state.messages.map(m => `
+        <div class="item-card" style="padding:8px 10px; font-size:12px;">
+          ${m.val} <span style="color:var(--text-muted); float:right;">${m.time}</span>
+        </div>
+      `).join("");
+    }
+
+    function askAi() {
+      const q = document.getElementById("aiQuestion").value.trim();
       if (!q) return;
-      state.aiHistory.push({ from: state.currentUser?.name || "You", text: q });
-
-      let reply = `BAZAARO 24/7 AI: All posts and reels are public for every user. You can edit or repost anytime, pay/receive via UPI (${state.upiId}), or customize QR & site settings in "Website & QR Studio".`;
-      const ql = q.toLowerCase();
-      if (ql.includes("upi") || ql.includes("qr") || ql.includes("pay")) {
-        reply = `UPI ID is ${state.upiId} and the QR scanner is shown in "UPI, QR & GST" and "Website & QR Studio", where you can replace the QR image anytime.`;
-      } else if (ql.includes("free") || ql.includes("lock") || ql.includes("9778197726")) {
-        reply = `New users get 3 months free, followed by ₹1/month auto lock on the 1st of each month. Exempt numbers 9778197726 and 7012253516 remain 100% free.`;
-      } else if (ql.includes("edit") || ql.includes("repost")) {
-        reply = `Every post and reel has Edit and Repost buttons so you can update details or push them back to the top of the public feed.`;
-      }
-
-      state.aiHistory.push({ from: "BAZAARO AI", text: reply });
-      inp.value = "";
-      saveState();
-      renderAiLog();
+      const rep = document.getElementById("aiReply");
+      rep.style.display = "block";
+      rep.innerHTML = `<strong>AI Help:</strong> Swipe the category bar on Home to browse <b>Food & Kitchen, Vehicles, Shop, ₹1 Books, Jobs, News, Health & Reels</b>. Tap <b>🍲 Sell Food</b> to list food items.`;
     }
 
-    function toEmbed(url) {
-      if (!url) return "";
-      const m = url.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
-      return m ? `https://www.youtube.com/embed/${m[1]}` : url;
+    function openModal(id) { document.getElementById(id).classList.add("open"); }
+    function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+    function toggleDrawer() { document.getElementById("sideDrawer").classList.toggle("open"); }
+    function toggleTheme() { document.body.classList.toggle("light-theme"); }
+    function shareApp() {
+      if (navigator.share) navigator.share({ title: state.siteName, url: window.location.href });
+      else alert("Link: " + window.location.href);
     }
 
-    function esc(s) {
-      return String(s || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    function renderPosts(list) {
-      if (!list.length) {
-        return `
-          <div class="card">
-            <div style="font-weight:700;">No public entries in this view yet</div>
-            <div class="meta" style="margin-top:4px;">Tap <b>+ Add Post</b> to publish items, vehicles, ₹1 books/classes, jobs, services, doctors, or updates publicly to everyone.</div>
-          </div>
-        `;
-      }
-      return list.map(p => {
-        const cmts = (p.comments || []).map(c => `<div class="comment-item"><b>${esc(c.by)}:</b> ${esc(c.text)}</div>`).join("");
-        return `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-              <span class="pill">${esc(p.type.toUpperCase())} • PUBLIC</span>
-              <span class="meta">By <b>${esc(p.authorName)}</b>${p.authorCity ? " • " + esc(p.authorCity) : ""}</span>
-            </div>
-            <h4 style="margin-top:8px; font-size:1rem;">${esc(p.title)}</h4>
-            ${p.price ? `<div class="price">${esc(p.price)}</div>` : ""}
-            ${p.extra ? `<div class="meta" style="margin-top:3px;">${esc(p.extra)}</div>` : ""}
-            ${p.desc ? `<p style="margin-top:7px; font-size:0.86rem;">${esc(p.desc)}</p>` : ""}
-            ${p.imgUrl ? `<img class="post-img" src="${esc(p.imgUrl)}" alt="" />` : ""}
-            <div class="actions-row">
-              <button class="btn btn-sm" onclick="likePost('${p.id}')">👍 Like (${p.likes || 0})</button>
-              <button class="btn btn-sm" onclick="openCreateModal('${p.type}', '${p.id}', null)">✏️ Edit</button>
-              <button class="btn btn-sm btn-gold" onclick="repostExistingPost('${p.id}')">🔁 Repost</button>
-              <button class="btn btn-sm" onclick="shareText('${esc(p.title)}', '${esc(p.desc)}')">📲 Share</button>
-            </div>
-            <div class="comment-box">
-              ${cmts || `<div class="meta">No comments yet</div>`}
-              <div style="display:flex; gap:6px; margin-top:8px;">
-                <input id="pc-${p.id}" placeholder="Add public comment..." style="padding:6px 9px; font-size:0.78rem;" />
-                <button class="btn btn-sm btn-primary" onclick="addPostComment('${p.id}')">Send</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function renderView() {
-      const view = document.getElementById("appView");
-      const tab = state.activeTab;
-      const tDict = I18N[state.lang] || I18N.en;
-
-      if (tab === "reels") {
-        const cards = state.reels.length
-          ? state.reels.map(r => {
-              const emb = toEmbed(r.videoUrl);
-              let media = "";
-              if (r.videoDataUrl) media = `<video src="${r.videoDataUrl}" controls playsinline></video>`;
-              else if (emb.includes("youtube.com/embed/")) media = `<iframe src="${esc(emb)}" allowfullscreen></iframe>`;
-              else if (r.videoUrl) media = `<video src="${esc(r.videoUrl)}" controls playsinline></video>`;
-
-              const cmts = r.hideComments
-                ? `<div class="meta">Comments hidden by creator</div>`
-                : `
-                  ${(r.comments || []).map(c => `<div class="comment-item"><b>${esc(c.by)}:</b> ${esc(c.text)}</div>`).join("") || `<div class="meta">No comments yet</div>`}
-                  <div style="display:flex; gap:6px; margin-top:8px;">
-                    <input id="rc-${r.id}" placeholder="Comment on reel..." style="padding:6px 9px; font-size:0.78rem;" />
-                    <button class="btn btn-sm btn-primary" onclick="addReelComment('${r.id}')">Post</button>
-                  </div>
-                `;
-
-              return `
-                <div class="card">
-                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                    <div>
-                      <span class="pill">${r.reelMode === "upload" ? "TYPE 2: UPLOAD" : "TYPE 1: LINK"}</span>
-                      ${r.madeAi ? `<span class="pill pill-gold">Made with AI</span>` : ""}
-                    </div>
-                    <span class="meta">Public • <b>${esc(r.authorName)}</b></span>
-                  </div>
-                  <h4 style="margin-top:8px;">${esc(r.title)}</h4>
-                  ${r.desc ? `<p class="meta" style="margin-top:4px; color:var(--text);">${esc(r.desc)}</p>` : ""}
-                  ${media}
-                  ${r.tagProduct ? `<div class="price" style="font-size:0.84rem;">🛒 Tagged: ${esc(r.tagProduct)} • Buy Now</div>` : ""}
-                  <div class="actions-row">
-                    <button class="btn btn-sm" onclick="likeReel('${r.id}')">❤️ Like (${r.likes || 0})</button>
-                    <button class="btn btn-sm" onclick="openCreateModal('reel', null, '${r.id}')">✏️ Edit & Repost</button>
-                    <button class="btn btn-sm" onclick="shareText('${esc(r.title)}', '${esc(r.desc)}')">📲 Share</button>
-                  </div>
-                  <div class="comment-box">${cmts}</div>
-                </div>
-              `;
-            }).join("")
-          : `<div class="card"><div class="meta">No reels uploaded yet. Tap <b>+ Upload Reel</b> to add Type 1 (Link) or Type 2 (Upload).</div></div>`;
-
-        view.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h3>🎬 Dual Reels (Public Feed)</h3>
-            <button class="btn btn-primary" onclick="openCreateModal('reel')">+ Upload Reel</button>
-          </div>
-          ${cards}
-        `;
-        return;
-      }
-
-      if (tab === "health") {
-        const latest = state.vitals[0] || { sys: 0, dia: 0, sugar: 0, chol: 0, med: "" };
-        const bp = bpBadge(latest.sys, latest.dia);
-        const sg = sugarBadge(latest.sugar);
-        const ch = cholBadge(latest.chol);
-
-        const logs = state.vitals.length
-          ? state.vitals.map(v => `
-              <div class="card">
-                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px;">
-                  <b>BP: ${v.sys}/${v.dia} mmHg • Sugar: ${v.sugar} mg/dL • Cholesterol: ${v.chol} mg/dL</b>
-                  <span class="meta">${esc(v.time)}</span>
-                </div>
-                ${v.med ? `<div class="meta" style="margin-top:4px;">💊 Reminder / Medicine: <b>${esc(v.med)}</b></div>` : ""}
-              </div>
-            `).join("")
-          : `<div class="card"><div class="meta">No health readings saved yet.</div></div>`;
-
-        view.innerHTML = `
-          <div class="grid-3" style="margin-bottom:12px;">
-            <div class="card" style="margin:0;">
-              <div class="meta">Blood Pressure</div>
-              <div class="vital-num">${latest.sys || "--"}/${latest.dia || "--"} <span class="meta">mmHg</span></div>
-              <span class="${bp.cls}" style="margin-top:6px;">${bp.txt}</span>
-            </div>
-            <div class="card" style="margin:0;">
-              <div class="meta">Blood Sugar</div>
-              <div class="vital-num">${latest.sugar || "--"} <span class="meta">mg/dL</span></div>
-              <span class="${sg.cls}" style="margin-top:6px;">${sg.txt}</span>
-            </div>
-            <div class="card" style="margin:0;">
-              <div class="meta">Cholesterol</div>
-              <div class="vital-num">${latest.chol || "--"} <span class="meta">mg/dL</span></div>
-              <span class="${ch.cls}" style="margin-top:6px;">${ch.txt}</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 style="margin-bottom:10px;">❤️ Health Checking & Vitals Input</h3>
-            <div class="grid-2">
-              <div class="field"><label>BP Systolic (Upper)</label><input type="number" id="vSys" placeholder="e.g. 120" /></div>
-              <div class="field"><label>BP Diastolic (Lower)</label><input type="number" id="vDia" placeholder="e.g. 80" /></div>
-              <div class="field"><label>Blood Sugar (mg/dL)</label><input type="number" id="vSugar" placeholder="e.g. 96" /></div>
-              <div class="field"><label>Cholesterol (mg/dL)</label><input type="number" id="vChol" placeholder="e.g. 175" /></div>
-            </div>
-            <div class="field"><label>Medicine / Check Reminder</label><input id="vMed" placeholder="e.g. Morning tablet & water" /></div>
-            <button class="btn btn-success" onclick="saveVitals()">Save Health Check</button>
-          </div>
-          ${logs}
-        `;
-        return;
-      }
-
-      if (tab === "paygst") {
-        view.innerHTML = `
-          <div class="card">
-            <h3 style="margin-bottom:6px;">💳 UPI ID, QR Scanner & GST Calculator</h3>
-            <div class="meta" style="margin-bottom:10px;">
-              Pay directly via UPI ID: <b style="color:var(--gold);">${esc(state.upiId)}</b> • Partner Store: <a href="${esc(state.studioUrl)}" target="_blank" style="color:var(--primary);">${esc(state.studioUrl)}</a>
-            </div>
-            <img class="qr-preview" src="${esc(state.qrImage)}" alt="BAZAARO UPI QR Scanner" onerror="this.style.display='none';" />
-            <div class="meta">UPI ID: <b>${esc(state.upiId)}</b> • Scan with any UPI app (GPay, PhonePe, Paytm, Navi)</div>
-
-            <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
-              <h4 style="margin-bottom:8px;">GST Calculator</h4>
-              <div class="grid-2">
-                <div class="field"><label>Amount (₹)</label><input type="number" id="gAmt" value="1000" oninput="calcGst()" /></div>
-                <div class="field">
-                  <label>GST Slab (%)</label>
-                  <select id="gRate" onchange="calcGst()">
-                    <option value="5">5% GST</option>
-                    <option value="12">12% GST</option>
-                    <option value="18" selected>18% GST</option>
-                    <option value="28">28% GST</option>
-                  </select>
-                </div>
-              </div>
-              <div class="card" style="background:var(--surface-2); margin-top:8px;" id="gOut"></div>
-            </div>
-          </div>
-        `;
-        calcGst();
-        return;
-      }
-
-      if (tab === "editor") {
-        view.innerHTML = `
-          <div class="card">
-            <h3 style="margin-bottom:10px;">✏️ Live Website, QR Scanner & Search Settings Editor</h3>
-            <div class="grid-2">
-              <div class="field"><label>Brand Title</label><input id="edBrandTitle" value="${esc(state.brandTitle)}" /></div>
-              <div class="field"><label>Brand Subtitle</label><input id="edBrandSub" value="${esc(state.brandSub)}" /></div>
-              <div class="field"><label>Owner UPI ID</label><input id="edUpiId" value="${esc(state.upiId)}" /></div>
-              <div class="field"><label>Aether AI Creative Studio Link</label><input id="edStudioUrl" value="${esc(state.studioUrl)}" /></div>
-            </div>
-            <div class="field"><label>Upload / Replace QR Scanner Photo Anytime</label><input type="file" id="edQrFile" accept="image/*" /></div>
-            <div class="field"><label>Google Search / Discovery Keywords</label><input id="edSeo" value="${esc(state.seoKeywords)}" /></div>
-            <button class="btn btn-primary" onclick="saveStudioAndQrSettings()">Save Website & QR Changes</button>
-          </div>
-        `;
-        return;
-      }
-
-      const filtered = tab === "all" ? state.posts : state.posts.filter(p => p.type === tab);
-      view.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <h3>${tab === "all" ? tDict.publicFeed : tab.toUpperCase() + " (Public)"}</h3>
-          <button class="btn btn-primary" onclick="openCreateModal('${tab === "all" ? "shop" : tab}')">${tDict.addPost}</button>
-        </div>
-        ${renderPosts(filtered)}
-      `;
-    }
-
-    function renderAll() {
-      applyTheme();
-      const lang = I18N[state.lang] || I18N.en;
-      document.getElementById("headerBrandTitle").textContent = state.brandTitle;
-      document.getElementById("headerBrandSub").textContent = state.brandSub;
-      document.getElementById("heroHeadline").textContent = lang.headline;
-      document.getElementById("langSelect").value = state.lang;
-
-      const u = state.currentUser;
-      const plan = evaluatePlan(u);
-      const pill = document.getElementById("statusPill");
-      pill.textContent = plan.label;
-      pill.className = plan.locked ? "pill pill-warn" : (plan.exempt || plan.inTrial ? "pill pill-ok" : "pill pill-gold");
-
-      document.getElementById("userSummaryBar").innerHTML = `
-        <span class="pill">User: ${esc(u?.name || "Guest")} (${esc(u?.contact || "No Contact")})</span>
-        <span class="pill pill-gold">UPI: ${esc(state.upiId)}</span>
-        <a class="btn btn-sm" href="${esc(state.studioUrl)}" target="_blank">🌐 Aether AI Creative Studio</a>
-      `;
-
-      const lockEl = document.getElementById("planLockNotice");
-      if (plan.locked) {
-        lockEl.innerHTML = `
-          <div class="lock-banner">
-            <div style="font-weight:800; color:var(--danger);">Monthly Lock Active (${esc(plan.monthKey)})</div>
-            <div class="meta" style="margin-top:4px;">3-month free period ended; pay ₹${MONTHLY_FEE} via UPI (<b>${esc(state.upiId)}</b>) for monthly access.</div>
-            <button class="btn btn-gold" style="margin-top:8px;" onclick="unlockMonthlyPass()">Confirm ₹${MONTHLY_FEE} Monthly Pass</button>
-          </div>
-        `;
-      } else {
-        lockEl.innerHTML = "";
-      }
-
-      renderView();
-    }
-
-    renderAll();
+    // Show Food language toggle on initial load
+    updateCategoryHeader();
   </script>
 </body>
 </html>
