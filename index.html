@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>BAZAARO — India's Trending Public Super-Hub</title>
+  <title>BAZAARO — Fast Public Super-Hub</title>
   <style>
     :root {
       --bg: #0b1120;
@@ -17,7 +17,6 @@
       --success: #10b981;
       --danger: #ef4444;
       --border: rgba(255, 255, 255, 0.09);
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     }
 
     body.light-theme {
@@ -27,88 +26,32 @@
       --text: #0f172a;
       --text-muted: #475569;
       --border: rgba(15, 23, 42, 0.1);
-      --shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      padding-bottom: 92px;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    #splashScreen {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at center, #172554 0%, #090d16 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.45s ease, visibility 0.45s ease;
-    }
-    #splashScreen.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .splash-logo {
-      width: 105px;
-      height: 105px;
-      border-radius: 26px;
-      background: linear-gradient(135deg, #1d4ed8, #f59e0b);
-      padding: 4px;
-      box-shadow: 0 0 35px rgba(245, 158, 11, 0.45);
-      animation: pulseLogo 1.3s infinite alternate;
-      overflow: hidden;
-    }
-    .splash-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 22px;
-      background: #0b1120;
-    }
-    @keyframes pulseLogo {
-      from { transform: scale(0.95); }
-      to { transform: scale(1.05); }
-    }
-    .splash-title {
-      margin-top: 16px;
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #ffffff;
-    }
-    .splash-sub {
-      margin-top: 5px;
-      font-size: 12px;
-      color: #fbbf24;
-      letter-spacing: 0.7px;
+      padding-bottom: 84px;
     }
 
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(19, 28, 49, 0.94);
-      backdrop-filter: blur(12px);
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 10px 12px;
+      padding: 9px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-    }
-    body.light-theme header {
-      background: rgba(255, 255, 255, 0.95);
     }
     .brand-left {
       display: flex;
@@ -120,31 +63,29 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       color: var(--text);
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      font-size: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      font-size: 17px;
       cursor: pointer;
-      flex-shrink: 0;
     }
     .site-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
       border: 2px solid var(--accent);
       object-fit: cover;
       background: #1e293b;
-      flex-shrink: 0;
     }
     .brand-name {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .boss-tag {
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 700;
       color: var(--accent);
     }
@@ -152,55 +93,36 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      flex-shrink: 0;
     }
     .pill-btn {
       background: var(--surface-2);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 6px 10px;
+      padding: 6px 9px;
       border-radius: 999px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       text-decoration: none;
-      display: inline-block;
     }
-    .pill-btn.primary {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-    }
-    .pill-btn.cart-pill {
-      background: rgba(245, 158, 11, 0.18);
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.4);
-    }
-    .pill-btn.you-btn {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
-      border: none;
-    }
-    .pill-btn.admin {
-      background: #0f172a;
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.4);
-    }
+    .pill-btn.primary { background: var(--primary); color: #fff; border: none; }
+    .pill-btn.cart-pill { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
+    .pill-btn.you-btn { background: #059669; color: #fff; border: none; }
+    .pill-btn.admin { background: #0f172a; color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
 
     .container {
       max-width: 720px;
       margin: 0 auto;
-      padding: 12px;
+      padding: 10px 12px;
     }
 
     .lang-bar-wrap {
       display: flex;
-      align-items: center;
       gap: 6px;
       overflow-x: auto;
       padding-bottom: 6px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       scrollbar-width: none;
     }
     .lang-bar-wrap::-webkit-scrollbar { display: none; }
@@ -209,205 +131,99 @@
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 6px 11px;
+      padding: 5px 10px;
       border-radius: 999px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
     }
     .lang-chip.active {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #ffffff;
+      background: #059669;
+      color: #fff;
       border-color: #34d399;
     }
 
-    .date-3d-wrapper {
-      perspective: 900px;
-      margin-bottom: 12px;
-    }
-    .date-3d-card {
-      background: linear-gradient(145deg, #0f172a, #1e1b4b 50%, #090d16);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 18px;
-      padding: 12px 13px;
-      box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.55),
-        0 0 18px rgba(59, 130, 246, 0.35),
-        inset 0 1px 1px rgba(255, 255, 255, 0.22);
-      transform: rotateX(5deg);
-      position: relative;
-      overflow: hidden;
-    }
-    .date-3d-card::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -30%;
-      width: 60%;
-      height: 200%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
-      transform: rotate(25deg);
-      animation: lightSweep 4s infinite linear;
-      pointer-events: none;
-    }
-    @keyframes lightSweep {
-      0% { left: -60%; }
-      100% { left: 140%; }
-    }
-    .date-row-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .date-3d-cubes {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .cube-box {
-      background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-bottom: 3px solid #2563eb;
-      border-radius: 11px;
-      padding: 5px 9px;
-      text-align: center;
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45), 0 0 10px rgba(37, 99, 235, 0.3);
-    }
-    .cube-box.gold-glow {
-      border-bottom-color: #f59e0b;
-      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45), 0 0 12px rgba(245, 158, 11, 0.35);
-    }
-    .cube-label {
-      display: block;
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 0.7px;
-      color: #94a3b8;
-      text-transform: uppercase;
-    }
-    .cube-val {
-      display: block;
-      font-size: 17px;
-      font-weight: 900;
-      color: #ffffff;
-      text-shadow: 0 2px 0 #1d4ed8, 0 4px 10px rgba(56, 189, 248, 0.85);
-    }
-    .cube-box.gold-glow .cube-val {
-      color: #fde68a;
-      text-shadow: 0 2px 0 #b45309, 0 4px 10px rgba(245, 158, 11, 0.85);
-    }
-    .time-row-3d {
-      margin-top: 9px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    .status-strip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 9px 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-    }
-    .clock-3d-display {
-      font-size: 16px;
-      font-weight: 900;
-      color: #7dd3fc;
-      letter-spacing: 1px;
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+      flex-wrap: wrap;
+      font-size: 12px;
     }
     .live-dot-tag {
       font-size: 10px;
       font-weight: 800;
       color: #34d399;
       background: rgba(16, 185, 129, 0.14);
-      border: 1px solid rgba(16, 185, 129, 0.38);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       padding: 3px 8px;
       border-radius: 999px;
-      white-space: nowrap;
     }
 
     .hero-card {
-      background: linear-gradient(135deg, #172554 0%, #1e1b4b 55%, #0f172a 100%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 20px;
-      padding: 15px;
+      background: linear-gradient(135deg, #172554, #0f172a);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px;
       color: #fff;
-      box-shadow: var(--shadow);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .hero-top {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .hero-logo {
-      width: 58px;
-      height: 58px;
-      border-radius: 15px;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       border: 2px solid #f59e0b;
       object-fit: cover;
       background: #0b1120;
-      flex-shrink: 0;
     }
-    .hero-title {
-      font-size: 17px;
-      font-weight: 800;
-    }
-    .hero-desc {
-      font-size: 12px;
-      color: #cbd5e1;
-      margin-top: 3px;
-      line-height: 1.4;
-    }
-    .owner-info-box {
-      margin-top: 10px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 12px;
-      padding: 9px 11px;
-      font-size: 12px;
-      color: #f8fafc;
-    }
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
+    .hero-title { font-size: 15px; font-weight: 800; }
+    .hero-desc { font-size: 11px; color: #cbd5e1; margin-top: 2px; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
     .badge {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 4px 9px;
+      padding: 3px 8px;
       border-radius: 999px;
       background: rgba(16, 185, 129, 0.2);
       color: #6ee7b7;
-      border: 1px solid rgba(16, 185, 129, 0.35);
     }
-    .badge.gold {
-      background: rgba(245, 158, 11, 0.2);
-      color: #fcd34d;
-      border-color: rgba(245, 158, 11, 0.35);
+    .badge.gold { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+
+    .store-quick-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .store-quick-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 4px;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
     }
 
-    .cat-strip-wrap {
-      margin-bottom: 12px;
-    }
-    .cat-strip-title {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--text-muted);
-      margin-bottom: 7px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-    }
     .cat-strip {
       display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
       overflow-x: auto;
-      gap: 8px;
+      gap: 7px;
       padding-bottom: 6px;
-      -webkit-overflow-scrolling: touch;
+      margin-bottom: 10px;
       scrollbar-width: none;
     }
     .cat-strip::-webkit-scrollbar { display: none; }
@@ -416,66 +232,56 @@
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 9px 14px;
+      padding: 7px 12px;
       border-radius: 999px;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
     }
     .cat-pill.active {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #ffffff;
+      background: var(--primary);
+      color: #fff;
       border-color: #60a5fa;
     }
 
     .search-bar {
       display: flex;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 7px;
+      margin-bottom: 10px;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 15px;
+      border-radius: 16px;
+      padding: 12px;
       margin-bottom: 12px;
-      box-shadow: var(--shadow);
     }
     .card-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       gap: 8px;
     }
-    .card-title {
-      font-size: 15px;
-      font-weight: 800;
-    }
+    .card-title { font-size: 14px; font-weight: 800; }
 
     .item-card {
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-    .clickable-open-area {
-      cursor: pointer;
+      border-radius: 13px;
+      padding: 11px;
+      margin-bottom: 10px;
     }
     .item-photo-wrap {
       position: relative;
-      margin-bottom: 9px;
+      margin-bottom: 8px;
     }
     .item-photo {
       width: 100%;
-      max-height: 230px;
+      height: 190px;
       object-fit: cover;
-      border-radius: 11px;
-      border: 1px solid var(--border);
+      border-radius: 10px;
       background: #0f172a;
       display: block;
     }
@@ -484,123 +290,101 @@
       right: 8px;
       bottom: 8px;
       background: rgba(15, 23, 42, 0.85);
-      color: #f8fafc;
-      font-size: 10.5px;
+      color: #fff;
+      font-size: 10px;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 3px 7px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
     }
     .item-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .item-cat-tag {
-      font-size: 10.5px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-      background: rgba(37, 99, 235, 0.2);
-      color: #60a5fa;
-    }
-    .item-price-tag {
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #fbbf24;
-    }
-    .item-title {
-      font-size: 15px;
-      font-weight: 800;
       margin-bottom: 4px;
     }
+    .item-cat-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(37, 99, 235, 0.25);
+      color: #60a5fa;
+    }
+    .item-price-tag { font-size: 12px; font-weight: 800; color: #fbbf24; }
+    .item-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
     .item-desc {
-      font-size: 12.5px;
+      font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.45;
+      line-height: 1.4;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .tap-hint-text {
-      font-size: 11px;
-      color: #60a5fa;
-      font-weight: 700;
-      margin-top: 6px;
-    }
     .item-actions-row {
       display: flex;
-      gap: 7px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-top: 9px;
+      margin-top: 8px;
     }
     .cart-add-btn {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
+      background: var(--accent);
       color: #0f172a;
       border: none;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
-      padding: 7px 11px;
-      border-radius: 9px;
+      padding: 6px 10px;
+      border-radius: 8px;
       cursor: pointer;
     }
     .details-open-btn {
       background: var(--surface);
       color: var(--text);
       border: 1px solid var(--border);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 7px 11px;
-      border-radius: 9px;
+      padding: 6px 10px;
+      border-radius: 8px;
       cursor: pointer;
     }
     .item-link-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #ffffff;
+      background: var(--primary);
+      color: #fff;
       text-decoration: none;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
-      padding: 7px 11px;
-      border-radius: 9px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: inline-block;
     }
     .item-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 10px;
-      padding-top: 8px;
+      margin-top: 8px;
+      padding-top: 7px;
       border-top: 1px solid var(--border);
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--text-muted);
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .item-actions {
-      display: flex;
       gap: 6px;
-      align-items: center;
     }
     .edit-item-btn {
-      background: rgba(59, 130, 246, 0.18);
+      background: rgba(59, 130, 246, 0.2);
       color: #93c5fd;
-      border: 1px solid rgba(59, 130, 246, 0.38);
-      padding: 4px 9px;
-      border-radius: 8px;
-      font-size: 11px;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      padding: 3px 8px;
+      border-radius: 7px;
+      font-size: 10.5px;
       font-weight: 700;
       cursor: pointer;
     }
     .del-btn {
-      background: rgba(239, 68, 68, 0.16);
+      background: rgba(239, 68, 68, 0.18);
       color: #f87171;
       border: 1px solid rgba(239, 68, 68, 0.35);
-      padding: 4px 9px;
-      border-radius: 8px;
-      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 7px;
+      font-size: 10.5px;
       font-weight: 700;
       cursor: pointer;
     }
@@ -608,77 +392,44 @@
     .photo-preview-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-      margin-top: 8px;
+      gap: 6px;
+      margin-top: 6px;
     }
     .photo-preview-thumb {
       width: 100%;
-      height: 78px;
+      height: 68px;
       object-fit: cover;
-      border-radius: 9px;
-      border: 1px solid var(--border);
+      border-radius: 8px;
     }
-
     .detail-main-photo {
       width: 100%;
-      max-height: 270px;
+      max-height: 250px;
       object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid var(--border);
+      border-radius: 12px;
       margin-bottom: 8px;
     }
     .detail-thumbs-row {
       display: flex;
-      gap: 7px;
+      gap: 6px;
       overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .detail-thumb-img {
-      width: 64px;
-      height: 64px;
+      width: 58px;
+      height: 58px;
       object-fit: cover;
-      border-radius: 9px;
+      border-radius: 8px;
       border: 2px solid transparent;
       cursor: pointer;
       flex-shrink: 0;
     }
-    .detail-thumb-img.active {
-      border-color: var(--accent);
-    }
-
-    .user-directory-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 11px;
-      margin-bottom: 9px;
-    }
-    .online-pill {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.4);
-    }
-    .away-pill {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.2);
-      color: #cbd5e1;
-    }
+    .detail-thumb-img.active { border-color: var(--accent); }
 
     .btn {
-      padding: 9px 13px;
-      border-radius: 12px;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: none;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
@@ -688,41 +439,19 @@
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-success { background: var(--success); color: #fff; }
     .btn-accent { background: var(--accent); color: #0f172a; }
-    .btn-secondary {
-      background: var(--surface-2);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .form-group { margin-bottom: 11px; }
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
+    .btn-secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+
+    .form-group { margin-bottom: 10px; }
+    .form-group label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 3px; }
     .form-control {
       width: 100%;
       background: var(--surface-2);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 9px 11px;
-      border-radius: 11px;
+      padding: 8px 10px;
+      border-radius: 10px;
       font-size: 13px;
     }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      text-align: center;
-      background: var(--surface-2);
-      padding: 11px 6px;
-      border-radius: 14px;
-      margin: 10px 0;
-    }
-    .stat-num { font-size: 19px; font-weight: 800; color: var(--primary-light); }
-    .stat-label { font-size: 11px; color: var(--text-muted); }
 
     .drawer-backdrop {
       position: fixed;
@@ -732,45 +461,20 @@
       z-index: 550;
     }
     .drawer-backdrop.open { display: block; }
-
     .drawer {
       position: fixed;
       top: 0;
-      left: -310px;
-      width: 295px;
-      max-width: 86vw;
+      left: -300px;
+      width: 280px;
+      max-width: 85vw;
       height: 100%;
       background: var(--surface);
-      border-right: 1px solid var(--border);
       z-index: 600;
-      padding: 16px;
+      padding: 14px;
       overflow-y: auto;
-      transition: left 0.25s ease;
+      transition: left 0.2s ease;
     }
     .drawer.open { left: 0; }
-    .drawer-cat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      margin: 10px 0 14px;
-    }
-    .drawer-cat-tile {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 8px;
-      border-radius: 12px;
-      font-size: 11.5px;
-      font-weight: 700;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .drawer-cat-tile:hover, .drawer-cat-tile.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary-light);
-    }
     .drawer-btn {
       display: block;
       width: 100%;
@@ -778,10 +482,10 @@
       background: var(--surface-2);
       color: var(--text);
       border: none;
-      padding: 10px 12px;
-      border-radius: 11px;
-      margin-bottom: 8px;
-      font-size: 13px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      margin-bottom: 7px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
     }
@@ -789,36 +493,36 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.74);
+      background: rgba(0, 0, 0, 0.75);
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 15px;
+      padding: 14px;
       z-index: 500;
     }
     .modal-backdrop.open { display: flex; }
     .modal {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: 18px;
       width: 100%;
-      max-width: 480px;
-      max-height: 88vh;
+      max-width: 470px;
+      max-height: 86vh;
       overflow-y: auto;
-      padding: 18px;
+      padding: 16px;
     }
     .modal-head {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .close-x {
       background: var(--surface-2);
       border: none;
       color: var(--text);
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
     }
@@ -828,16 +532,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(19, 28, 49, 0.97);
-      backdrop-filter: blur(12px);
+      background: var(--surface);
       border-top: 1px solid var(--border);
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      padding: 8px 2px;
+      padding: 7px 2px;
       z-index: 200;
-    }
-    body.light-theme .bottom-nav {
-      background: rgba(255, 255, 255, 0.97);
     }
     .nav-btn {
       background: none;
@@ -847,63 +547,22 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
       cursor: pointer;
     }
     .nav-btn.active { color: var(--primary-light); }
-
-    .fab-ai {
-      position: fixed;
-      right: 14px;
-      bottom: 72px;
-      background: linear-gradient(135deg, #2563eb, #10b981);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 9px 13px;
-      font-size: 11.5px;
-      font-weight: 800;
-      box-shadow: var(--shadow);
-      z-index: 250;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-
-  <div id="splashScreen">
-    <div class="splash-logo">
-      <img id="splashLogoImg" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="BAZAARO" />
-    </div>
-    <div class="splash-title" id="splashTitleText">BAZAARO</div>
-    <div class="splash-sub" id="splashSubText">OWNER • MUHAMMED ADHIL • 9778197726</div>
-  </div>
 
   <div class="drawer-backdrop" id="drawerBackdrop" onclick="toggleDrawer()"></div>
 
   <div class="drawer" id="sideDrawer">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-      <strong id="drawerBrandName" style="font-size:16px;">BAZAARO</strong>
+      <strong id="drawerBrandName">BAZAARO</strong>
       <button class="close-x" onclick="toggleDrawer()">✕</button>
     </div>
-
-    <div style="font-size:11px; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:0.6px;">
-      ✨ All Categories
-    </div>
-    <div class="drawer-cat-grid" id="drawerCatGrid">
-      <button class="drawer-cat-tile active" onclick="selectCategoryByName('ALL'); toggleDrawer()">🌐 All Items</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('PRODUCTS'); toggleDrawer()">🛒 Sell Products</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('FOOD'); toggleDrawer()">🍲 Food & Kitchen</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('VEHICLES'); toggleDrawer()">🚗 Vehicles</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('SHOP'); toggleDrawer()">🛍️ Shop & Store</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('BOOKS'); toggleDrawer()">📘 ₹1 Books/Class</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('JOBS'); toggleDrawer()">💼 Jobs & Work</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('NEWS'); toggleDrawer()">📰 News</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('HEALTH'); toggleDrawer()">❤️ Health</button>
-      <button class="drawer-cat-tile" onclick="selectCategoryByName('REELS'); toggleDrawer()">🎬 Reels</button>
-    </div>
-
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('cartModal')">🛒 My Cart (<span id="drawerCartCount">0</span>)</button>
     <button class="drawer-btn" id="drawerOwnerUsersBtn" style="display:none; color:#fbbf24;" onclick="toggleDrawer(); openOwnerUsersPanel()">👑 Live Users & Details (Owner Only)</button>
@@ -912,7 +571,7 @@
     <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Verification</button>
     <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); shareApp()">📤 Share BAZAARO</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); resetLocalCacheFast()">⚡ Fix Speed / Clear Cache</button>
   </div>
 
   <header>
@@ -925,15 +584,15 @@
       </div>
     </div>
     <div class="header-actions">
-      <button class="pill-btn admin" id="ownerUsersTopBtn" style="display:none;" onclick="openOwnerUsersPanel()">👑 Live Users</button>
+      <button class="pill-btn admin" id="ownerUsersTopBtn" style="display:none;" onclick="openOwnerUsersPanel()">👑 Users</button>
       <button class="pill-btn cart-pill" onclick="openModal('cartModal')">🛒 <span id="headerCartCount">0</span></button>
-      <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit</button>
-      <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Create Account</button>
+      <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️</button>
+      <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Account</button>
     </div>
   </header>
 
   <div class="container">
-    <!-- All Languages Selector -->
+    <!-- All Languages Bar -->
     <div class="lang-bar-wrap" id="languageBar">
       <button class="lang-chip active" data-lang="en" onclick="setAppLanguage('en')">🌐 English</button>
       <button class="lang-chip" data-lang="ml" onclick="setAppLanguage('ml')">മലയാളം</button>
@@ -944,47 +603,18 @@
       <button class="lang-chip" data-lang="ar" onclick="setAppLanguage('ar')">العربية</button>
     </div>
 
-    <div class="date-3d-wrapper">
-      <div class="date-3d-card">
-        <div class="date-row-top">
-          <div class="date-3d-cubes">
-            <div class="cube-box">
-              <span class="cube-label">Year</span>
-              <span class="cube-val" id="liveYear">2026</span>
-            </div>
-            <div class="cube-box gold-glow">
-              <span class="cube-label">Month</span>
-              <span class="cube-val" id="liveMonth">Nov</span>
-            </div>
-            <div class="cube-box">
-              <span class="cube-label">Date</span>
-              <span class="cube-val" id="liveDate">28</span>
-            </div>
-            <div class="cube-box gold-glow">
-              <span class="cube-label">Day</span>
-              <span class="cube-val" id="liveDay">Sat</span>
-            </div>
-          </div>
-          <div class="live-dot-tag" id="syncStatusBadge">● FIREBASE LIVE</div>
-        </div>
-        <div class="time-row-3d">
-          <span style="font-size:11px; color:#94a3b8; font-weight:700;">TIME (H : M : S)</span>
-          <span class="clock-3d-display" id="liveClockHMS">12:20:00 AM</span>
-        </div>
-      </div>
+    <div class="status-strip">
+      <strong id="liveDateClockText">28 Nov 2026 • Sat</strong>
+      <span class="live-dot-tag" id="syncStatusBadge">● FAST LIVE</span>
     </div>
 
     <div class="hero-card">
       <div class="hero-top">
-        <img id="heroLogo" class="hero-logo" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Hero Logo" />
+        <img id="heroLogo" class="hero-logo" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Logo" />
         <div>
           <div class="hero-title" id="heroSiteTitle">BAZAARO — India's Trending Public Super-Hub</div>
-          <div class="hero-desc" id="heroSiteDesc">First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516</div>
+          <div class="hero-desc" id="heroSiteDesc">Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • First 3 Months Free (₹1/mo after)</div>
         </div>
-      </div>
-      <div class="owner-info-box">
-        <strong>Owner:</strong> <span id="ownerNameLine">MUHAMMED ADHIL</span> &nbsp;|&nbsp;
-        <strong>Phone:</strong> <span id="ownerPhoneLine">9778197726 / 7012253516</span>
       </div>
       <div class="badge-row">
         <span class="badge">🛡️ 100% Secured</span>
@@ -993,20 +623,25 @@
       </div>
     </div>
 
-    <div class="cat-strip-wrap">
-      <div class="cat-strip-title" id="categoriesLabelText">Categories</div>
-      <div class="cat-strip" id="categoryBar">
-        <button class="cat-pill active" data-cat="ALL" onclick="selectCategory('ALL', this)">🌐 All</button>
-        <button class="cat-pill" data-cat="PRODUCTS" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
-        <button class="cat-pill" data-cat="FOOD" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
-        <button class="cat-pill" data-cat="VEHICLES" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
-        <button class="cat-pill" data-cat="SHOP" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
-        <button class="cat-pill" data-cat="BOOKS" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
-        <button class="cat-pill" data-cat="JOBS" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
-        <button class="cat-pill" data-cat="NEWS" onclick="selectCategory('NEWS', this)">📰 News</button>
-        <button class="cat-pill" data-cat="HEALTH" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
-        <button class="cat-pill" data-cat="REELS" onclick="selectCategory('REELS', this)">🎬 Reels</button>
-      </div>
+    <!-- Instant Store Search Shortcuts (Meesho, Flipkart, Myntra, Amazon) -->
+    <div class="store-quick-bar">
+      <button class="store-quick-btn" onclick="openExternalStoreSearch('meesho')">🛒 Meesho</button>
+      <button class="store-quick-btn" onclick="openExternalStoreSearch('flipkart')">🛍️ Flipkart</button>
+      <button class="store-quick-btn" onclick="openExternalStoreSearch('myntra')">👗 Myntra</button>
+      <button class="store-quick-btn" onclick="openExternalStoreSearch('amazon')">📦 Amazon</button>
+    </div>
+
+    <div class="cat-strip" id="categoryBar">
+      <button class="cat-pill active" data-cat="ALL" onclick="selectCategory('ALL', this)">🌐 All</button>
+      <button class="cat-pill" data-cat="PRODUCTS" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
+      <button class="cat-pill" data-cat="FOOD" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
+      <button class="cat-pill" data-cat="VEHICLES" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
+      <button class="cat-pill" data-cat="SHOP" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
+      <button class="cat-pill" data-cat="BOOKS" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
+      <button class="cat-pill" data-cat="JOBS" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
+      <button class="cat-pill" data-cat="NEWS" onclick="selectCategory('NEWS', this)">📰 News</button>
+      <button class="cat-pill" data-cat="HEALTH" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
+      <button class="cat-pill" data-cat="REELS" onclick="selectCategory('REELS', this)">🎬 Reels</button>
     </div>
 
     <div class="search-bar">
@@ -1019,12 +654,9 @@
         <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
         <button class="pill-btn primary" id="addItemBtnLabel" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
       </div>
-
       <div id="categoryItemsContainer"></div>
     </div>
   </div>
-
-  <button class="fab-ai" onclick="openModal('aiModal')">🤖 24/7 AI Help</button>
 
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
@@ -1051,9 +683,6 @@
         <h3>👑 Live Users & Details (Owner Only)</h3>
         <button class="close-x" onclick="closeModal('ownerUsersModal')">✕</button>
       </div>
-      <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
-        Visible only to Owner (MUHAMMED ADHIL • 9778197726 / 7012253516).
-      </div>
       <div id="ownerUsersListContainer"></div>
     </div>
   </div>
@@ -1077,7 +706,7 @@
         <button class="close-x" onclick="closeModal('cartModal')">✕</button>
       </div>
       <div id="cartItemsContainer"></div>
-      <div style="margin-top:12px; display:flex; gap:8px;">
+      <div style="margin-top:10px; display:flex; gap:8px;">
         <button class="btn btn-success" style="flex:1;" onclick="checkoutCart()">⚡ Proceed to Buy / UPI</button>
         <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
       </div>
@@ -1111,36 +740,18 @@
         <button class="close-x" onclick="closeModal('youModal')">✕</button>
       </div>
       <div class="item-card">
-        <div style="font-size:16px; font-weight:800;" id="youUserName">User</div>
+        <div style="font-size:15px; font-weight:800;" id="youUserName">User</div>
         <div style="font-size:12px; color:var(--text-muted);" id="youUserPhone">Phone</div>
         <div id="ownerBadgeInYou" style="display:none; margin-top:6px;">
           <span class="badge gold">👑 Owner Access</span>
         </div>
       </div>
-
-      <div class="stats-grid">
-        <div>
-          <div class="stat-num" id="youPostsCount">0</div>
-          <div class="stat-label">Items</div>
-        </div>
-        <div>
-          <div class="stat-num" id="youFollowersCount">0</div>
-          <div class="stat-label">Followers</div>
-        </div>
-        <div>
-          <div class="stat-num" id="youFollowingCount">0</div>
-          <div class="stat-label">Following</div>
-        </div>
-      </div>
-
       <button class="btn btn-accent" id="youLiveUsersBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openOwnerUsersPanel()">
         👑 View All Live Users & Details
       </button>
-
       <button class="btn btn-primary" id="youEditWebsiteBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openModal('editModal')">
         ✏️ Edit Website
       </button>
-
       <button class="btn btn-secondary" style="width:100%; color:#ef4444;" onclick="logoutAccount()">Logout</button>
     </div>
   </div>
@@ -1219,17 +830,17 @@
         <input type="file" id="postPhotoFiles" accept="image/*" multiple class="form-control" onchange="handleMultiplePhotosUpload(event)" />
       </div>
       <div class="form-group">
-        <label>Or Photo Links (Up to 6 links — one link per line)</label>
+        <label>Or Photo Links (Up to 6 links — one per line)</label>
         <textarea id="postPhotoUrls" class="form-control" rows="2" placeholder="https://...&#10;https://..." oninput="handlePhotoUrlsInput(event)"></textarea>
       </div>
       <div class="photo-preview-grid" id="postPhotoPreviewGrid"></div>
-      <div class="form-group" style="margin-top:10px;">
+      <div class="form-group" style="margin-top:8px;">
         <label>Seller Name & Contact Number</label>
         <input type="text" id="postSellerContact" class="form-control" placeholder="Name & Phone number" />
       </div>
       <div class="form-group">
         <label>Full Details</label>
-        <textarea id="postContent" class="form-control" rows="4" placeholder="Enter full specifications, size, delivery, or details..."></textarea>
+        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter full specifications, size, delivery, or details..."></textarea>
       </div>
       <button class="btn btn-success" id="savePostBtn" style="width:100%;" onclick="savePublicPost()">Publish Live to Everyone</button>
     </div>
@@ -1243,8 +854,8 @@
         <button class="close-x" onclick="closeModal('qrModal')">✕</button>
       </div>
       <div class="item-card" style="text-align:center;">
-        <div style="font-size:16px; font-weight:800;" id="qrUpiDisplay">9778197726@naviaxis</div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">100% Secured • Owner: MUHAMMED ADHIL • 9778197726, 7012253516</div>
+        <div style="font-size:15px; font-weight:800;" id="qrUpiDisplay">9778197726@naviaxis</div>
+        <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">100% Secured • Owner: MUHAMMED ADHIL • 9778197726, 7012253516</div>
       </div>
     </div>
   </div>
@@ -1264,65 +875,47 @@
     </div>
   </div>
 
-  <!-- 24/7 AI Help Modal -->
-  <div class="modal-backdrop" id="aiModal">
-    <div class="modal">
-      <div class="modal-head">
-        <h3>🤖 24/7 AI Help</h3>
-        <button class="close-x" onclick="closeModal('aiModal')">✕</button>
-      </div>
-      <div style="display:flex; gap:8px;">
-        <input type="text" id="aiQuestion" class="form-control" placeholder="Ask anything..." />
-        <button class="btn btn-primary" onclick="askAi()">Ask</button>
-      </div>
-      <div id="aiReply" class="item-card" style="margin-top:10px; display:none;"></div>
-    </div>
-  </div>
-
   <script>
     const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
     const MAX_PHOTOS = 6;
+    const STORAGE_KEY = "bazaaro_fast_v5";
 
     const I18N = {
       en: {
         dir: "ltr",
-        categoriesLabel: "Categories",
         searchPlaceholder: "Search Meesho, Flipkart, Myntra, Amazon, items...",
         sellBtn: "+ Sell",
         addItemBtn: "+ Add Item",
-        tapHint: "Tap to view full details & photos ↗",
-        addToCart: "🛒 Add to Cart",
+        addToCart: "🛒 Cart",
         detailsBuy: "🔍 Details & Buy",
         editBtn: "✏️ Edit",
         removeBtn: "Remove",
         navHome: "Home",
-        navSell: "Sell Item",
+        navSell: "Sell",
         navCart: "Cart",
         cats: {
           ALL: "🌐 All Items",
-          PRODUCTS: "🛒 Sell Products",
+          PRODUCTS: "🛒 Products",
           FOOD: "🍲 Food & Kitchen",
           VEHICLES: "🚗 Vehicles",
           SHOP: "🛍️ Shop & Store",
-          BOOKS: "📘 ₹1 Books & Classes",
-          JOBS: "💼 Jobs & Services",
-          NEWS: "📰 News & Updates",
-          HEALTH: "❤️ Health & Doctors",
-          REELS: "🎬 Reels & Videos"
+          BOOKS: "📘 ₹1 Books",
+          JOBS: "💼 Jobs",
+          NEWS: "📰 News",
+          HEALTH: "❤️ Health",
+          REELS: "🎬 Reels"
         }
       },
       ml: {
         dir: "ltr",
-        categoriesLabel: "കാറ്റഗറികൾ",
         searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ഐറ്റങ്ങൾ തിരയുക...",
         sellBtn: "+ വിൽക്കുക",
         addItemBtn: "+ ഐറ്റം ചേർക്കുക",
-        tapHint: "മുഴുവൻ വിവരങ്ങളും ഫോട്ടോകളും കാണാൻ തൊടുക ↗",
-        addToCart: "🛒 കാർട്ടിൽ ചേർക്കുക",
+        addToCart: "🛒 കാർട്ട്",
         detailsBuy: "🔍 വിവരങ്ങൾ & വാങ്ങുക",
         editBtn: "✏️ എഡിറ്റ്",
-        removeBtn: "നീക്കം ചെയ്യുക",
+        removeBtn: "നീക്കുക",
         navHome: "ഹോം",
         navSell: "വിൽക്കുക",
         navCart: "കാർട്ട്",
@@ -1332,8 +925,8 @@
           FOOD: "🍲 ഭക്ഷണം & കിച്ചൺ",
           VEHICLES: "🚗 വാഹനങ്ങൾ",
           SHOP: "🛍️ ഷോപ്പ് & സ്റ്റോർ",
-          BOOKS: "📘 ₹1 ബുക്കുകൾ & ക്ലാസ്സ്",
-          JOBS: "💼 ജോലികൾ & സർവീസ്",
+          BOOKS: "📘 ₹1 ബുക്കുകൾ",
+          JOBS: "💼 ജോലികൾ",
           NEWS: "📰 വാർത്തകൾ",
           HEALTH: "❤️ ആരോഗ്യം",
           REELS: "🎬 റീൽസ്"
@@ -1341,26 +934,24 @@
       },
       hi: {
         dir: "ltr",
-        categoriesLabel: "श्रेणियां",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, सामान खोजें...",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon खोजें...",
         sellBtn: "+ बेचें",
-        addItemBtn: "+ आइटम जोड़ें",
-        tapHint: "पूरी जानकारी और फोटो देखने के लिए टैप करें ↗",
-        addToCart: "🛒 कार्ट में डालें",
+        addItemBtn: "+ जोड़ें",
+        addToCart: "🛒 कार्ट",
         detailsBuy: "🔍 विवरण और खरीदें",
-        editBtn: "✏️ संपादित करें",
+        editBtn: "✏️ संपादित",
         removeBtn: "हटाएं",
         navHome: "होम",
         navSell: "बेचें",
         navCart: "कार्ट",
         cats: {
           ALL: "🌐 सभी आइटम",
-          PRODUCTS: "🛒 उत्पाद बेचें",
+          PRODUCTS: "🛒 उत्पाद",
           FOOD: "🍲 खाना और किचन",
           VEHICLES: "🚗 वाहन",
           SHOP: "🛍️ शॉप और स्टोर",
-          BOOKS: "📘 ₹1 किताबें और क्लास",
-          JOBS: "💼 नौकरियां और सेवाएं",
+          BOOKS: "📘 ₹1 किताबें",
+          JOBS: "💼 नौकरियां",
           NEWS: "📰 समाचार",
           HEALTH: "❤️ स्वास्थ्य",
           REELS: "🎬 रील्स"
@@ -1368,12 +959,10 @@
       },
       ta: {
         dir: "ltr",
-        categoriesLabel: "பிரிவுகள்",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, பொருட்கள் தேடுங்கள்...",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon தேடுங்கள்...",
         sellBtn: "+ விற்க",
         addItemBtn: "+ சேர்க்க",
-        tapHint: "முழு விவரம் மற்றும் படங்களை காண தொடவும் ↗",
-        addToCart: "🛒 கார்ட்டில் சேர்",
+        addToCart: "🛒 கார்ட்",
         detailsBuy: "🔍 விவரம் & வாங்கு",
         editBtn: "✏️ திருத்து",
         removeBtn: "நீக்கு",
@@ -1395,13 +984,11 @@
       },
       kn: {
         dir: "ltr",
-        categoriesLabel: "ವರ್ಗಗಳು",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ವಸ್ತುಗಳನ್ನು ಹುಡುಕಿ...",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon ಹುಡುಕಿ...",
         sellBtn: "+ ಮಾರಾಟ",
         addItemBtn: "+ ಸೇರಿಸಿ",
-        tapHint: "ಪೂರ್ಣ ವಿವರ ಮತ್ತು ಫೋಟೋಗಳಿಗಾಗಿ ಒತ್ತಿ ↗",
-        addToCart: "🛒 ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ",
-        detailsBuy: "🔍 ವಿವರ ಮತ್ತು ಖರೀದಿ",
+        addToCart: "🛒 ಕಾರ್ಟ್",
+        detailsBuy: "🔍 ವಿವರ & ಖರೀದಿ",
         editBtn: "✏️ ತಿದ್ದು",
         removeBtn: "ತೆಗೆದುಹಾಕಿ",
         navHome: "ಮುಖಪುಟ",
@@ -1410,9 +997,9 @@
         cats: {
           ALL: "🌐 ಎಲ್ಲಾ ವಸ್ತುಗಳು",
           PRODUCTS: "🛒 ಉತ್ಪನ್ನಗಳು",
-          FOOD: "🍲 ಆಹಾರ ಮತ್ತು ಅಡುಗೆ",
+          FOOD: "🍲 ಆಹಾರ & ಅಡುಗೆ",
           VEHICLES: "🚗 ವಾಹನಗಳು",
-          SHOP: "🛍️ ಅಂಗಡಿ & ಸ್ಟೋರ್",
+          SHOP: "🛍️ ಅಂಗಡಿ",
           BOOKS: "📘 ₹1 ಪುಸ್ತಕಗಳು",
           JOBS: "💼 ಉದ್ಯೋಗಗಳು",
           NEWS: "📰 ಸುದ್ದಿ",
@@ -1422,24 +1009,22 @@
       },
       te: {
         dir: "ltr",
-        categoriesLabel: "వర్గాలు",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, వస్తువులు వెతకండి...",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon వెతకండి...",
         sellBtn: "+ అమ్మండి",
         addItemBtn: "+ జోడించండి",
-        tapHint: "పూర్తి వివరాలు & ఫోటోల కోసం తాకండి ↗",
-        addToCart: "🛒 కార్ట్‌లో చేర్చండి",
+        addToCart: "🛒 కార్ట్",
         detailsBuy: "🔍 వివరాలు & కొనండి",
         editBtn: "✏️ మార్చండి",
-        removeBtn: "తొలగించండి",
+        removeBtn: "తొలగించు",
         navHome: "హోమ్",
         navSell: "అమ్మండి",
         navCart: "కార్ట్",
         cats: {
           ALL: "🌐 అన్ని వస్తువులు",
           PRODUCTS: "🛒 ఉత్పత్తులు",
-          FOOD: "🍲 ఆహారం & కిచెన్",
+          FOOD: "🍲 ఆహారం",
           VEHICLES: "🚗 వాహనాలు",
-          SHOP: "🛍️ షాప్ & స్టోర్",
+          SHOP: "🛍️ షాప్",
           BOOKS: "📘 ₹1 పుస్తకాలు",
           JOBS: "💼 ఉద్యోగాలు",
           NEWS: "📰 వార్తలు",
@@ -1449,12 +1034,10 @@
       },
       ar: {
         dir: "rtl",
-        categoriesLabel: "الفئات",
         searchPlaceholder: "ابحث في Meesho وFlipkart وMyntra وAmazon...",
         sellBtn: "+ بيع",
         addItemBtn: "+ إضافة",
-        tapHint: "اضغط لعرض التفاصيل الكاملة والصور ↗",
-        addToCart: "🛒 أضف إلى السلة",
+        addToCart: "🛒 السلة",
         detailsBuy: "🔍 التفاصيل والشراء",
         editBtn: "✏️ تعديل",
         removeBtn: "حذف",
@@ -1462,12 +1045,12 @@
         navSell: "بيع",
         navCart: "السلة",
         cats: {
-          ALL: "🌐 كل العناصر",
+          ALL: "🌐 الكل",
           PRODUCTS: "🛒 المنتجات",
-          FOOD: "🍲 الطعام والمطبخ",
+          FOOD: "🍲 الطعام",
           VEHICLES: "🚗 المركبات",
           SHOP: "🛍️ المتجر",
-          BOOKS: "📘 كتب بـ ₹1",
+          BOOKS: "📘 كتب ₹1",
           JOBS: "💼 الوظائف",
           NEWS: "📰 الأخبار",
           HEALTH: "❤️ الصحة",
@@ -1477,46 +1060,27 @@
     };
 
     const CATEGORY_DEFAULT_IMAGES = {
-      PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=70",
-      FOOD: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=800&auto=format&fit=crop",
-      VEHICLES: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=70",
-      SHOP: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=70",
-      BOOKS: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=70",
-      JOBS: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=70",
-      NEWS: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=70",
-      HEALTH: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=70",
-      REELS: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=70"
+      PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=60",
+      FOOD: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=60&w=600&auto=format&fit=crop",
+      VEHICLES: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=60",
+      SHOP: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=60",
+      BOOKS: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=60",
+      JOBS: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=60",
+      NEWS: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=60",
+      HEALTH: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=60",
+      REELS: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=60"
     };
 
-    function updateLiveDateTime() {
-      const now = new Date();
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-      document.getElementById("liveYear").textContent = now.getFullYear();
-      document.getElementById("liveMonth").textContent = months[now.getMonth()];
-      document.getElementById("liveDate").textContent = String(now.getDate()).padStart(2, "0");
-      document.getElementById("liveDay").textContent = days[now.getDay()];
-
-      let hrs = now.getHours();
-      const mins = String(now.getMinutes()).padStart(2, "0");
-      const secs = String(now.getSeconds()).padStart(2, "0");
-      const ampm = hrs >= 12 ? "PM" : "AM";
-      hrs = hrs % 12 || 12;
-      document.getElementById("liveClockHMS").textContent =
-        `${String(hrs).padStart(2, "0")}:${mins}:${secs} ${ampm}`;
-    }
-
-    const starterFoodRecipes = [
+    const starterItems = [
       {
         id: "r2",
         cat: "FOOD",
         title: "കുഴിമന്തി (Kuzhi Mandi)",
         price: "Recipe / Order",
         link: "",
-        photos: ["https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=800&auto=format&fit=crop"],
-        descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ. രീതി: ചിക്കൻ വേവിച്ച് അരിക്ക് മുകളിൽ വെച്ച് ചാർക്കോൾ പുക നൽകുക.",
-        descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal. Method: Steam/roast chicken over spiced rice and smoke with charcoal.",
+        photos: ["https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=60&w=600&auto=format&fit=crop"],
+        descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ.",
+        descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal.",
         by: "MUHAMMED ADHIL • 9778197726"
       }
     ];
@@ -1525,50 +1089,63 @@
       siteName: "BAZAARO",
       heroTitle: "BAZAARO — India's Trending Public Super-Hub",
       bossTag: "OWNER • MUHAMMED ADHIL • 9778197726",
-      siteDesc: "First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516",
+      siteDesc: "Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • First 3 Months Free (₹1/mo after)",
       upi: "9778197726@naviaxis",
       logo: "https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO",
       lang: "en",
       user: null,
       isOwnerVerified: false,
-      followers: 0,
-      following: 0,
       cart: [],
       liveUsers: [],
-      items: starterFoodRecipes
+      items: starterItems
     };
 
-    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v4")) || defaultData;
-    if (!Array.isArray(state.cart)) state.cart = [];
-    if (!Array.isArray(state.liveUsers)) state.liveUsers = [];
+    let state = defaultData;
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved && typeof saved === "object") state = { ...defaultData, ...saved };
+    } catch (e) {}
+
     let currentCategory = "ALL";
     let uploadedLogoTemp = null;
     let postPhotosTemp = [];
+    let isSyncing = false;
 
-    function getSessionId() {
-      let sid = sessionStorage.getItem("bazaaro_session_id");
-      if (!sid) {
-        sid = "sess_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
-        sessionStorage.setItem("bazaaro_session_id", sid);
-      }
-      return sid;
+    function updateClockFast() {
+      const now = new Date();
+      document.getElementById("liveDateClockText").textContent =
+        now.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric", weekday: "short" }) +
+        " • " +
+        now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
     }
 
-    window.addEventListener("load", async () => {
-      updateLiveDateTime();
-      setInterval(updateLiveDateTime, 1000);
+    // Immediate non-blocking render on load (Zero white screen!)
+    document.addEventListener("DOMContentLoaded", () => {
+      updateClockFast();
+      setInterval(updateClockFast, 1000);
       applyLanguageUI();
       syncUI();
-      await pullFromFirebase(true);
-      await syncPresenceToFirebase();
-      setInterval(() => pullFromFirebase(false), 4000);
-      setInterval(() => syncPresenceToFirebase(), 15000);
-      setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1000);
+      setTimeout(() => {
+        pullFromFirebase(true);
+        syncPresenceToFirebase();
+      }, 150);
+      setInterval(() => pullFromFirebase(false), 15000);
     });
+
+    function openExternalStoreSearch(store) {
+      const q = encodeURIComponent(document.getElementById("searchInput").value.trim() || "trending offers");
+      const urls = {
+        meesho: `https://www.meesho.com/search?q=${q}`,
+        flipkart: `https://www.flipkart.com/search?q=${q}`,
+        myntra: `https://www.myntra.com/${q}`,
+        amazon: `https://www.amazon.in/s?k=${q}`
+      };
+      window.open(urls[store], "_blank", "noopener,noreferrer");
+    }
 
     function setAppLanguage(langCode) {
       state.lang = I18N[langCode] ? langCode : "en";
-      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
+      saveLocalSafe();
       applyLanguageUI();
       renderCategoryItems();
     }
@@ -1577,12 +1154,9 @@
       const lang = state.lang || "en";
       const pack = I18N[lang] || I18N.en;
       document.documentElement.dir = pack.dir || "ltr";
-
       document.querySelectorAll(".lang-chip").forEach(chip => {
         chip.classList.toggle("active", chip.getAttribute("data-lang") === lang);
       });
-
-      document.getElementById("categoriesLabelText").textContent = pack.categoriesLabel;
       document.getElementById("searchInput").placeholder = pack.searchPlaceholder;
       document.getElementById("topSellBtn").textContent = pack.sellBtn;
       document.getElementById("addItemBtnLabel").textContent = pack.addItemBtn;
@@ -1592,39 +1166,47 @@
 
       document.querySelectorAll("#categoryBar .cat-pill").forEach(pill => {
         const c = pill.getAttribute("data-cat");
-        if (c && pack.cats[c]) {
-          pill.textContent = pack.cats[c];
-        }
+        if (c && pack.cats[c]) pill.textContent = pack.cats[c];
       });
-
-      updateCategoryHeader();
+      document.getElementById("activeCategoryHeading").textContent = pack.cats[currentCategory] || pack.cats.ALL;
     }
 
     function normalizeItemPhotos(item) {
-      if (Array.isArray(item.photos) && item.photos.length > 0) {
-        return item.photos.slice(0, MAX_PHOTOS);
-      }
-      if (item.photo) {
-        return [item.photo];
-      }
+      if (Array.isArray(item.photos) && item.photos.length > 0) return item.photos.slice(0, MAX_PHOTOS);
+      if (item.photo) return [item.photo];
       return [CATEGORY_DEFAULT_IMAGES[item.cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
     }
 
-    async function pullFromFirebase(seedIfEmpty) {
+    function saveLocalSafe() {
       try {
-        const res = await fetch(`${DB_URL}/bazaaro_public.json`);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Trim old items if local storage quota is full
+        state.items = state.items.slice(0, 15);
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (err) {}
+      }
+    }
+
+    function resetLocalCacheFast() {
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+
+    async function pullFromFirebase(seedIfEmpty) {
+      if (isSyncing) return;
+      isSyncing = true;
+      try {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 5000);
+        const res = await fetch(`${DB_URL}/bazaaro_public.json`, { signal: controller.signal });
+        clearTimeout(timer);
         if (!res.ok) return;
         const cloud = await res.json();
-        const badge = document.getElementById("syncStatusBadge");
-        if (badge) badge.textContent = "● FIREBASE LIVE";
+        document.getElementById("syncStatusBadge").textContent = "● FIREBASE LIVE";
 
         if (cloud) {
-          if (Array.isArray(cloud.items) && cloud.items.length > 0) {
-            state.items = cloud.items;
-          }
-          if (Array.isArray(cloud.liveUsers)) {
-            state.liveUsers = cloud.liveUsers;
-          }
+          if (Array.isArray(cloud.items) && cloud.items.length > 0) state.items = cloud.items;
+          if (Array.isArray(cloud.liveUsers)) state.liveUsers = cloud.liveUsers;
           if (cloud.site) {
             state.siteName = cloud.site.siteName || state.siteName;
             state.heroTitle = cloud.site.heroTitle || state.heroTitle;
@@ -1633,41 +1215,42 @@
             state.upi = cloud.site.upi || state.upi;
             if (cloud.site.logo) state.logo = cloud.site.logo;
           }
-          localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
-          renderCategoryItems();
-          syncHeaderHeroOnly();
-          if (document.getElementById("ownerUsersModal").classList.contains("open")) {
-            renderOwnerUsersList();
-          }
+          saveLocalSafe();
+          syncUI();
         } else if (seedIfEmpty) {
           await pushPublicStateToFirebase();
         }
       } catch (err) {
-        const badge = document.getElementById("syncStatusBadge");
-        if (badge) badge.textContent = "● OFFLINE CACHE";
+        document.getElementById("syncStatusBadge").textContent = "● FAST CACHE";
+      } finally {
+        isSyncing = false;
       }
+    }
+
+    function getSessionId() {
+      let sid = sessionStorage.getItem("bazaaro_sid");
+      if (!sid) {
+        sid = "u_" + Date.now().toString(36);
+        sessionStorage.setItem("bazaaro_sid", sid);
+      }
+      return sid;
     }
 
     async function syncPresenceToFirebase() {
       const sid = getSessionId();
-      const now = Date.now();
       const entry = {
         sessionId: sid,
         name: state.user ? state.user.name : "Guest Visitor",
         phone: state.user ? state.user.phone : "Not Provided",
         isOwner: isOwnerUser(),
         lang: state.lang || "en",
-        lastSeen: now
+        lastSeen: Date.now()
       };
-
-      const existingIdx = state.liveUsers.findIndex(u => u.sessionId === sid);
-      if (existingIdx >= 0) {
-        state.liveUsers[existingIdx] = entry;
-      } else {
-        state.liveUsers.unshift(entry);
-      }
-      state.liveUsers = state.liveUsers.slice(0, 100);
-      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
+      const idx = state.liveUsers.findIndex(u => u.sessionId === sid);
+      if (idx >= 0) state.liveUsers[idx] = entry;
+      else state.liveUsers.unshift(entry);
+      state.liveUsers = state.liveUsers.slice(0, 60);
+      saveLocalSafe();
       await pushPublicStateToFirebase();
     }
 
@@ -1677,8 +1260,8 @@
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            items: state.items,
-            liveUsers: state.liveUsers,
+            items: state.items.slice(0, 40),
+            liveUsers: state.liveUsers.slice(0, 60),
             site: {
               siteName: state.siteName,
               heroTitle: state.heroTitle,
@@ -1690,20 +1273,7 @@
             updatedAt: Date.now()
           })
         });
-      } catch (err) {
-        console.log("Firebase sync retry:", err);
-      }
-    }
-
-    function persistLocalOnly() {
-      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
-      syncUI();
-    }
-
-    async function persistAndSyncCloud() {
-      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
-      syncUI();
-      await pushPublicStateToFirebase();
+      } catch (err) {}
     }
 
     function isOwnerUser() {
@@ -1712,21 +1282,8 @@
       return false;
     }
 
-    function updateCartBadges() {
-      const count = (state.cart || []).length;
-      const h = document.getElementById("headerCartCount");
-      const b = document.getElementById("bottomCartCount");
-      const d = document.getElementById("drawerCartCount");
-      if (h) h.textContent = count;
-      if (b) b.textContent = count;
-      if (d) d.textContent = count;
-    }
-
-    function syncHeaderHeroOnly() {
+    function syncUI() {
       document.title = state.siteName;
-      document.getElementById("splashTitleText").textContent = state.siteName;
-      document.getElementById("splashSubText").textContent = state.bossTag;
-      document.getElementById("splashLogoImg").src = state.logo;
       document.getElementById("headerLogo").src = state.logo;
       document.getElementById("heroLogo").src = state.logo;
       document.getElementById("headerSiteName").textContent = state.siteName;
@@ -1736,12 +1293,11 @@
       document.getElementById("heroSiteDesc").textContent = state.siteDesc;
       document.getElementById("heroUpiBadge").textContent = "UPI: " + state.upi;
       document.getElementById("qrUpiDisplay").textContent = state.upi;
-      document.getElementById("youPostsCount").textContent = state.items.length;
-      updateCartBadges();
-    }
 
-    function syncUI() {
-      syncHeaderHeroOnly();
+      const count = (state.cart || []).length;
+      document.getElementById("headerCartCount").textContent = count;
+      document.getElementById("bottomCartCount").textContent = count;
+      document.getElementById("drawerCartCount").textContent = count;
 
       const accHeaderBtn = document.getElementById("accountHeaderBtn");
       const drawerAccBtn = document.getElementById("drawerAccountBtn");
@@ -1755,7 +1311,7 @@
         document.getElementById("youUserName").textContent = state.user.name;
         document.getElementById("youUserPhone").textContent = "Phone: " + state.user.phone;
       } else {
-        accHeaderBtn.textContent = "Create Account";
+        accHeaderBtn.textContent = "Account";
         accHeaderBtn.className = "pill-btn primary";
         drawerAccBtn.textContent = "👤 Create Account";
         bottomAccLabel.textContent = "Account";
@@ -1769,9 +1325,6 @@
       document.getElementById("youEditWebsiteBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("youLiveUsersBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("ownerBadgeInYou").style.display = ownerAllowed ? "block" : "none";
-
-      document.getElementById("youFollowersCount").textContent = state.followers;
-      document.getElementById("youFollowingCount").textContent = state.following;
 
       document.getElementById("inputSiteName").value = state.siteName;
       document.getElementById("inputHeroTitle").value = state.heroTitle;
@@ -1788,35 +1341,24 @@
         openModal("adminModal");
         return;
       }
-      renderOwnerUsersList();
-      openModal("ownerUsersModal");
-    }
-
-    function renderOwnerUsersList() {
       const box = document.getElementById("ownerUsersListContainer");
-      if (!box) return;
       const now = Date.now();
       const users = state.liveUsers || [];
-      if (!users.length) {
-        box.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted);">No user records yet.</div>`;
-        return;
-      }
-      box.innerHTML = users
-        .map(u => {
-          const isOnline = now - (u.lastSeen || 0) < 30000;
-          const timeText = u.lastSeen ? new Date(u.lastSeen).toLocaleTimeString() : "-";
-          return `
-            <div class="user-directory-card">
-              <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                <strong>${u.name || "User"} ${u.isOwner ? "👑" : ""}</strong>
-                <span class="${isOnline ? "online-pill" : "away-pill"}">${isOnline ? "● LIVE NOW" : "Last: " + timeText}</span>
-              </div>
-              <div style="font-size:12px; color:#fbbf24; margin-top:4px;">📱 Phone: ${u.phone || "N/A"}</div>
-              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">🌐 Language: ${(u.lang || "en").toUpperCase()} • Session: ${u.sessionId}</div>
-            </div>
-          `;
-        })
-        .join("");
+      box.innerHTML = users.length
+        ? users.map(u => {
+            const isOnline = now - (u.lastSeen || 0) < 45000;
+            return `
+              <div class="item-card">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <strong>${u.name || "User"} ${u.isOwner ? "👑" : ""}</strong>
+                  <span class="live-dot-tag">${isOnline ? "● LIVE NOW" : new Date(u.lastSeen).toLocaleTimeString()}</span>
+                </div>
+                <div style="font-size:12px; color:#fbbf24; margin-top:4px;">📱 Phone: ${u.phone || "N/A"}</div>
+                <div style="font-size:11px; color:var(--text-muted);">🌐 Lang: ${(u.lang || "en").toUpperCase()}</div>
+              </div>`;
+          }).join("")
+        : `<div style="text-align:center; padding:12px; color:var(--text-muted);">No users yet.</div>`;
+      openModal("ownerUsersModal");
     }
 
     function handleAccountClick() {
@@ -1827,23 +1369,22 @@
     async function completeAccountLogin() {
       const name = document.getElementById("regName").value.trim();
       const phone = document.getElementById("regPhone").value.trim();
-      if (!name || !phone) {
-        alert("Please enter your Name and Phone Number.");
-        return;
-      }
+      if (!name || !phone) return alert("Enter Name and Phone Number.");
       state.user = { name, phone };
       if (OWNER_NUMBERS.includes(phone)) state.isOwnerVerified = true;
-      persistLocalOnly();
-      await syncPresenceToFirebase();
+      saveLocalSafe();
+      syncUI();
       closeModal("createAccountModal");
+      syncPresenceToFirebase();
     }
 
     async function logoutAccount() {
       state.user = null;
       state.isOwnerVerified = false;
-      persistLocalOnly();
-      await syncPresenceToFirebase();
+      saveLocalSafe();
+      syncUI();
       closeModal("youModal");
+      syncPresenceToFirebase();
     }
 
     async function verifyOwnerAccess() {
@@ -1851,21 +1392,14 @@
       if (OWNER_NUMBERS.includes(ph)) {
         state.isOwnerVerified = true;
         if (!state.user) state.user = { name: "MUHAMMED ADHIL", phone: ph };
-        persistLocalOnly();
-        await syncPresenceToFirebase();
+        saveLocalSafe();
+        syncUI();
         closeModal("adminModal");
         openOwnerUsersPanel();
+        syncPresenceToFirebase();
       } else {
         alert("Access Denied.");
       }
-    }
-
-    function previewLogoFile(e) {
-      const f = e.target.files[0];
-      if (!f) return;
-      compressImageFile(f, 240, 0.72, dataUrl => {
-        uploadedLogoTemp = dataUrl;
-      });
     }
 
     function compressImageFile(file, maxSize, quality, callback) {
@@ -1873,20 +1407,12 @@
       reader.onload = ev => {
         const img = new Image();
         img.onload = () => {
-          let w = img.width;
-          let h = img.height;
-          if (w > h && w > maxSize) {
-            h = Math.round((h * maxSize) / w);
-            w = maxSize;
-          } else if (h > maxSize) {
-            w = Math.round((w * maxSize) / h);
-            h = maxSize;
-          }
+          let w = img.width, h = img.height;
+          if (w > h && w > maxSize) { h = Math.round((h * maxSize) / w); w = maxSize; }
+          else if (h > maxSize) { w = Math.round((w * maxSize) / h); h = maxSize; }
           const canvas = document.createElement("canvas");
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0, w, h);
+          canvas.width = w; canvas.height = h;
+          canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           callback(canvas.toDataURL("image/jpeg", quality));
         };
         img.src = ev.target.result;
@@ -1894,40 +1420,31 @@
       reader.readAsDataURL(file);
     }
 
+    function previewLogoFile(e) {
+      const f = e.target.files[0];
+      if (f) compressImageFile(f, 180, 0.65, d => uploadedLogoTemp = d);
+    }
+
     function handleMultiplePhotosUpload(e) {
       const files = Array.from(e.target.files || []).slice(0, MAX_PHOTOS);
       if (!files.length) return;
       postPhotosTemp = [];
-      let processed = 0;
-
+      let done = 0;
       files.forEach(file => {
-        compressImageFile(file, 540, 0.58, dataUrl => {
+        compressImageFile(file, 360, 0.45, dataUrl => {
           postPhotosTemp.push(dataUrl);
-          processed++;
-          if (processed === files.length) {
-            renderPhotoPreviews();
-          }
+          if (++done === files.length) renderPhotoPreviews();
         });
       });
     }
 
     function handlePhotoUrlsInput(e) {
-      const lines = e.target.value
-        .split(/\n|,/)
-        .map(s => s.trim())
-        .filter(Boolean)
-        .slice(0, MAX_PHOTOS);
-      postPhotosTemp = lines;
+      postPhotosTemp = e.target.value.split(/\n|,/).map(s => s.trim()).filter(Boolean).slice(0, MAX_PHOTOS);
       renderPhotoPreviews();
     }
 
     function renderPhotoPreviews() {
-      const grid = document.getElementById("postPhotoPreviewGrid");
-      if (!postPhotosTemp.length) {
-        grid.innerHTML = "";
-        return;
-      }
-      grid.innerHTML = postPhotosTemp
+      document.getElementById("postPhotoPreviewGrid").innerHTML = postPhotosTemp
         .slice(0, MAX_PHOTOS)
         .map(src => `<img class="photo-preview-thumb" src="${src}" alt="Preview" />`)
         .join("");
@@ -1936,8 +1453,7 @@
     function normalizeLink(raw) {
       const val = (raw || "").trim();
       if (!val) return "";
-      if (/^https?:\/\//i.test(val)) return val;
-      return "https://" + val;
+      return /^https?:\/\//i.test(val) ? val : "https://" + val;
     }
 
     function detectStoreLabel(url) {
@@ -1950,56 +1466,38 @@
     }
 
     async function saveSiteSettings() {
-      if (!isOwnerUser()) {
-        alert("Only Owner can edit website settings.");
-        return;
-      }
+      if (!isOwnerUser()) return alert("Owner Only.");
       state.siteName = document.getElementById("inputSiteName").value.trim() || "BAZAARO";
       state.heroTitle = document.getElementById("inputHeroTitle").value.trim() || state.siteName;
-      state.bossTag = document.getElementById("inputBossTag").value.trim() || "OWNER • MUHAMMED ADHIL • 9778197726";
+      state.bossTag = document.getElementById("inputBossTag").value.trim();
       state.siteDesc = document.getElementById("inputSiteDesc").value.trim();
       state.upi = document.getElementById("inputUpi").value.trim();
-      if (uploadedLogoTemp) {
-        state.logo = uploadedLogoTemp;
-        uploadedLogoTemp = null;
-      }
-      await persistAndSyncCloud();
+      if (uploadedLogoTemp) { state.logo = uploadedLogoTemp; uploadedLogoTemp = null; }
+      saveLocalSafe();
+      syncUI();
       closeModal("editModal");
+      pushPublicStateToFirebase();
     }
 
     function selectCategory(cat, btn) {
       currentCategory = cat;
       document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
       if (btn) btn.classList.add("active");
-      document.querySelectorAll(".drawer-cat-tile").forEach(t => {
-        t.classList.toggle("active", t.getAttribute("onclick").includes("'" + cat + "'"));
-      });
-      updateCategoryHeader();
+      applyLanguageUI();
       renderCategoryItems();
     }
 
     function selectCategoryByName(cat) {
       currentCategory = cat;
-      document.querySelectorAll(".cat-pill").forEach(p => {
-        p.classList.toggle("active", p.getAttribute("data-cat") === cat);
-      });
-      document.querySelectorAll(".drawer-cat-tile").forEach(t => {
-        t.classList.toggle("active", t.getAttribute("onclick").includes("'" + cat + "'"));
-      });
-      updateCategoryHeader();
+      document.querySelectorAll(".cat-pill").forEach(p => p.classList.toggle("active", p.getAttribute("data-cat") === cat));
+      applyLanguageUI();
       renderCategoryItems();
-    }
-
-    function updateCategoryHeader() {
-      const pack = I18N[state.lang] || I18N.en;
-      document.getElementById("activeCategoryHeading").textContent = pack.cats[currentCategory] || pack.cats.ALL;
     }
 
     function openSellModal(defaultCat) {
       document.getElementById("editingItemId").value = "";
-      document.getElementById("postModalHeading").textContent =
-        defaultCat === "FOOD" ? "🍲 Sell Food Item (Up to 6 Photos)" : "🛒 Sell Product / Add Item (Up to 6 Photos)";
-      document.getElementById("savePostBtn").textContent = "Publish Live to Everyone";
+      document.getElementById("postModalHeading").textContent = "🛒 Sell / Add Item (Up to 6 Photos)";
+      document.getElementById("savePostBtn").textContent = "Publish Live";
       document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
       document.getElementById("postTitle").value = "";
       document.getElementById("postPrice").value = "";
@@ -2008,9 +1506,7 @@
       document.getElementById("postPhotoUrls").value = "";
       postPhotosTemp = [];
       renderPhotoPreviews();
-      document.getElementById("postSellerContact").value = state.user
-        ? `${state.user.name} • ${state.user.phone}`
-        : "";
+      document.getElementById("postSellerContact").value = state.user ? `${state.user.name} • ${state.user.phone}` : "";
       document.getElementById("postContent").value = "";
       openModal("postModal");
     }
@@ -2018,19 +1514,17 @@
     function openEditItemModal(id) {
       const target = state.items.find(x => x.id === id);
       if (!target) return;
-
       const existingPhotos = normalizeItemPhotos(target);
       document.getElementById("editingItemId").value = target.id;
-      document.getElementById("postModalHeading").textContent = "✏️ Edit Item, Photos & Link";
-      document.getElementById("savePostBtn").textContent = "Save Changes Live";
+      document.getElementById("postModalHeading").textContent = "✏️ Edit Item & Photos";
+      document.getElementById("savePostBtn").textContent = "Save Changes";
       document.getElementById("postCategory").value = target.cat || "PRODUCTS";
       document.getElementById("postTitle").value = target.title || "";
       document.getElementById("postPrice").value = target.price || "";
       document.getElementById("postProductLink").value = target.link || "";
       document.getElementById("postPhotoFiles").value = "";
       postPhotosTemp = [...existingPhotos];
-      const httpUrls = existingPhotos.filter(p => /^https?:\/\//i.test(p));
-      document.getElementById("postPhotoUrls").value = httpUrls.join("\n");
+      document.getElementById("postPhotoUrls").value = existingPhotos.filter(p => /^https?:\/\//i.test(p)).join("\n");
       renderPhotoPreviews();
       document.getElementById("postSellerContact").value = target.by || "";
       document.getElementById("postContent").value = target.descMl || target.descEn || "";
@@ -2043,68 +1537,46 @@
       const title = document.getElementById("postTitle").value.trim();
       const price = document.getElementById("postPrice").value.trim() || "For Sale";
       const link = normalizeLink(document.getElementById("postProductLink").value);
-      const contact =
-        document.getElementById("postSellerContact").value.trim() ||
-        (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
+      const contact = document.getElementById("postSellerContact").value.trim() || (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
       const txt = document.getElementById("postContent").value.trim();
 
-      if (!title || !txt) {
-        alert("Please enter Name and Full Details.");
-        return;
-      }
+      if (!title || !txt) return alert("Enter Name and Details.");
 
-      const finalPhotos =
-        postPhotosTemp.length > 0
-          ? postPhotosTemp.slice(0, MAX_PHOTOS)
-          : [CATEGORY_DEFAULT_IMAGES[cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
+      const finalPhotos = postPhotosTemp.length > 0
+        ? postPhotosTemp.slice(0, MAX_PHOTOS)
+        : [CATEGORY_DEFAULT_IMAGES[cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
 
       if (editId) {
         state.items = state.items.map(item =>
-          item.id === editId
-            ? {
-                ...item,
-                cat,
-                title,
-                price,
-                link,
-                photos: finalPhotos,
-                photo: finalPhotos[0],
-                descMl: txt,
-                descEn: txt,
-                by: contact
-              }
-            : item
+          item.id === editId ? { ...item, cat, title, price, link, photos: finalPhotos, descMl: txt, descEn: txt, by: contact } : item
         );
       } else {
         state.items.unshift({
           id: "item_" + Date.now(),
-          cat,
-          title,
-          price,
-          link,
+          cat, title, price, link,
           photos: finalPhotos,
-          photo: finalPhotos[0],
-          descMl: txt,
-          descEn: txt,
+          descMl: txt, descEn: txt,
           by: contact
         });
       }
 
       postPhotosTemp = [];
-      document.getElementById("editingItemId").value = "";
-      await persistAndSyncCloud();
+      saveLocalSafe();
+      syncUI();
       closeModal("postModal");
+      pushPublicStateToFirebase();
     }
 
     async function deleteItem(id) {
       state.items = state.items.filter(x => x.id !== id);
-      await persistAndSyncCloud();
+      saveLocalSafe();
+      syncUI();
+      pushPublicStateToFirebase();
     }
 
     function openItemDetailsModal(id) {
       const item = state.items.find(x => x.id === id);
       if (!item) return;
-
       const photos = normalizeItemPhotos(item);
       const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
       const fullDesc = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
@@ -2112,111 +1584,65 @@
       document.getElementById("detailModalTitle").textContent = item.title;
       document.getElementById("detailModalBody").innerHTML = `
         <img id="detailActivePhoto" class="detail-main-photo" src="${photos[0]}" alt="${item.title}" />
-        ${
-          photos.length > 1
-            ? `<div class="detail-thumbs-row">
-                ${photos
-                  .map(
-                    (src, idx) =>
-                      `<img class="detail-thumb-img ${idx === 0 ? "active" : ""}" src="${src}" onclick="switchDetailPhoto(this, '${src}')" alt="Photo ${idx + 1}" />`
-                  )
-                  .join("")}
-              </div>`
-            : ""
-        }
-        <div class="item-top">
-          <span class="item-cat-tag">${item.cat}</span>
-          <span class="item-price-tag">${item.price}</span>
-        </div>
-        <div style="font-size:16px; font-weight:800; margin:6px 0;">${item.title}</div>
-        <div style="font-size:13px; color:var(--text-muted); line-height:1.55; white-space:pre-line;">${fullDesc}</div>
-        <div style="margin-top:10px; font-size:12px; color:var(--text-muted);">
-          <strong>Seller / Contact:</strong> ${item.by}
-        </div>
-        <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+        ${photos.length > 1 ? `<div class="detail-thumbs-row">${photos.map((src, i) => `<img class="detail-thumb-img ${i === 0 ? "active" : ""}" src="${src}" onclick="switchDetailPhoto(this, '${src}')" />`).join("")}</div>` : ""}
+        <div class="item-top"><span class="item-cat-tag">${item.cat}</span><span class="item-price-tag">${item.price}</span></div>
+        <div style="font-size:15px; font-weight:800; margin:5px 0;">${item.title}</div>
+        <div style="font-size:12.5px; color:var(--text-muted); line-height:1.5; white-space:pre-line;">${fullDesc}</div>
+        <div style="margin-top:8px; font-size:11.5px; color:var(--text-muted);"><strong>Seller:</strong> ${item.by}</div>
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
           <button class="btn btn-accent" style="flex:1;" onclick="addToCart('${item.id}')">🛒 Add to Cart</button>
-          ${
-            safeLink
-              ? `<a class="btn btn-primary" style="flex:1;" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>`
-              : `<button class="btn btn-success" style="flex:1;" onclick="addToCart('${item.id}'); closeModal('itemDetailsModal'); openModal('cartModal')">⚡ Buy Now</button>`
-          }
+          ${safeLink
+            ? `<a class="btn btn-primary" style="flex:1;" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>`
+            : `<button class="btn btn-success" style="flex:1;" onclick="addToCart('${item.id}'); closeModal('itemDetailsModal'); openModal('cartModal')">⚡ Buy Now</button>`}
         </div>
       `;
       openModal("itemDetailsModal");
     }
 
-    function switchDetailPhoto(thumbEl, src) {
+    function switchDetailPhoto(el, src) {
       document.getElementById("detailActivePhoto").src = src;
-      document.querySelectorAll(".detail-thumb-img").forEach(el => el.classList.remove("active"));
-      if (thumbEl) thumbEl.classList.add("active");
+      document.querySelectorAll(".detail-thumb-img").forEach(x => x.classList.remove("active"));
+      if (el) el.classList.add("active");
     }
 
     function addToCart(id) {
       const item = state.items.find(x => x.id === id);
       if (!item) return;
-      const photos = normalizeItemPhotos(item);
-      state.cart.push({
-        cartId: "c_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
-        id: item.id,
-        title: item.title,
-        price: item.price,
-        photo: photos[0],
-        link: item.link || "",
-        by: item.by
-      });
-      persistLocalOnly();
-      renderCartItems();
+      state.cart.push({ cartId: "c_" + Date.now(), id: item.id, title: item.title, price: item.price, link: item.link || "", by: item.by });
+      saveLocalSafe();
+      syncUI();
       alert("Added to Cart: " + item.title);
     }
 
     function removeFromCart(cartId) {
       state.cart = (state.cart || []).filter(c => c.cartId !== cartId);
-      persistLocalOnly();
-      renderCartItems();
+      saveLocalSafe();
+      syncUI();
     }
 
     function clearCart() {
       state.cart = [];
-      persistLocalOnly();
-      renderCartItems();
+      saveLocalSafe();
+      syncUI();
     }
 
     function renderCartItems() {
       const box = document.getElementById("cartItemsContainer");
-      if (!box) return;
       const list = state.cart || [];
-      if (!list.length) {
-        box.innerHTML = `<div style="text-align:center; padding:16px; color:var(--text-muted); font-size:13px;">Your cart is empty.</div>`;
-        return;
-      }
-      box.innerHTML = list
-        .map(
-          c => `
-        <div class="item-card">
-          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-            <div>
-              <div class="item-title">${c.title}</div>
-              <div style="font-size:12px; color:#fbbf24; font-weight:800;">${c.price}</div>
-              <div style="font-size:11px; color:var(--text-muted);">${c.by}</div>
-            </div>
-            <button class="del-btn" onclick="removeFromCart('${c.cartId}')">Remove</button>
-          </div>
-          ${
-            c.link
-              ? `<a class="item-link-btn" href="${c.link}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(c.link)}</a>`
-              : ""
-          }
-        </div>
-      `
-        )
-        .join("");
+      box.innerHTML = list.length
+        ? list.map(c => `
+            <div class="item-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div><div class="item-title">${c.title}</div><div style="font-size:12px; color:#fbbf24; font-weight:800;">${c.price}</div></div>
+                <button class="del-btn" onclick="removeFromCart('${c.cartId}')">Remove</button>
+              </div>
+              ${c.link ? `<a class="item-link-btn" style="margin-top:6px;" href="${c.link}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(c.link)}</a>` : ""}
+            </div>`).join("")
+        : `<div style="text-align:center; padding:14px; color:var(--text-muted); font-size:12.5px;">Cart is empty.</div>`;
     }
 
     function checkoutCart() {
-      if (!state.cart || !state.cart.length) {
-        alert("Cart is empty.");
-        return;
-      }
+      if (!state.cart || !state.cart.length) return alert("Cart is empty.");
       closeModal("cartModal");
       openModal("qrModal");
     }
@@ -2226,64 +1652,45 @@
       const q = document.getElementById("searchInput").value.trim().toLowerCase();
       const filtered = state.items.filter(item => {
         const matchCat = currentCategory === "ALL" || item.cat === currentCategory;
-        const blob = (item.title + " " + (item.descMl || "") + " " + (item.descEn || "") + " " + item.by + " " + item.price + " " + (item.link || "")).toLowerCase();
-        const matchQuery = !q || blob.includes(q);
-        return matchCat && matchQuery;
+        const blob = (item.title + " " + (item.descMl || "") + " " + (item.descEn || "") + " " + item.by + " " + item.price).toLowerCase();
+        return matchCat && (!q || blob.includes(q));
       });
 
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
-        container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">
-          No items listed here yet. Tap <b>${pack.addItemBtn}</b> to add up to 6 photos, links, and full details.
-        </div>`;
+        container.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted); font-size:12.5px;">No items yet. Tap <b>${pack.addItemBtn}</b> to add photos & links.</div>`;
         return;
       }
 
       container.innerHTML = filtered.map(item => {
         const photos = normalizeItemPhotos(item);
-        const imgSrc = photos[0];
         const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
         const descText = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
         return `
           <div class="item-card">
-            <div class="clickable-open-area" onclick="openItemDetailsModal('${item.id}')">
+            <div style="cursor:pointer;" onclick="openItemDetailsModal('${item.id}')">
               <div class="item-photo-wrap">
-                <img class="item-photo" src="${imgSrc}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
-                ${photos.length > 1 ? `<span class="photo-count-badge">📷 ${photos.length} Photos</span>` : ""}
+                <img class="item-photo" loading="lazy" src="${photos[0]}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
+                ${photos.length > 1 ? `<span class="photo-count-badge">📷 ${photos.length}</span>` : ""}
               </div>
-              <div class="item-top">
-                <span class="item-cat-tag">${item.cat}</span>
-                <span class="item-price-tag">${item.price}</span>
-              </div>
+              <div class="item-top"><span class="item-cat-tag">${item.cat}</span><span class="item-price-tag">${item.price}</span></div>
               <div class="item-title">${item.title}</div>
               <div class="item-desc">${descText}</div>
-              <div class="tap-hint-text">${pack.tapHint}</div>
             </div>
-
             <div class="item-actions-row">
               <button class="cart-add-btn" onclick="addToCart('${item.id}')">${pack.addToCart}</button>
               <button class="details-open-btn" onclick="openItemDetailsModal('${item.id}')">${pack.detailsBuy}</button>
               ${safeLink ? `<a class="item-link-btn" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>` : ""}
             </div>
-
             <div class="item-footer">
               <span><strong>${item.by}</strong></span>
-              <div class="item-actions">
+              <div>
                 <button class="edit-item-btn" onclick="openEditItemModal('${item.id}')">${pack.editBtn}</button>
                 <button class="del-btn" onclick="deleteItem('${item.id}')">${pack.removeBtn}</button>
               </div>
             </div>
-          </div>
-        `;
+          </div>`;
       }).join("");
-    }
-
-    function askAi() {
-      const q = document.getElementById("aiQuestion").value.trim();
-      if (!q) return;
-      const rep = document.getElementById("aiReply");
-      rep.style.display = "block";
-      rep.innerHTML = `<strong>AI Help:</strong> Choose any language at the top bar, tap any item for full details & photos, or add items to Cart.`;
     }
 
     function openModal(id) { document.getElementById(id).classList.add("open"); }
@@ -2293,12 +1700,6 @@
       document.getElementById("drawerBackdrop").classList.toggle("open");
     }
     function toggleTheme() { document.body.classList.toggle("light-theme"); }
-    function shareApp() {
-      if (navigator.share) navigator.share({ title: state.siteName, url: window.location.href });
-      else alert("Link: " + window.location.href);
-    }
-
-    updateCategoryHeader();
   </script>
 </body>
 </html>
