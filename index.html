@@ -349,6 +349,41 @@
     .letter-sub { font-size: 10.5px; color: #fbbf24; font-weight: 700; display: block; margin-top: 2px; }
     .letter-play { font-size: 9.5px; color: #34d399; font-weight: 800; display: block; margin-top: 3px; }
 
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+      background: var(--surface-2);
+      padding: 10px 6px;
+      border-radius: 12px;
+      margin: 10px 0;
+    }
+    .stat-num { font-size: 18px; font-weight: 800; color: var(--primary-light); }
+    .stat-label { font-size: 11px; color: var(--text-muted); }
+
+    .qr-card-box {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 16px;
+      padding: 14px;
+      text-align: center;
+    }
+    .qr-matrix-grid {
+      width: 176px;
+      height: 176px;
+      margin: 10px auto;
+      display: grid;
+      grid-template-columns: repeat(21, 1fr);
+      gap: 1px;
+      background: #ffffff;
+      padding: 8px;
+      border: 2px solid #0f172a;
+      border-radius: 10px;
+    }
+    .qr-cell-dark { background: #0f172a; }
+    .qr-cell-light { background: #ffffff; }
+
     .photo-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
     .photo-preview-thumb { width: 100%; height: 68px; object-fit: cover; border-radius: 8px; }
     .detail-main-photo { width: 100%; max-height: 260px; object-fit: contain; background: #090d16; border-radius: 12px; margin-bottom: 8px; cursor: zoom-in; }
@@ -394,6 +429,7 @@
     </div>
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('cartModal')">🛒 My Cart (<span id="drawerCartCount">0</span>)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openModal('qrModal')">📱 Navi QR & UPI</button>
     <button class="drawer-btn" id="drawerOwnerUsersBtn" style="display:none; color:#fbbf24;" onclick="toggleDrawer(); openOwnerUsersPanel()">👑 Live Users & Details (Owner Only)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product (Up to 6 Photos + Affiliate Link)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food / Recipe (Up to 6 Photos)</button>
@@ -460,7 +496,7 @@
       </div>
       <div class="time-row-3d">
         <span style="font-size:10.5px; color:#94a3b8; font-weight:700;">3D LIVE TIME</span>
-        <span class="clock-3d-display" id="liveClockHMS">01:09:00 AM</span>
+        <span class="clock-3d-display" id="liveClockHMS">01:51:00 AM</span>
       </div>
     </div>
 
@@ -475,7 +511,7 @@
       <div class="badge-row">
         <span class="badge">🛡️ 100% Secured</span>
         <span class="badge gold">100% FREE (Exempt)</span>
-        <span class="badge" id="heroUpiBadge">UPI: 9778197726@naviaxis</span>
+        <span class="badge" id="heroUpiBadge" onclick="openModal('qrModal')" style="cursor:pointer;">📱 QR / UPI: 9778197726@naviaxis</span>
       </div>
     </div>
 
@@ -539,7 +575,7 @@
     </div>
   </div>
 
-  <!-- Bottom Navigation with Home, Add Reel, Cart, Letters, Account -->
+  <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
       <span>🏠</span><span id="navHomeLabel">Home</span>
@@ -625,7 +661,7 @@
     </div>
   </div>
 
-  <!-- "You" Modal -->
+  <!-- "You" Modal with Followers & Following -->
   <div class="modal-backdrop" id="youModal">
     <div class="modal">
       <div class="modal-head">
@@ -639,6 +675,22 @@
           <span class="badge gold">👑 Owner Access</span>
         </div>
       </div>
+
+      <div class="stats-grid">
+        <div>
+          <div class="stat-num" id="youPostsCount">0</div>
+          <div class="stat-label">Items</div>
+        </div>
+        <div>
+          <div class="stat-num" id="youFollowersCount">0</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div>
+          <div class="stat-num" id="youFollowingCount">0</div>
+          <div class="stat-label">Following</div>
+        </div>
+      </div>
+
       <button class="btn btn-accent" id="youLiveUsersBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openOwnerUsersPanel()">
         👑 View All Live Users & Details
       </button>
@@ -740,16 +792,23 @@
     </div>
   </div>
 
-  <!-- QR / UPI Modal -->
+  <!-- Navi QR & UPI Modal -->
   <div class="modal-backdrop" id="qrModal">
     <div class="modal">
       <div class="modal-head">
-        <h3>📱 Saved QR & UPI</h3>
+        <h3>📱 Navi QR Code & UPI</h3>
         <button class="close-x" onclick="closeModal('qrModal')">✕</button>
       </div>
-      <div class="item-card" style="text-align:center;">
-        <div style="font-size:15px; font-weight:800;" id="qrUpiDisplay">9778197726@naviaxis</div>
-        <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">100% Secured • Owner: MUHAMMED ADHIL • 9778197726, 7012253516</div>
+      <div class="qr-card-box">
+        <div style="font-size:15px; font-weight:900; color:#10b981;">n navi</div>
+        <div style="font-size:11px; color:#475569; margin-top:2px;">Pay using any UPI app • G Pay • PhonePe • Paytm • navi</div>
+        <div class="qr-matrix-grid" id="naviQrMatrixGrid"></div>
+        <div style="font-size:14px; font-weight:800; margin-top:6px;">Mr Muhammed Adil C A</div>
+        <div style="font-size:12.5px; font-weight:700; color:#334155; margin-top:2px;" id="qrUpiDisplay">UPI ID : 9778197726@naviaxis</div>
+      </div>
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <a id="upiPayAppLink" href="upi://pay?pa=9778197726@naviaxis&pn=Mr%20Muhammed%20Adil%20C%20A&cu=INR" class="btn btn-success" style="flex:1;">⚡ Pay via UPI App</a>
+        <button class="btn btn-secondary" onclick="copyUpiId()">📋 Copy UPI</button>
       </div>
     </div>
   </div>
@@ -773,7 +832,7 @@
     const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
     const MAX_PHOTOS = 6;
-    const STORAGE_KEY = "bazaaro_fast_v9";
+    const STORAGE_KEY = "bazaaro_fast_v10";
 
     const I18N = {
       en: { dir: "ltr", searchPlaceholder: "Search Meesho, Flipkart, Myntra, Amazon, food, reels...", sellBtn: "+ Sell", addItemBtn: "+ Add Item", addToCart: "🛒 Cart", detailsBuy: "🔍 Details & Play", editBtn: "✏️ Edit", removeBtn: "Remove", navHome: "Home", navCart: "Cart" },
@@ -914,6 +973,8 @@
       lang: "en",
       user: null,
       isOwnerVerified: false,
+      followers: 0,
+      following: 0,
       cart: [],
       liveUsers: [],
       items: starterItems
@@ -933,6 +994,49 @@
     let zoomLevel = 1;
     let lastSpokenObj = { text: "A", lang: "en", label: "A" };
     let audioCtx = null;
+
+    function renderNaviQrMatrix(upiStr) {
+      const grid = document.getElementById("naviQrMatrixGrid");
+      if (!grid) return;
+      const seedText = upiStr || "9778197726@naviaxis";
+      let hash = 2166136261;
+      for (let i = 0; i < seedText.length; i++) {
+        hash ^= seedText.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+
+      const size = 21;
+      const cells = [];
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const isTopLeft = r < 7 && c < 7;
+          const isTopRight = r < 7 && c >= size - 7;
+          const isBottomLeft = r >= size - 7 && c < 7;
+          let dark = false;
+
+          if (isTopLeft || isTopRight || isBottomLeft) {
+            const lr = isBottomLeft ? r - (size - 7) : r;
+            const lc = isTopRight ? c - (size - 7) : c;
+            const border = lr === 0 || lr === 6 || lc === 0 || lc === 6;
+            const center = lr >= 2 && lr <= 4 && lc >= 2 && lc <= 4;
+            dark = border || center;
+          } else {
+            const mix = ((hash >>> ((r * 7 + c) % 24)) ^ (r * 31 + c * 17)) & 1;
+            dark = mix === 1;
+          }
+          cells.push(`<div class="${dark ? "qr-cell-dark" : "qr-cell-light"}"></div>`);
+        }
+      }
+      grid.innerHTML = cells.join("");
+    }
+
+    function copyUpiId() {
+      const val = state.upi || "9778197726@naviaxis";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val).catch(() => {});
+      }
+      alert("UPI Copied: " + val);
+    }
 
     function scrollToLettersSection() {
       const el = document.getElementById("kidsLearningCard");
@@ -1052,6 +1156,7 @@
       setInterval(update3DDateTime, 1000);
       applyLanguageUI();
       renderKidsLetters("en");
+      renderNaviQrMatrix(state.upi);
       syncUI();
       setTimeout(() => {
         pullFromFirebase(true);
@@ -1115,6 +1220,21 @@
       await pushPublicStateToFirebase();
     }
 
+    function deduplicateUsersList(list) {
+      const seen = new Set();
+      const out = [];
+      for (const u of (list || [])) {
+        const key = (u.phone && u.phone !== "Not Provided")
+          ? "phone:" + String(u.phone).trim()
+          : "name:" + String(u.name || "Guest").trim().toLowerCase();
+        if (!seen.has(key)) {
+          seen.add(key);
+          out.push(u);
+        }
+      }
+      return out;
+    }
+
     async function pullFromFirebase(seedIfEmpty) {
       if (isSyncing) return;
       isSyncing = true;
@@ -1133,7 +1253,9 @@
             const missingStarter = starterItems.filter(s => !existingIds.has(s.id));
             state.items = [...cloud.items, ...missingStarter];
           }
-          if (Array.isArray(cloud.liveUsers)) state.liveUsers = cloud.liveUsers;
+          if (Array.isArray(cloud.liveUsers)) {
+            state.liveUsers = deduplicateUsersList(cloud.liveUsers);
+          }
           if (cloud.site) {
             state.siteName = cloud.site.siteName || state.siteName;
             state.heroTitle = cloud.site.heroTitle || state.heroTitle;
@@ -1165,18 +1287,26 @@
 
     async function syncPresenceToFirebase() {
       const sid = getSessionId();
+      const userName = state.user ? state.user.name.trim() : "Guest Visitor";
+      const userPhone = state.user ? state.user.phone.trim() : "Not Provided";
+
       const entry = {
         sessionId: sid,
-        name: state.user ? state.user.name : "Guest Visitor",
-        phone: state.user ? state.user.phone : "Not Provided",
+        name: userName,
+        phone: userPhone,
         isOwner: isOwnerUser(),
         lang: state.lang || "en",
         lastSeen: Date.now()
       };
-      const idx = state.liveUsers.findIndex(u => u.sessionId === sid);
-      if (idx >= 0) state.liveUsers[idx] = entry;
-      else state.liveUsers.unshift(entry);
-      state.liveUsers = state.liveUsers.slice(0, 60);
+
+      const filtered = (state.liveUsers || []).filter(u => {
+        if (userPhone !== "Not Provided" && u.phone === userPhone) return false;
+        if (userPhone === "Not Provided" && userName.toLowerCase() === "guest visitor" && (!u.phone || u.phone === "Not Provided")) return false;
+        if (u.sessionId === sid) return false;
+        return true;
+      });
+
+      state.liveUsers = deduplicateUsersList([entry, ...filtered]).slice(0, 40);
       saveLocalSafe();
       await pushPublicStateToFirebase();
     }
@@ -1192,7 +1322,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             items: lightweightItems,
-            liveUsers: state.liveUsers.slice(0, 60),
+            liveUsers: deduplicateUsersList(state.liveUsers).slice(0, 40),
             site: {
               siteName: state.siteName,
               heroTitle: state.heroTitle,
@@ -1222,13 +1352,20 @@
       document.getElementById("headerBossTag").textContent = state.bossTag;
       document.getElementById("heroSiteTitle").textContent = state.heroTitle;
       document.getElementById("heroSiteDesc").textContent = state.siteDesc;
-      document.getElementById("heroUpiBadge").textContent = "UPI: " + state.upi;
-      document.getElementById("qrUpiDisplay").textContent = state.upi;
+      document.getElementById("heroUpiBadge").textContent = "📱 QR / UPI: " + state.upi;
+      document.getElementById("qrUpiDisplay").textContent = "UPI ID : " + state.upi;
+      document.getElementById("upiPayAppLink").href =
+        `upi://pay?pa=${encodeURIComponent(state.upi)}&pn=Mr%20Muhammed%20Adil%20C%20A&cu=INR`;
+      renderNaviQrMatrix(state.upi);
 
       const count = (state.cart || []).length;
       document.getElementById("headerCartCount").textContent = count;
       document.getElementById("bottomCartCount").textContent = count;
       document.getElementById("drawerCartCount").textContent = count;
+
+      document.getElementById("youPostsCount").textContent = state.items.length;
+      document.getElementById("youFollowersCount").textContent = state.followers || 0;
+      document.getElementById("youFollowingCount").textContent = state.following || 0;
 
       const accHeaderBtn = document.getElementById("accountHeaderBtn");
       const drawerAccBtn = document.getElementById("drawerAccountBtn");
@@ -1274,7 +1411,7 @@
       }
       const box = document.getElementById("ownerUsersListContainer");
       const now = Date.now();
-      const users = state.liveUsers || [];
+      const users = deduplicateUsersList(state.liveUsers || []);
       box.innerHTML = users.length
         ? users.map(u => {
             const isOnline = now - (u.lastSeen || 0) < 45000;
