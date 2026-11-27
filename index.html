@@ -194,6 +194,33 @@
       padding: 12px;
     }
 
+    .lang-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+      scrollbar-width: none;
+    }
+    .lang-bar-wrap::-webkit-scrollbar { display: none; }
+    .lang-chip {
+      flex: 0 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .lang-chip.active {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      border-color: #34d399;
+    }
+
     .date-3d-wrapper {
       perspective: 900px;
       margin-bottom: 12px;
@@ -620,6 +647,33 @@
       border-color: var(--accent);
     }
 
+    .user-directory-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px;
+      margin-bottom: 9px;
+    }
+    .online-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .away-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.2);
+      color: #cbd5e1;
+    }
+
     .btn {
       padding: 9px 13px;
       border-radius: 12px;
@@ -852,6 +906,7 @@
 
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('cartModal')">🛒 My Cart (<span id="drawerCartCount">0</span>)</button>
+    <button class="drawer-btn" id="drawerOwnerUsersBtn" style="display:none; color:#fbbf24;" onclick="toggleDrawer(); openOwnerUsersPanel()">👑 Live Users & Details (Owner Only)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product (Up to 6 Photos)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item (Up to 6 Photos)</button>
     <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
@@ -870,13 +925,25 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="pill-btn admin" id="ownerUsersTopBtn" style="display:none;" onclick="openOwnerUsersPanel()">👑 Live Users</button>
       <button class="pill-btn cart-pill" onclick="openModal('cartModal')">🛒 <span id="headerCartCount">0</span></button>
-      <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit Site</button>
+      <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit</button>
       <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Create Account</button>
     </div>
   </header>
 
   <div class="container">
+    <!-- All Languages Selector -->
+    <div class="lang-bar-wrap" id="languageBar">
+      <button class="lang-chip active" data-lang="en" onclick="setAppLanguage('en')">🌐 English</button>
+      <button class="lang-chip" data-lang="ml" onclick="setAppLanguage('ml')">മലയാളം</button>
+      <button class="lang-chip" data-lang="hi" onclick="setAppLanguage('hi')">हिंदी</button>
+      <button class="lang-chip" data-lang="ta" onclick="setAppLanguage('ta')">தமிழ்</button>
+      <button class="lang-chip" data-lang="kn" onclick="setAppLanguage('kn')">ಕನ್ನಡ</button>
+      <button class="lang-chip" data-lang="te" onclick="setAppLanguage('te')">తెలుగు</button>
+      <button class="lang-chip" data-lang="ar" onclick="setAppLanguage('ar')">العربية</button>
+    </div>
+
     <div class="date-3d-wrapper">
       <div class="date-3d-card">
         <div class="date-row-top">
@@ -902,7 +969,7 @@
         </div>
         <div class="time-row-3d">
           <span style="font-size:11px; color:#94a3b8; font-weight:700;">TIME (H : M : S)</span>
-          <span class="clock-3d-display" id="liveClockHMS">12:09:00 AM</span>
+          <span class="clock-3d-display" id="liveClockHMS">12:20:00 AM</span>
         </div>
       </div>
     </div>
@@ -927,36 +994,30 @@
     </div>
 
     <div class="cat-strip-wrap">
-      <div class="cat-strip-title">Categories</div>
+      <div class="cat-strip-title" id="categoriesLabelText">Categories</div>
       <div class="cat-strip" id="categoryBar">
-        <button class="cat-pill active" onclick="selectCategory('ALL', this)">🌐 All</button>
-        <button class="cat-pill" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
-        <button class="cat-pill" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
-        <button class="cat-pill" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
-        <button class="cat-pill" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
-        <button class="cat-pill" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
-        <button class="cat-pill" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
-        <button class="cat-pill" onclick="selectCategory('NEWS', this)">📰 News</button>
-        <button class="cat-pill" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
-        <button class="cat-pill" onclick="selectCategory('REELS', this)">🎬 Reels</button>
+        <button class="cat-pill active" data-cat="ALL" onclick="selectCategory('ALL', this)">🌐 All</button>
+        <button class="cat-pill" data-cat="PRODUCTS" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
+        <button class="cat-pill" data-cat="FOOD" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
+        <button class="cat-pill" data-cat="VEHICLES" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
+        <button class="cat-pill" data-cat="SHOP" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
+        <button class="cat-pill" data-cat="BOOKS" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
+        <button class="cat-pill" data-cat="JOBS" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
+        <button class="cat-pill" data-cat="NEWS" onclick="selectCategory('NEWS', this)">📰 News</button>
+        <button class="cat-pill" data-cat="HEALTH" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
+        <button class="cat-pill" data-cat="REELS" onclick="selectCategory('REELS', this)">🎬 Reels</button>
       </div>
     </div>
 
     <div class="search-bar">
       <input type="text" id="searchInput" class="form-control" placeholder="Search Meesho, Flipkart, Myntra, Amazon, items..." oninput="renderCategoryItems()" />
-      <button class="btn btn-accent" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Sell</button>
+      <button class="btn btn-accent" id="topSellBtn" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Sell</button>
     </div>
 
     <div class="card">
       <div class="card-head">
         <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
-        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
-      </div>
-
-      <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px; flex-wrap:wrap;">
-        <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം</button>
-        <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English</button>
-        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food (+6 Photos)</button>
+        <button class="pill-btn primary" id="addItemBtnLabel" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
       </div>
 
       <div id="categoryItemsContainer"></div>
@@ -967,13 +1028,13 @@
 
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
-      <span>🏠</span><span>Home</span>
+      <span>🏠</span><span id="navHomeLabel">Home</span>
     </button>
     <button class="nav-btn" onclick="openSellModal('PRODUCTS')">
-      <span>🛒</span><span>Sell Item</span>
+      <span>🛒</span><span id="navSellLabel">Sell Item</span>
     </button>
     <button class="nav-btn" onclick="openModal('cartModal')">
-      <span>🛍️</span><span>Cart (<span id="bottomCartCount">0</span>)</span>
+      <span>🛍️</span><span><span id="navCartLabel">Cart</span> (<span id="bottomCartCount">0</span>)</span>
     </button>
     <button class="nav-btn" onclick="openModal('qrModal')">
       <span>📱</span><span>QR/UPI</span>
@@ -982,6 +1043,20 @@
       <span>👤</span><span id="bottomAccountLabel">Account</span>
     </button>
   </nav>
+
+  <!-- Owner-Only Live Users & Details Modal -->
+  <div class="modal-backdrop" id="ownerUsersModal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>👑 Live Users & Details (Owner Only)</h3>
+        <button class="close-x" onclick="closeModal('ownerUsersModal')">✕</button>
+      </div>
+      <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+        Visible only to Owner (MUHAMMED ADHIL • 9778197726 / 7012253516).
+      </div>
+      <div id="ownerUsersListContainer"></div>
+    </div>
+  </div>
 
   <!-- Full Product / Item Details Modal -->
   <div class="modal-backdrop" id="itemDetailsModal">
@@ -1039,7 +1114,7 @@
         <div style="font-size:16px; font-weight:800;" id="youUserName">User</div>
         <div style="font-size:12px; color:var(--text-muted);" id="youUserPhone">Phone</div>
         <div id="ownerBadgeInYou" style="display:none; margin-top:6px;">
-          <span class="badge gold">👑 Owner Edit Access</span>
+          <span class="badge gold">👑 Owner Access</span>
         </div>
       </div>
 
@@ -1058,7 +1133,11 @@
         </div>
       </div>
 
-      <button class="btn btn-accent" id="youEditWebsiteBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openModal('editModal')">
+      <button class="btn btn-accent" id="youLiveUsersBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openOwnerUsersPanel()">
+        👑 View All Live Users & Details
+      </button>
+
+      <button class="btn btn-primary" id="youEditWebsiteBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openModal('editModal')">
         ✏️ Edit Website
       </button>
 
@@ -1181,7 +1260,7 @@
         <label>Enter Owner Mobile Number</label>
         <input type="tel" id="adminVerifyPhone" class="form-control" placeholder="9778197726" />
       </div>
-      <button class="btn btn-accent" style="width:100%;" onclick="verifyOwnerAccess()">Unlock Owner Edit</button>
+      <button class="btn btn-accent" style="width:100%;" onclick="verifyOwnerAccess()">Unlock Owner Panel</button>
     </div>
   </div>
 
@@ -1205,9 +1284,201 @@
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
     const MAX_PHOTOS = 6;
 
+    const I18N = {
+      en: {
+        dir: "ltr",
+        categoriesLabel: "Categories",
+        searchPlaceholder: "Search Meesho, Flipkart, Myntra, Amazon, items...",
+        sellBtn: "+ Sell",
+        addItemBtn: "+ Add Item",
+        tapHint: "Tap to view full details & photos ↗",
+        addToCart: "🛒 Add to Cart",
+        detailsBuy: "🔍 Details & Buy",
+        editBtn: "✏️ Edit",
+        removeBtn: "Remove",
+        navHome: "Home",
+        navSell: "Sell Item",
+        navCart: "Cart",
+        cats: {
+          ALL: "🌐 All Items",
+          PRODUCTS: "🛒 Sell Products",
+          FOOD: "🍲 Food & Kitchen",
+          VEHICLES: "🚗 Vehicles",
+          SHOP: "🛍️ Shop & Store",
+          BOOKS: "📘 ₹1 Books & Classes",
+          JOBS: "💼 Jobs & Services",
+          NEWS: "📰 News & Updates",
+          HEALTH: "❤️ Health & Doctors",
+          REELS: "🎬 Reels & Videos"
+        }
+      },
+      ml: {
+        dir: "ltr",
+        categoriesLabel: "കാറ്റഗറികൾ",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ഐറ്റങ്ങൾ തിരയുക...",
+        sellBtn: "+ വിൽക്കുക",
+        addItemBtn: "+ ഐറ്റം ചേർക്കുക",
+        tapHint: "മുഴുവൻ വിവരങ്ങളും ഫോട്ടോകളും കാണാൻ തൊടുക ↗",
+        addToCart: "🛒 കാർട്ടിൽ ചേർക്കുക",
+        detailsBuy: "🔍 വിവരങ്ങൾ & വാങ്ങുക",
+        editBtn: "✏️ എഡിറ്റ്",
+        removeBtn: "നീക്കം ചെയ്യുക",
+        navHome: "ഹോം",
+        navSell: "വിൽക്കുക",
+        navCart: "കാർട്ട്",
+        cats: {
+          ALL: "🌐 എല്ലാ ഐറ്റങ്ങളും",
+          PRODUCTS: "🛒 പ്രൊഡക്റ്റുകൾ",
+          FOOD: "🍲 ഭക്ഷണം & കിച്ചൺ",
+          VEHICLES: "🚗 വാഹനങ്ങൾ",
+          SHOP: "🛍️ ഷോപ്പ് & സ്റ്റോർ",
+          BOOKS: "📘 ₹1 ബുക്കുകൾ & ക്ലാസ്സ്",
+          JOBS: "💼 ജോലികൾ & സർവീസ്",
+          NEWS: "📰 വാർത്തകൾ",
+          HEALTH: "❤️ ആരോഗ്യം",
+          REELS: "🎬 റീൽസ്"
+        }
+      },
+      hi: {
+        dir: "ltr",
+        categoriesLabel: "श्रेणियां",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, सामान खोजें...",
+        sellBtn: "+ बेचें",
+        addItemBtn: "+ आइटम जोड़ें",
+        tapHint: "पूरी जानकारी और फोटो देखने के लिए टैप करें ↗",
+        addToCart: "🛒 कार्ट में डालें",
+        detailsBuy: "🔍 विवरण और खरीदें",
+        editBtn: "✏️ संपादित करें",
+        removeBtn: "हटाएं",
+        navHome: "होम",
+        navSell: "बेचें",
+        navCart: "कार्ट",
+        cats: {
+          ALL: "🌐 सभी आइटम",
+          PRODUCTS: "🛒 उत्पाद बेचें",
+          FOOD: "🍲 खाना और किचन",
+          VEHICLES: "🚗 वाहन",
+          SHOP: "🛍️ शॉप और स्टोर",
+          BOOKS: "📘 ₹1 किताबें और क्लास",
+          JOBS: "💼 नौकरियां और सेवाएं",
+          NEWS: "📰 समाचार",
+          HEALTH: "❤️ स्वास्थ्य",
+          REELS: "🎬 रील्स"
+        }
+      },
+      ta: {
+        dir: "ltr",
+        categoriesLabel: "பிரிவுகள்",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, பொருட்கள் தேடுங்கள்...",
+        sellBtn: "+ விற்க",
+        addItemBtn: "+ சேர்க்க",
+        tapHint: "முழு விவரம் மற்றும் படங்களை காண தொடவும் ↗",
+        addToCart: "🛒 கார்ட்டில் சேர்",
+        detailsBuy: "🔍 விவரம் & வாங்கு",
+        editBtn: "✏️ திருத்து",
+        removeBtn: "நீக்கு",
+        navHome: "முகப்பு",
+        navSell: "விற்க",
+        navCart: "கார்ட்",
+        cats: {
+          ALL: "🌐 அனைத்து பொருட்கள்",
+          PRODUCTS: "🛒 பொருட்கள்",
+          FOOD: "🍲 உணவு & சமையல்",
+          VEHICLES: "🚗 வாகனங்கள்",
+          SHOP: "🛍️ கடை & ஸ்டோர்",
+          BOOKS: "📘 ₹1 புத்தகங்கள்",
+          JOBS: "💼 வேலைகள்",
+          NEWS: "📰 செய்திகள்",
+          HEALTH: "❤️ ஆரோக்கியம்",
+          REELS: "🎬 ரீல்ஸ்"
+        }
+      },
+      kn: {
+        dir: "ltr",
+        categoriesLabel: "ವರ್ಗಗಳು",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ವಸ್ತುಗಳನ್ನು ಹುಡುಕಿ...",
+        sellBtn: "+ ಮಾರಾಟ",
+        addItemBtn: "+ ಸೇರಿಸಿ",
+        tapHint: "ಪೂರ್ಣ ವಿವರ ಮತ್ತು ಫೋಟೋಗಳಿಗಾಗಿ ಒತ್ತಿ ↗",
+        addToCart: "🛒 ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ",
+        detailsBuy: "🔍 ವಿವರ ಮತ್ತು ಖರೀದಿ",
+        editBtn: "✏️ ತಿದ್ದು",
+        removeBtn: "ತೆಗೆದುಹಾಕಿ",
+        navHome: "ಮುಖಪುಟ",
+        navSell: "ಮಾರಾಟ",
+        navCart: "ಕಾರ್ಟ್",
+        cats: {
+          ALL: "🌐 ಎಲ್ಲಾ ವಸ್ತುಗಳು",
+          PRODUCTS: "🛒 ಉತ್ಪನ್ನಗಳು",
+          FOOD: "🍲 ಆಹಾರ ಮತ್ತು ಅಡುಗೆ",
+          VEHICLES: "🚗 ವಾಹನಗಳು",
+          SHOP: "🛍️ ಅಂಗಡಿ & ಸ್ಟೋರ್",
+          BOOKS: "📘 ₹1 ಪುಸ್ತಕಗಳು",
+          JOBS: "💼 ಉದ್ಯೋಗಗಳು",
+          NEWS: "📰 ಸುದ್ದಿ",
+          HEALTH: "❤️ ಆರೋಗ್ಯ",
+          REELS: "🎬 ರೀಲ್ಸ್"
+        }
+      },
+      te: {
+        dir: "ltr",
+        categoriesLabel: "వర్గాలు",
+        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, వస్తువులు వెతకండి...",
+        sellBtn: "+ అమ్మండి",
+        addItemBtn: "+ జోడించండి",
+        tapHint: "పూర్తి వివరాలు & ఫోటోల కోసం తాకండి ↗",
+        addToCart: "🛒 కార్ట్‌లో చేర్చండి",
+        detailsBuy: "🔍 వివరాలు & కొనండి",
+        editBtn: "✏️ మార్చండి",
+        removeBtn: "తొలగించండి",
+        navHome: "హోమ్",
+        navSell: "అమ్మండి",
+        navCart: "కార్ట్",
+        cats: {
+          ALL: "🌐 అన్ని వస్తువులు",
+          PRODUCTS: "🛒 ఉత్పత్తులు",
+          FOOD: "🍲 ఆహారం & కిచెన్",
+          VEHICLES: "🚗 వాహనాలు",
+          SHOP: "🛍️ షాప్ & స్టోర్",
+          BOOKS: "📘 ₹1 పుస్తకాలు",
+          JOBS: "💼 ఉద్యోగాలు",
+          NEWS: "📰 వార్తలు",
+          HEALTH: "❤️ ఆరోగ్యం",
+          REELS: "🎬 రీల్స్"
+        }
+      },
+      ar: {
+        dir: "rtl",
+        categoriesLabel: "الفئات",
+        searchPlaceholder: "ابحث في Meesho وFlipkart وMyntra وAmazon...",
+        sellBtn: "+ بيع",
+        addItemBtn: "+ إضافة",
+        tapHint: "اضغط لعرض التفاصيل الكاملة والصور ↗",
+        addToCart: "🛒 أضف إلى السلة",
+        detailsBuy: "🔍 التفاصيل والشراء",
+        editBtn: "✏️ تعديل",
+        removeBtn: "حذف",
+        navHome: "الرئيسية",
+        navSell: "بيع",
+        navCart: "السلة",
+        cats: {
+          ALL: "🌐 كل العناصر",
+          PRODUCTS: "🛒 المنتجات",
+          FOOD: "🍲 الطعام والمطبخ",
+          VEHICLES: "🚗 المركبات",
+          SHOP: "🛍️ المتجر",
+          BOOKS: "📘 كتب بـ ₹1",
+          JOBS: "💼 الوظائف",
+          NEWS: "📰 الأخبار",
+          HEALTH: "❤️ الصحة",
+          REELS: "🎬 ريلز"
+        }
+      }
+    };
+
     const CATEGORY_DEFAULT_IMAGES = {
       PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=70",
-      FOOD: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=70",
+      FOOD: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=800&auto=format&fit=crop",
       VEHICLES: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=70",
       SHOP: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=70",
       BOOKS: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=70",
@@ -1238,21 +1509,10 @@
 
     const starterFoodRecipes = [
       {
-        id: "r1",
-        cat: "FOOD",
-        title: "ചിക്കൻ ബിരിയാണി (Chicken Biryani)",
-        price: "Recipe",
-        link: "",
-        photos: [CATEGORY_DEFAULT_IMAGES.FOOD],
-        descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി, ചിക്കൻ, സവാള, തക്കാളി, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. രീതി: മസാല ചിക്കൻ വേവിച്ച്, നെയ്യിൽ വേവിച്ച അരി ചേർത്ത് ദം ഇടുക.",
-        descEn: "Ingredients: Kaima/Basmati rice, chicken, onion, tomato, ginger-garlic paste, curd, biryani masala, ghee, coriander & mint. Method: Cook spiced chicken, layer with ghee-cooked rice, and dum cook.",
-        by: "MUHAMMED ADHIL • 9778197726"
-      },
-      {
         id: "r2",
         cat: "FOOD",
         title: "കുഴിമന്തി (Kuzhi Mandi)",
-        price: "Recipe",
+        price: "Recipe / Order",
         link: "",
         photos: ["https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=800&auto=format&fit=crop"],
         descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ. രീതി: ചിക്കൻ വേവിച്ച് അരിക്ക് മുകളിൽ വെച്ച് ചാർക്കോൾ പുക നൽകുക.",
@@ -1268,29 +1528,77 @@
       siteDesc: "First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516",
       upi: "9778197726@naviaxis",
       logo: "https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO",
+      lang: "en",
       user: null,
       isOwnerVerified: false,
       followers: 0,
       following: 0,
       cart: [],
+      liveUsers: [],
       items: starterFoodRecipes
     };
 
-    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v3")) || defaultData;
+    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v4")) || defaultData;
     if (!Array.isArray(state.cart)) state.cart = [];
+    if (!Array.isArray(state.liveUsers)) state.liveUsers = [];
     let currentCategory = "ALL";
-    let foodLang = "ml";
     let uploadedLogoTemp = null;
     let postPhotosTemp = [];
+
+    function getSessionId() {
+      let sid = sessionStorage.getItem("bazaaro_session_id");
+      if (!sid) {
+        sid = "sess_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+        sessionStorage.setItem("bazaaro_session_id", sid);
+      }
+      return sid;
+    }
 
     window.addEventListener("load", async () => {
       updateLiveDateTime();
       setInterval(updateLiveDateTime, 1000);
+      applyLanguageUI();
       syncUI();
       await pullFromFirebase(true);
+      await syncPresenceToFirebase();
       setInterval(() => pullFromFirebase(false), 4000);
+      setInterval(() => syncPresenceToFirebase(), 15000);
       setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1000);
     });
+
+    function setAppLanguage(langCode) {
+      state.lang = I18N[langCode] ? langCode : "en";
+      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
+      applyLanguageUI();
+      renderCategoryItems();
+    }
+
+    function applyLanguageUI() {
+      const lang = state.lang || "en";
+      const pack = I18N[lang] || I18N.en;
+      document.documentElement.dir = pack.dir || "ltr";
+
+      document.querySelectorAll(".lang-chip").forEach(chip => {
+        chip.classList.toggle("active", chip.getAttribute("data-lang") === lang);
+      });
+
+      document.getElementById("categoriesLabelText").textContent = pack.categoriesLabel;
+      document.getElementById("searchInput").placeholder = pack.searchPlaceholder;
+      document.getElementById("topSellBtn").textContent = pack.sellBtn;
+      document.getElementById("addItemBtnLabel").textContent = pack.addItemBtn;
+      document.getElementById("navHomeLabel").textContent = pack.navHome;
+      document.getElementById("navSellLabel").textContent = pack.navSell;
+      document.getElementById("navCartLabel").textContent = pack.navCart;
+
+      document.querySelectorAll("#categoryBar .cat-pill").forEach(pill => {
+        const c = pill.getAttribute("data-cat");
+        if (c && pack.cats[c]) {
+          pill.textContent = pack.cats[c];
+        }
+      });
+
+      updateCategoryHeader();
+    }
 
     function normalizeItemPhotos(item) {
       if (Array.isArray(item.photos) && item.photos.length > 0) {
@@ -1310,8 +1618,13 @@
         const badge = document.getElementById("syncStatusBadge");
         if (badge) badge.textContent = "● FIREBASE LIVE";
 
-        if (cloud && Array.isArray(cloud.items) && cloud.items.length > 0) {
-          state.items = cloud.items;
+        if (cloud) {
+          if (Array.isArray(cloud.items) && cloud.items.length > 0) {
+            state.items = cloud.items;
+          }
+          if (Array.isArray(cloud.liveUsers)) {
+            state.liveUsers = cloud.liveUsers;
+          }
           if (cloud.site) {
             state.siteName = cloud.site.siteName || state.siteName;
             state.heroTitle = cloud.site.heroTitle || state.heroTitle;
@@ -1320,9 +1633,12 @@
             state.upi = cloud.site.upi || state.upi;
             if (cloud.site.logo) state.logo = cloud.site.logo;
           }
-          localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
+          localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
           renderCategoryItems();
           syncHeaderHeroOnly();
+          if (document.getElementById("ownerUsersModal").classList.contains("open")) {
+            renderOwnerUsersList();
+          }
         } else if (seedIfEmpty) {
           await pushPublicStateToFirebase();
         }
@@ -1332,6 +1648,29 @@
       }
     }
 
+    async function syncPresenceToFirebase() {
+      const sid = getSessionId();
+      const now = Date.now();
+      const entry = {
+        sessionId: sid,
+        name: state.user ? state.user.name : "Guest Visitor",
+        phone: state.user ? state.user.phone : "Not Provided",
+        isOwner: isOwnerUser(),
+        lang: state.lang || "en",
+        lastSeen: now
+      };
+
+      const existingIdx = state.liveUsers.findIndex(u => u.sessionId === sid);
+      if (existingIdx >= 0) {
+        state.liveUsers[existingIdx] = entry;
+      } else {
+        state.liveUsers.unshift(entry);
+      }
+      state.liveUsers = state.liveUsers.slice(0, 100);
+      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
+      await pushPublicStateToFirebase();
+    }
+
     async function pushPublicStateToFirebase() {
       try {
         await fetch(`${DB_URL}/bazaaro_public.json`, {
@@ -1339,6 +1678,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             items: state.items,
+            liveUsers: state.liveUsers,
             site: {
               siteName: state.siteName,
               heroTitle: state.heroTitle,
@@ -1356,12 +1696,12 @@
     }
 
     function persistLocalOnly() {
-      localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
       syncUI();
     }
 
     async function persistAndSyncCloud() {
-      localStorage.setItem("bazaaro_fb_v3", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_v4", JSON.stringify(state));
       syncUI();
       await pushPublicStateToFirebase();
     }
@@ -1423,8 +1763,11 @@
 
       const ownerAllowed = isOwnerUser();
       document.getElementById("ownerEditTopBtn").style.display = ownerAllowed ? "inline-block" : "none";
+      document.getElementById("ownerUsersTopBtn").style.display = ownerAllowed ? "inline-block" : "none";
       document.getElementById("drawerEditSiteBtn").style.display = ownerAllowed ? "block" : "none";
+      document.getElementById("drawerOwnerUsersBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("youEditWebsiteBtn").style.display = ownerAllowed ? "block" : "none";
+      document.getElementById("youLiveUsersBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("ownerBadgeInYou").style.display = ownerAllowed ? "block" : "none";
 
       document.getElementById("youFollowersCount").textContent = state.followers;
@@ -1440,12 +1783,48 @@
       renderCartItems();
     }
 
+    function openOwnerUsersPanel() {
+      if (!isOwnerUser()) {
+        openModal("adminModal");
+        return;
+      }
+      renderOwnerUsersList();
+      openModal("ownerUsersModal");
+    }
+
+    function renderOwnerUsersList() {
+      const box = document.getElementById("ownerUsersListContainer");
+      if (!box) return;
+      const now = Date.now();
+      const users = state.liveUsers || [];
+      if (!users.length) {
+        box.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted);">No user records yet.</div>`;
+        return;
+      }
+      box.innerHTML = users
+        .map(u => {
+          const isOnline = now - (u.lastSeen || 0) < 30000;
+          const timeText = u.lastSeen ? new Date(u.lastSeen).toLocaleTimeString() : "-";
+          return `
+            <div class="user-directory-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <strong>${u.name || "User"} ${u.isOwner ? "👑" : ""}</strong>
+                <span class="${isOnline ? "online-pill" : "away-pill"}">${isOnline ? "● LIVE NOW" : "Last: " + timeText}</span>
+              </div>
+              <div style="font-size:12px; color:#fbbf24; margin-top:4px;">📱 Phone: ${u.phone || "N/A"}</div>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">🌐 Language: ${(u.lang || "en").toUpperCase()} • Session: ${u.sessionId}</div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
     function handleAccountClick() {
       if (state.user) openModal("youModal");
       else openModal("createAccountModal");
     }
 
-    function completeAccountLogin() {
+    async function completeAccountLogin() {
       const name = document.getElementById("regName").value.trim();
       const phone = document.getElementById("regPhone").value.trim();
       if (!name || !phone) {
@@ -1455,24 +1834,27 @@
       state.user = { name, phone };
       if (OWNER_NUMBERS.includes(phone)) state.isOwnerVerified = true;
       persistLocalOnly();
+      await syncPresenceToFirebase();
       closeModal("createAccountModal");
     }
 
-    function logoutAccount() {
+    async function logoutAccount() {
       state.user = null;
       state.isOwnerVerified = false;
       persistLocalOnly();
+      await syncPresenceToFirebase();
       closeModal("youModal");
     }
 
-    function verifyOwnerAccess() {
+    async function verifyOwnerAccess() {
       const ph = document.getElementById("adminVerifyPhone").value.trim();
       if (OWNER_NUMBERS.includes(ph)) {
         state.isOwnerVerified = true;
         if (!state.user) state.user = { name: "MUHAMMED ADHIL", phone: ph };
         persistLocalOnly();
+        await syncPresenceToFirebase();
         closeModal("adminModal");
-        openModal("editModal");
+        openOwnerUsersPanel();
       } else {
         alert("Access Denied.");
       }
@@ -1599,7 +1981,7 @@
     function selectCategoryByName(cat) {
       currentCategory = cat;
       document.querySelectorAll(".cat-pill").forEach(p => {
-        p.classList.toggle("active", p.getAttribute("onclick").includes("'" + cat + "'"));
+        p.classList.toggle("active", p.getAttribute("data-cat") === cat);
       });
       document.querySelectorAll(".drawer-cat-tile").forEach(t => {
         t.classList.toggle("active", t.getAttribute("onclick").includes("'" + cat + "'"));
@@ -1609,27 +1991,8 @@
     }
 
     function updateCategoryHeader() {
-      const titles = {
-        ALL: "🌐 All Items",
-        PRODUCTS: "🛒 Sell Products",
-        FOOD: "🍲 Food & Kitchen",
-        VEHICLES: "🚗 Vehicles",
-        SHOP: "🛍️ Shop & Store",
-        BOOKS: "📘 ₹1 Books & Classes",
-        JOBS: "💼 Jobs & Services",
-        NEWS: "📰 News & Updates",
-        HEALTH: "❤️ Health & Doctors",
-        REELS: "🎬 Reels & Videos"
-      };
-      document.getElementById("activeCategoryHeading").textContent = titles[currentCategory] || titles.ALL;
-      document.getElementById("foodLangBar").style.display = currentCategory === "FOOD" ? "flex" : "none";
-    }
-
-    function setFoodLang(lang) {
-      foodLang = lang;
-      document.getElementById("langMlBtn").className = lang === "ml" ? "pill-btn primary" : "pill-btn";
-      document.getElementById("langEnBtn").className = lang === "en" ? "pill-btn primary" : "pill-btn";
-      renderCategoryItems();
+      const pack = I18N[state.lang] || I18N.en;
+      document.getElementById("activeCategoryHeading").textContent = pack.cats[currentCategory] || pack.cats.ALL;
     }
 
     function openSellModal(defaultCat) {
@@ -1744,7 +2107,7 @@
 
       const photos = normalizeItemPhotos(item);
       const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
-      const fullDesc = foodLang === "ml" ? item.descMl : item.descEn;
+      const fullDesc = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
 
       document.getElementById("detailModalTitle").textContent = item.title;
       document.getElementById("detailModalBody").innerHTML = `
@@ -1859,10 +2222,11 @@
     }
 
     function renderCategoryItems() {
+      const pack = I18N[state.lang] || I18N.en;
       const q = document.getElementById("searchInput").value.trim().toLowerCase();
       const filtered = state.items.filter(item => {
         const matchCat = currentCategory === "ALL" || item.cat === currentCategory;
-        const blob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by + " " + item.price + " " + (item.link || "")).toLowerCase();
+        const blob = (item.title + " " + (item.descMl || "") + " " + (item.descEn || "") + " " + item.by + " " + item.price + " " + (item.link || "")).toLowerCase();
         const matchQuery = !q || blob.includes(q);
         return matchCat && matchQuery;
       });
@@ -1870,7 +2234,7 @@
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
         container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">
-          No items listed here yet. Tap <b>+ Add Item</b> to add up to 6 photos, links, and full details.
+          No items listed here yet. Tap <b>${pack.addItemBtn}</b> to add up to 6 photos, links, and full details.
         </div>`;
         return;
       }
@@ -1879,6 +2243,7 @@
         const photos = normalizeItemPhotos(item);
         const imgSrc = photos[0];
         const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
+        const descText = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
         return `
           <div class="item-card">
             <div class="clickable-open-area" onclick="openItemDetailsModal('${item.id}')">
@@ -1891,21 +2256,21 @@
                 <span class="item-price-tag">${item.price}</span>
               </div>
               <div class="item-title">${item.title}</div>
-              <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
-              <div class="tap-hint-text">Tap to view full details & photos ↗</div>
+              <div class="item-desc">${descText}</div>
+              <div class="tap-hint-text">${pack.tapHint}</div>
             </div>
 
             <div class="item-actions-row">
-              <button class="cart-add-btn" onclick="addToCart('${item.id}')">🛒 Add to Cart</button>
-              <button class="details-open-btn" onclick="openItemDetailsModal('${item.id}')">🔍 Details & Buy</button>
+              <button class="cart-add-btn" onclick="addToCart('${item.id}')">${pack.addToCart}</button>
+              <button class="details-open-btn" onclick="openItemDetailsModal('${item.id}')">${pack.detailsBuy}</button>
               ${safeLink ? `<a class="item-link-btn" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>` : ""}
             </div>
 
             <div class="item-footer">
               <span><strong>${item.by}</strong></span>
               <div class="item-actions">
-                <button class="edit-item-btn" onclick="openEditItemModal('${item.id}')">✏️ Edit</button>
-                <button class="del-btn" onclick="deleteItem('${item.id}')">Remove</button>
+                <button class="edit-item-btn" onclick="openEditItemModal('${item.id}')">${pack.editBtn}</button>
+                <button class="del-btn" onclick="deleteItem('${item.id}')">${pack.removeBtn}</button>
               </div>
             </div>
           </div>
@@ -1918,7 +2283,7 @@
       if (!q) return;
       const rep = document.getElementById("aiReply");
       rep.style.display = "block";
-      rep.innerHTML = `<strong>AI Help:</strong> Tap any item card to open full details and photos, add items to Cart, or upload up to 6 photos per item.`;
+      rep.innerHTML = `<strong>AI Help:</strong> Choose any language at the top bar, tap any item for full details & photos, or add items to Cart.`;
     }
 
     function openModal(id) { document.getElementById(id).classList.add("open"); }
