@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>BAZAARO — Fast Public Super-Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <title>BAZAARO — India's Trending Public Super-Hub</title>
   <style>
     :root {
       --bg: #0b1120;
@@ -16,7 +16,7 @@
       --accent: #f59e0b;
       --success: #10b981;
       --danger: #ef4444;
-      --border: rgba(255, 255, 255, 0.09);
+      --border: rgba(255, 255, 255, 0.1);
     }
 
     body.light-theme {
@@ -25,7 +25,7 @@
       --surface-2: #e2e8f0;
       --text: #0f172a;
       --text-muted: #475569;
-      --border: rgba(15, 23, 42, 0.1);
+      --border: rgba(15, 23, 42, 0.12);
     }
 
     * {
@@ -38,7 +38,8 @@
     body {
       background: var(--bg);
       color: var(--text);
-      padding-bottom: 84px;
+      padding-bottom: 92px;
+      touch-action: manipulation;
     }
 
     header {
@@ -53,12 +54,7 @@
       justify-content: space-between;
       gap: 6px;
     }
-    .brand-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-    }
+    .brand-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
     .menu-btn {
       background: var(--surface-2);
       border: 1px solid var(--border);
@@ -77,23 +73,9 @@
       object-fit: cover;
       background: #1e293b;
     }
-    .brand-name {
-      font-size: 15px;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .boss-tag {
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
+    .brand-name { font-size: 15px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .boss-tag { font-size: 9px; font-weight: 700; color: var(--accent); }
+    .header-actions { display: flex; align-items: center; gap: 5px; }
     .pill-btn {
       background: var(--surface-2);
       color: var(--text);
@@ -111,18 +93,14 @@
     .pill-btn.you-btn { background: #059669; color: #fff; border: none; }
     .pill-btn.admin { background: #0f172a; color: #fbbf24; border-color: rgba(245, 158, 11, 0.4); }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 10px 12px;
-    }
+    .container { max-width: 720px; margin: 0 auto; padding: 10px 12px; }
 
     .lang-bar-wrap {
       display: flex;
       gap: 6px;
       overflow-x: auto;
       padding-bottom: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       scrollbar-width: none;
     }
     .lang-bar-wrap::-webkit-scrollbar { display: none; }
@@ -137,24 +115,56 @@
       font-weight: 700;
       cursor: pointer;
     }
-    .lang-chip.active {
-      background: #059669;
-      color: #fff;
-      border-color: #34d399;
-    }
+    .lang-chip.active { background: #059669; color: #fff; border-color: #34d399; }
 
-    .status-strip {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 9px 12px;
+    .date-3d-card {
+      background: linear-gradient(145deg, #0f172a, #1e1b4b 55%, #090d16);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 16px;
+      padding: 10px 12px;
       margin-bottom: 10px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+    .date-row-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+    .date-3d-cubes { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .cube-box {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-bottom: 3px solid #2563eb;
+      border-radius: 10px;
+      padding: 4px 8px;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+    }
+    .cube-box.gold-glow {
+      border-bottom-color: #f59e0b;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+    }
+    .cube-label { display: block; font-size: 8px; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
+    .cube-val {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+    }
+    .cube-box.gold-glow .cube-val {
+      color: #fde68a;
+      text-shadow: 0 0 8px rgba(245, 158, 11, 0.8);
+    }
+    .time-row-3d {
+      margin-top: 8px;
+      padding-top: 7px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      font-size: 12px;
+    }
+    .clock-3d-display {
+      font-size: 14px;
+      font-weight: 900;
+      color: #7dd3fc;
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.85);
     }
     .live-dot-tag {
       font-size: 10px;
@@ -174,30 +184,12 @@
       color: #fff;
       margin-bottom: 10px;
     }
-    .hero-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .hero-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      border: 2px solid #f59e0b;
-      object-fit: cover;
-      background: #0b1120;
-    }
+    .hero-top { display: flex; align-items: center; gap: 10px; }
+    .hero-logo { width: 46px; height: 46px; border-radius: 12px; border: 2px solid #f59e0b; object-fit: cover; background: #0b1120; }
     .hero-title { font-size: 15px; font-weight: 800; }
-    .hero-desc { font-size: 11px; color: #cbd5e1; margin-top: 2px; }
+    .hero-desc { font-size: 11px; color: #cbd5e1; margin-top: 2px; line-height: 1.35; }
     .badge-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-    .badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(16, 185, 129, 0.2);
-      color: #6ee7b7;
-    }
+    .badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
     .badge.gold { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
 
     .store-quick-bar {
@@ -238,17 +230,9 @@
       font-weight: 700;
       cursor: pointer;
     }
-    .cat-pill.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: #60a5fa;
-    }
+    .cat-pill.active { background: var(--primary); color: #fff; border-color: #60a5fa; }
 
-    .search-bar {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 10px;
-    }
+    .search-bar { display: flex; gap: 7px; margin-bottom: 10px; }
 
     .card {
       background: var(--surface);
@@ -257,13 +241,7 @@
       padding: 12px;
       margin-bottom: 12px;
     }
-    .card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      gap: 8px;
-    }
+    .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 8px; flex-wrap: wrap; }
     .card-title { font-size: 14px; font-weight: 800; }
 
     .item-card {
@@ -273,10 +251,7 @@
       padding: 11px;
       margin-bottom: 10px;
     }
-    .item-photo-wrap {
-      position: relative;
-      margin-bottom: 8px;
-    }
+    .item-photo-wrap { position: relative; margin-bottom: 8px; }
     .item-photo {
       width: 100%;
       height: 190px;
@@ -284,6 +259,15 @@
       border-radius: 10px;
       background: #0f172a;
       display: block;
+      cursor: pointer;
+    }
+    .item-video-player {
+      width: 100%;
+      max-height: 260px;
+      border-radius: 10px;
+      background: #000;
+      display: block;
+      margin-bottom: 8px;
     }
     .photo-count-badge {
       position: absolute;
@@ -296,146 +280,83 @@
       padding: 3px 7px;
       border-radius: 999px;
     }
-    .item-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 4px;
-    }
-    .item-cat-tag {
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 5px;
-      background: rgba(37, 99, 235, 0.25);
-      color: #60a5fa;
-    }
+    .item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .item-cat-tag { font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 5px; background: rgba(37, 99, 235, 0.25); color: #60a5fa; }
     .item-price-tag { font-size: 12px; font-weight: 800; color: #fbbf24; }
-    .item-title { font-size: 14px; font-weight: 800; margin-bottom: 3px; }
-    .item-desc {
+    .item-title { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+    .item-desc-scroll {
       font-size: 12px;
       color: var(--text-muted);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      line-height: 1.55;
+      max-height: 130px;
+      overflow-y: auto;
+      padding-right: 4px;
+      white-space: pre-line;
     }
-    .item-actions-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-    .cart-add-btn {
-      background: var(--accent);
-      color: #0f172a;
-      border: none;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .details-open-btn {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .item-link-btn {
-      background: var(--primary);
-      color: #fff;
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 6px 10px;
-      border-radius: 8px;
-      display: inline-block;
-    }
-    .item-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      padding-top: 7px;
-      border-top: 1px solid var(--border);
-      font-size: 11px;
-      color: var(--text-muted);
-      gap: 6px;
-    }
-    .edit-item-btn {
-      background: rgba(59, 130, 246, 0.2);
-      color: #93c5fd;
-      border: 1px solid rgba(59, 130, 246, 0.35);
-      padding: 3px 8px;
-      border-radius: 7px;
-      font-size: 10.5px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .del-btn {
-      background: rgba(239, 68, 68, 0.18);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.35);
-      padding: 3px 8px;
-      border-radius: 7px;
-      font-size: 10.5px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .item-actions-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .cart-add-btn { background: var(--accent); color: #0f172a; border: none; font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+    .details-open-btn { background: var(--surface); color: var(--text); border: 1px solid var(--border); font-size: 11px; font-weight: 700; padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+    .item-link-btn { background: var(--primary); color: #fff; text-decoration: none; font-size: 11px; font-weight: 800; padding: 6px 10px; border-radius: 8px; display: inline-block; }
+    .item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-muted); gap: 6px; }
+    .edit-item-btn { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.35); padding: 3px 8px; border-radius: 7px; font-size: 10.5px; font-weight: 700; cursor: pointer; }
+    .del-btn { background: rgba(239, 68, 68, 0.18); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); padding: 3px 8px; border-radius: 7px; font-size: 10.5px; font-weight: 700; cursor: pointer; }
 
-    .photo-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .photo-preview-thumb {
-      width: 100%;
-      height: 68px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .detail-main-photo {
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 8px;
-    }
-    .detail-thumbs-row {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      margin-bottom: 10px;
-    }
-    .detail-thumb-img {
-      width: 58px;
-      height: 58px;
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid transparent;
+    .kids-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 10px; scrollbar-width: none; }
+    .kids-tabs::-webkit-scrollbar { display: none; }
+    .kids-tab-btn {
+      flex: 0 0 auto;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
       cursor: pointer;
-      flex-shrink: 0;
     }
+    .kids-tab-btn.active { background: #f59e0b; color: #0f172a; border-color: #fbbf24; }
+    .now-speaking-banner {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 800;
+      color: #6ee7b7;
+    }
+    .letters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      max-height: 270px;
+      overflow-y: auto;
+    }
+    .letter-tile {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 8px 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .letter-tile:active { transform: scale(0.95); border-color: #34d399; }
+    .letter-big { font-size: 18px; font-weight: 900; color: #60a5fa; display: block; }
+    .letter-sub { font-size: 10.5px; color: #fbbf24; font-weight: 700; display: block; margin-top: 2px; }
+    .letter-play { font-size: 9.5px; color: #34d399; font-weight: 800; display: block; margin-top: 3px; }
+
+    .photo-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
+    .photo-preview-thumb { width: 100%; height: 68px; object-fit: cover; border-radius: 8px; }
+    .detail-main-photo { width: 100%; max-height: 260px; object-fit: contain; background: #090d16; border-radius: 12px; margin-bottom: 8px; cursor: zoom-in; }
+    .detail-thumbs-row { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 10px; }
+    .detail-thumb-img { width: 58px; height: 58px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; flex-shrink: 0; }
     .detail-thumb-img.active { border-color: var(--accent); }
 
-    .btn {
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: none;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-    }
+    .btn { padding: 8px 12px; border-radius: 10px; border: none; font-size: 12.5px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-success { background: var(--success); color: #fff; }
     .btn-accent { background: var(--accent); color: #0f172a; }
@@ -443,114 +364,22 @@
 
     .form-group { margin-bottom: 10px; }
     .form-group label { display: block; font-size: 11.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 3px; }
-    .form-control {
-      width: 100%;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 13px;
-    }
+    .form-control { width: 100%; background: var(--surface-2); border: 1px solid var(--border); color: var(--text); padding: 8px 10px; border-radius: 10px; font-size: 13px; }
 
-    .drawer-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      display: none;
-      z-index: 550;
-    }
+    .drawer-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.65); display: none; z-index: 550; }
     .drawer-backdrop.open { display: block; }
-    .drawer {
-      position: fixed;
-      top: 0;
-      left: -300px;
-      width: 280px;
-      max-width: 85vw;
-      height: 100%;
-      background: var(--surface);
-      z-index: 600;
-      padding: 14px;
-      overflow-y: auto;
-      transition: left 0.2s ease;
-    }
+    .drawer { position: fixed; top: 0; left: -300px; width: 280px; max-width: 85vw; height: 100%; background: var(--surface); z-index: 600; padding: 14px; overflow-y: auto; transition: left 0.2s ease; }
     .drawer.open { left: 0; }
-    .drawer-btn {
-      display: block;
-      width: 100%;
-      text-align: left;
-      background: var(--surface-2);
-      color: var(--text);
-      border: none;
-      padding: 9px 11px;
-      border-radius: 10px;
-      margin-bottom: 7px;
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .drawer-btn { display: block; width: 100%; text-align: left; background: var(--surface-2); color: var(--text); border: none; padding: 9px 11px; border-radius: 10px; margin-bottom: 7px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
 
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 14px;
-      z-index: 500;
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.78); display: none; align-items: center; justify-content: center; padding: 14px; z-index: 500; }
     .modal-backdrop.open { display: flex; }
-    .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      width: 100%;
-      max-width: 470px;
-      max-height: 86vh;
-      overflow-y: auto;
-      padding: 16px;
-    }
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .close-x {
-      background: var(--surface-2);
-      border: none;
-      color: var(--text);
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
+    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; padding: 16px; }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .close-x { background: var(--surface-2); border: none; color: var(--text); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
 
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      padding: 7px 2px;
-      z-index: 200;
-    }
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      font-size: 10px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(5, 1fr); padding: 7px 2px; z-index: 200; }
+    .nav-btn { background: none; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; font-weight: 700; cursor: pointer; }
     .nav-btn.active { color: var(--primary-light); }
   </style>
 </head>
@@ -566,12 +395,14 @@
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('cartModal')">🛒 My Cart (<span id="drawerCartCount">0</span>)</button>
     <button class="drawer-btn" id="drawerOwnerUsersBtn" style="display:none; color:#fbbf24;" onclick="toggleDrawer(); openOwnerUsersPanel()">👑 Live Users & Details (Owner Only)</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product (Up to 6 Photos)</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item (Up to 6 Photos)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product (Up to 6 Photos + Affiliate Link)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food / Recipe (Up to 6 Photos)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('REELS')">🎬 Add Reel / Gallery Video</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); scrollToLettersSection()">🔤 Kids Letters (A–Z & All Languages)</button>
     <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Verification</button>
     <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); resetLocalCacheFast()">⚡ Fix Speed / Clear Cache</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); resetLocalCacheFast()">⚡ Restore All 5 Recipes</button>
   </div>
 
   <header>
@@ -584,6 +415,7 @@
       </div>
     </div>
     <div class="header-actions">
+      <button class="pill-btn" onclick="zoomPageStep()">🔍 Zoom</button>
       <button class="pill-btn admin" id="ownerUsersTopBtn" style="display:none;" onclick="openOwnerUsersPanel()">👑 Users</button>
       <button class="pill-btn cart-pill" onclick="openModal('cartModal')">🛒 <span id="headerCartCount">0</span></button>
       <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️</button>
@@ -592,7 +424,7 @@
   </header>
 
   <div class="container">
-    <!-- All Languages Bar -->
+    <!-- All Languages Selector -->
     <div class="lang-bar-wrap" id="languageBar">
       <button class="lang-chip active" data-lang="en" onclick="setAppLanguage('en')">🌐 English</button>
       <button class="lang-chip" data-lang="ml" onclick="setAppLanguage('ml')">മലയാളം</button>
@@ -603,9 +435,33 @@
       <button class="lang-chip" data-lang="ar" onclick="setAppLanguage('ar')">العربية</button>
     </div>
 
-    <div class="status-strip">
-      <strong id="liveDateClockText">28 Nov 2026 • Sat</strong>
-      <span class="live-dot-tag" id="syncStatusBadge">● FAST LIVE</span>
+    <!-- 3D Light Date & Time -->
+    <div class="date-3d-card">
+      <div class="date-row-top">
+        <div class="date-3d-cubes">
+          <div class="cube-box">
+            <span class="cube-label">Year</span>
+            <span class="cube-val" id="liveYear">2026</span>
+          </div>
+          <div class="cube-box gold-glow">
+            <span class="cube-label">Month</span>
+            <span class="cube-val" id="liveMonth">Nov</span>
+          </div>
+          <div class="cube-box">
+            <span class="cube-label">Date</span>
+            <span class="cube-val" id="liveDate">28</span>
+          </div>
+          <div class="cube-box gold-glow">
+            <span class="cube-label">Day</span>
+            <span class="cube-val" id="liveDay">Sat</span>
+          </div>
+        </div>
+        <span class="live-dot-tag" id="syncStatusBadge">● FIREBASE LIVE</span>
+      </div>
+      <div class="time-row-3d">
+        <span style="font-size:10.5px; color:#94a3b8; font-weight:700;">3D LIVE TIME</span>
+        <span class="clock-3d-display" id="liveClockHMS">01:09:00 AM</span>
+      </div>
     </div>
 
     <div class="hero-card">
@@ -613,7 +469,7 @@
         <img id="heroLogo" class="hero-logo" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Logo" />
         <div>
           <div class="hero-title" id="heroSiteTitle">BAZAARO — India's Trending Public Super-Hub</div>
-          <div class="hero-desc" id="heroSiteDesc">Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • First 3 Months Free (₹1/mo after)</div>
+          <div class="hero-desc" id="heroSiteDesc">Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • Add your Meesho / Amazon / Flipkart / Myntra affiliate links to earn commission</div>
         </div>
       </div>
       <div class="badge-row">
@@ -623,7 +479,7 @@
       </div>
     </div>
 
-    <!-- Instant Store Search Shortcuts (Meesho, Flipkart, Myntra, Amazon) -->
+    <!-- Store Shortcuts (Meesho, Flipkart, Myntra, Amazon) -->
     <div class="store-quick-bar">
       <button class="store-quick-btn" onclick="openExternalStoreSearch('meesho')">🛒 Meesho</button>
       <button class="store-quick-btn" onclick="openExternalStoreSearch('flipkart')">🛍️ Flipkart</button>
@@ -631,50 +487,87 @@
       <button class="store-quick-btn" onclick="openExternalStoreSearch('amazon')">📦 Amazon</button>
     </div>
 
+    <!-- Categories -->
     <div class="cat-strip" id="categoryBar">
       <button class="cat-pill active" data-cat="ALL" onclick="selectCategory('ALL', this)">🌐 All</button>
       <button class="cat-pill" data-cat="PRODUCTS" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
-      <button class="cat-pill" data-cat="FOOD" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
+      <button class="cat-pill" data-cat="FOOD" onclick="selectCategory('FOOD', this)">🍲 Food & 5 Recipes</button>
+      <button class="cat-pill" data-cat="REELS" onclick="selectCategory('REELS', this)">🎬 Reels & Videos</button>
+      <button class="cat-pill" data-cat="CARTOON_SONGS" onclick="selectCategory('CARTOON_SONGS', this)">🎶 Cartoon & Songs</button>
       <button class="cat-pill" data-cat="VEHICLES" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
       <button class="cat-pill" data-cat="SHOP" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
       <button class="cat-pill" data-cat="BOOKS" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
       <button class="cat-pill" data-cat="JOBS" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
       <button class="cat-pill" data-cat="NEWS" onclick="selectCategory('NEWS', this)">📰 News</button>
       <button class="cat-pill" data-cat="HEALTH" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
-      <button class="cat-pill" data-cat="REELS" onclick="selectCategory('REELS', this)">🎬 Reels</button>
     </div>
 
     <div class="search-bar">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search Meesho, Flipkart, Myntra, Amazon, items..." oninput="renderCategoryItems()" />
+      <input type="text" id="searchInput" class="form-control" placeholder="Search Meesho, Flipkart, Myntra, Amazon, food, reels..." oninput="renderCategoryItems()" />
       <button class="btn btn-accent" id="topSellBtn" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Sell</button>
     </div>
 
-    <div class="card">
+    <!-- Category Feed & 5 Recipes -->
+    <div class="card" id="foodSection">
       <div class="card-head">
         <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
         <button class="pill-btn primary" id="addItemBtnLabel" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
       </div>
       <div id="categoryItemsContainer"></div>
     </div>
+
+    <!-- Kids Learning A-Z + All Language Letters at the Bottom -->
+    <div class="card" id="kidsLearningCard">
+      <div class="card-head">
+        <span class="card-title">🧒 Kids Learning & All Language Letters (🔊 Tap A–Z to Hear)</span>
+        <button class="pill-btn" onclick="stopSpeech()">⏹ Stop</button>
+      </div>
+      <div class="now-speaking-banner" id="nowSpeakingBanner">
+        <span id="nowSpeakingText">🔊 Tap A, B, C... to hear "A", "B", "C"!</span>
+        <button class="pill-btn primary" onclick="replayLastLetter()">▶ Replay</button>
+      </div>
+      <div class="kids-tabs" id="kidsScriptTabs">
+        <button class="kids-tab-btn active" onclick="renderKidsLetters('en', this)">🔤 English A–Z (Aa–Zz)</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('ml', this)">മലയാളം അക്ഷരങ്ങൾ</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('hi', this)">हिंदी वर्णमाला</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('ta', this)">தமிழ் எழுத்துக்கள்</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('kn', this)">ಕನ್ನಡ ಅಕ್ಷರಮಾಲೆ</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('te', this)">తెలుగు అక్షరాలు</button>
+        <button class="kids-tab-btn" onclick="renderKidsLetters('ar', this)">العربية حروف</button>
+      </div>
+      <div class="letters-grid" id="lettersGridContainer"></div>
+    </div>
   </div>
 
+  <!-- Bottom Navigation with Home, Add Reel, Cart, Letters, Account -->
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
       <span>🏠</span><span id="navHomeLabel">Home</span>
     </button>
-    <button class="nav-btn" onclick="openSellModal('PRODUCTS')">
-      <span>🛒</span><span id="navSellLabel">Sell Item</span>
+    <button class="nav-btn" onclick="openSellModal('REELS')">
+      <span>🎬</span><span>Add Reel</span>
     </button>
     <button class="nav-btn" onclick="openModal('cartModal')">
       <span>🛍️</span><span><span id="navCartLabel">Cart</span> (<span id="bottomCartCount">0</span>)</span>
     </button>
-    <button class="nav-btn" onclick="openModal('qrModal')">
-      <span>📱</span><span>QR/UPI</span>
+    <button class="nav-btn" onclick="scrollToLettersSection()">
+      <span>🔤</span><span>Letters</span>
     </button>
     <button class="nav-btn" onclick="handleAccountClick()">
       <span>👤</span><span id="bottomAccountLabel">Account</span>
     </button>
   </nav>
+
+  <!-- Zoomed Photo Modal -->
+  <div class="modal-backdrop" id="photoZoomModal">
+    <div class="modal" style="max-width:95vw;">
+      <div class="modal-head">
+        <h3>🔍 Zoom View</h3>
+        <button class="close-x" onclick="closeModal('photoZoomModal')">✕</button>
+      </div>
+      <img id="zoomedModalImg" src="" alt="Zoomed" style="width:100%; max-height:70vh; object-fit:contain; border-radius:10px;" />
+    </div>
+  </div>
 
   <!-- Owner-Only Live Users & Details Modal -->
   <div class="modal-backdrop" id="ownerUsersModal">
@@ -687,11 +580,11 @@
     </div>
   </div>
 
-  <!-- Full Product / Item Details Modal -->
+  <!-- Full Product / Recipe / Reel Details Modal -->
   <div class="modal-backdrop" id="itemDetailsModal">
     <div class="modal">
       <div class="modal-head">
-        <h3 id="detailModalTitle">Item Details</h3>
+        <h3 id="detailModalTitle">Full Details</h3>
         <button class="close-x" onclick="closeModal('itemDetailsModal')">✕</button>
       </div>
       <div id="detailModalBody"></div>
@@ -791,11 +684,11 @@
     </div>
   </div>
 
-  <!-- Add / Edit Item Modal (Up to 6 Photos + Store Link + Details for ALL Categories) -->
+  <!-- Add / Edit Item / Reel / Gallery Video Modal -->
   <div class="modal-backdrop" id="postModal">
     <div class="modal">
       <div class="modal-head">
-        <h3 id="postModalHeading">🛒 Sell Product / Add Item</h3>
+        <h3 id="postModalHeading">🛒 Sell / Add Item</h3>
         <button class="close-x" onclick="closeModal('postModal')">✕</button>
       </div>
       <input type="hidden" id="editingItemId" value="" />
@@ -803,46 +696,47 @@
         <label>Category</label>
         <select id="postCategory" class="form-control">
           <option value="PRODUCTS">🛒 Sell Products</option>
-          <option value="FOOD">🍲 Food & Kitchen (Sell Food)</option>
+          <option value="FOOD">🍲 Food & 5 Detailed Recipes</option>
+          <option value="REELS">🎬 Reels & Gallery Videos</option>
+          <option value="CARTOON_SONGS">🎶 Cartoon Videos & Songs</option>
           <option value="VEHICLES">🚗 Vehicles</option>
-          <option value="SHOP">🛍️ Shop & Store (Meesho / Flipkart / Myntra / Amazon)</option>
+          <option value="SHOP">🛍️ Shop & Store (Affiliate Links)</option>
           <option value="BOOKS">📘 ₹1 Books & Classes</option>
           <option value="JOBS">💼 Jobs & Services</option>
           <option value="NEWS">📰 News & Updates</option>
           <option value="HEALTH">❤️ Health & Doctors</option>
-          <option value="REELS">🎬 Reels & Videos</option>
         </select>
       </div>
       <div class="form-group">
-        <label>Product / Food / Item Name</label>
-        <input type="text" id="postTitle" class="form-control" placeholder="Enter product or item name" />
+        <label>Video / Product / Item Title</label>
+        <input type="text" id="postTitle" class="form-control" placeholder="Enter Video Title or Item Name" />
       </div>
       <div class="form-group">
-        <label>Price (₹)</label>
-        <input type="text" id="postPrice" class="form-control" placeholder="e.g., ₹250 / ₹1 / Contact for price" />
+        <label>Price (₹) / Tag</label>
+        <input type="text" id="postPrice" class="form-control" placeholder="e.g., Reel / ₹299 / Recipe" />
       </div>
       <div class="form-group">
-        <label>Meesho / Flipkart / Myntra / Amazon / Product Link (Optional)</label>
-        <input type="url" id="postProductLink" class="form-control" placeholder="https://www.meesho.com/... or https://amzn.to/..." />
+        <label>Video / Reel / Store Link (Optional)</label>
+        <input type="url" id="postProductLink" class="form-control" placeholder="https://..." />
       </div>
       <div class="form-group">
-        <label>Select up to 6 Photos from Gallery / Camera</label>
-        <input type="file" id="postPhotoFiles" accept="image/*" multiple class="form-control" onchange="handleMultiplePhotosUpload(event)" />
+        <label>Select Video or Photos from Gallery (Up to 6)</label>
+        <input type="file" id="postPhotoFiles" accept="video/*,image/*" multiple class="form-control" onchange="handleMultipleMediaUpload(event)" />
       </div>
       <div class="form-group">
-        <label>Or Photo Links (Up to 6 links — one per line)</label>
-        <textarea id="postPhotoUrls" class="form-control" rows="2" placeholder="https://...&#10;https://..." oninput="handlePhotoUrlsInput(event)"></textarea>
+        <label>Or Photo / Video Links (Up to 6 links — one per line)</label>
+        <textarea id="postPhotoUrls" class="form-control" rows="2" placeholder="https://..." oninput="handlePhotoUrlsInput(event)"></textarea>
       </div>
       <div class="photo-preview-grid" id="postPhotoPreviewGrid"></div>
       <div class="form-group" style="margin-top:8px;">
-        <label>Seller Name & Contact Number</label>
+        <label>Creator / Seller Name & Contact</label>
         <input type="text" id="postSellerContact" class="form-control" placeholder="Name & Phone number" />
       </div>
       <div class="form-group">
-        <label>Full Details</label>
-        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter full specifications, size, delivery, or details..."></textarea>
+        <label>Video / Item Description</label>
+        <textarea id="postContent" class="form-control" rows="4" placeholder="Write complete video description, details, or recipe..."></textarea>
       </div>
-      <button class="btn btn-success" id="savePostBtn" style="width:100%;" onclick="savePublicPost()">Publish Live to Everyone</button>
+      <button class="btn btn-success" id="savePostBtn" style="width:100%;" onclick="savePublicPost()">Publish Live</button>
     </div>
   </div>
 
@@ -879,217 +773,142 @@
     const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
     const MAX_PHOTOS = 6;
-    const STORAGE_KEY = "bazaaro_fast_v5";
+    const STORAGE_KEY = "bazaaro_fast_v9";
 
     const I18N = {
-      en: {
-        dir: "ltr",
-        searchPlaceholder: "Search Meesho, Flipkart, Myntra, Amazon, items...",
-        sellBtn: "+ Sell",
-        addItemBtn: "+ Add Item",
-        addToCart: "🛒 Cart",
-        detailsBuy: "🔍 Details & Buy",
-        editBtn: "✏️ Edit",
-        removeBtn: "Remove",
-        navHome: "Home",
-        navSell: "Sell",
-        navCart: "Cart",
-        cats: {
-          ALL: "🌐 All Items",
-          PRODUCTS: "🛒 Products",
-          FOOD: "🍲 Food & Kitchen",
-          VEHICLES: "🚗 Vehicles",
-          SHOP: "🛍️ Shop & Store",
-          BOOKS: "📘 ₹1 Books",
-          JOBS: "💼 Jobs",
-          NEWS: "📰 News",
-          HEALTH: "❤️ Health",
-          REELS: "🎬 Reels"
-        }
-      },
-      ml: {
-        dir: "ltr",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ഐറ്റങ്ങൾ തിരയുക...",
-        sellBtn: "+ വിൽക്കുക",
-        addItemBtn: "+ ഐറ്റം ചേർക്കുക",
-        addToCart: "🛒 കാർട്ട്",
-        detailsBuy: "🔍 വിവരങ്ങൾ & വാങ്ങുക",
-        editBtn: "✏️ എഡിറ്റ്",
-        removeBtn: "നീക്കുക",
-        navHome: "ഹോം",
-        navSell: "വിൽക്കുക",
-        navCart: "കാർട്ട്",
-        cats: {
-          ALL: "🌐 എല്ലാ ഐറ്റങ്ങളും",
-          PRODUCTS: "🛒 പ്രൊഡക്റ്റുകൾ",
-          FOOD: "🍲 ഭക്ഷണം & കിച്ചൺ",
-          VEHICLES: "🚗 വാഹനങ്ങൾ",
-          SHOP: "🛍️ ഷോപ്പ് & സ്റ്റോർ",
-          BOOKS: "📘 ₹1 ബുക്കുകൾ",
-          JOBS: "💼 ജോലികൾ",
-          NEWS: "📰 വാർത്തകൾ",
-          HEALTH: "❤️ ആരോഗ്യം",
-          REELS: "🎬 റീൽസ്"
-        }
-      },
-      hi: {
-        dir: "ltr",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon खोजें...",
-        sellBtn: "+ बेचें",
-        addItemBtn: "+ जोड़ें",
-        addToCart: "🛒 कार्ट",
-        detailsBuy: "🔍 विवरण और खरीदें",
-        editBtn: "✏️ संपादित",
-        removeBtn: "हटाएं",
-        navHome: "होम",
-        navSell: "बेचें",
-        navCart: "कार्ट",
-        cats: {
-          ALL: "🌐 सभी आइटम",
-          PRODUCTS: "🛒 उत्पाद",
-          FOOD: "🍲 खाना और किचन",
-          VEHICLES: "🚗 वाहन",
-          SHOP: "🛍️ शॉप और स्टोर",
-          BOOKS: "📘 ₹1 किताबें",
-          JOBS: "💼 नौकरियां",
-          NEWS: "📰 समाचार",
-          HEALTH: "❤️ स्वास्थ्य",
-          REELS: "🎬 रील्स"
-        }
-      },
-      ta: {
-        dir: "ltr",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon தேடுங்கள்...",
-        sellBtn: "+ விற்க",
-        addItemBtn: "+ சேர்க்க",
-        addToCart: "🛒 கார்ட்",
-        detailsBuy: "🔍 விவரம் & வாங்கு",
-        editBtn: "✏️ திருத்து",
-        removeBtn: "நீக்கு",
-        navHome: "முகப்பு",
-        navSell: "விற்க",
-        navCart: "கார்ட்",
-        cats: {
-          ALL: "🌐 அனைத்து பொருட்கள்",
-          PRODUCTS: "🛒 பொருட்கள்",
-          FOOD: "🍲 உணவு & சமையல்",
-          VEHICLES: "🚗 வாகனங்கள்",
-          SHOP: "🛍️ கடை & ஸ்டோர்",
-          BOOKS: "📘 ₹1 புத்தகங்கள்",
-          JOBS: "💼 வேலைகள்",
-          NEWS: "📰 செய்திகள்",
-          HEALTH: "❤️ ஆரோக்கியம்",
-          REELS: "🎬 ரீல்ஸ்"
-        }
-      },
-      kn: {
-        dir: "ltr",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon ಹುಡುಕಿ...",
-        sellBtn: "+ ಮಾರಾಟ",
-        addItemBtn: "+ ಸೇರಿಸಿ",
-        addToCart: "🛒 ಕಾರ್ಟ್",
-        detailsBuy: "🔍 ವಿವರ & ಖರೀದಿ",
-        editBtn: "✏️ ತಿದ್ದು",
-        removeBtn: "ತೆಗೆದುಹಾಕಿ",
-        navHome: "ಮುಖಪುಟ",
-        navSell: "ಮಾರಾಟ",
-        navCart: "ಕಾರ್ಟ್",
-        cats: {
-          ALL: "🌐 ಎಲ್ಲಾ ವಸ್ತುಗಳು",
-          PRODUCTS: "🛒 ಉತ್ಪನ್ನಗಳು",
-          FOOD: "🍲 ಆಹಾರ & ಅಡುಗೆ",
-          VEHICLES: "🚗 ವಾಹನಗಳು",
-          SHOP: "🛍️ ಅಂಗಡಿ",
-          BOOKS: "📘 ₹1 ಪುಸ್ತಕಗಳು",
-          JOBS: "💼 ಉದ್ಯೋಗಗಳು",
-          NEWS: "📰 ಸುದ್ದಿ",
-          HEALTH: "❤️ ಆರೋಗ್ಯ",
-          REELS: "🎬 ರೀಲ್ಸ್"
-        }
-      },
-      te: {
-        dir: "ltr",
-        searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon వెతకండి...",
-        sellBtn: "+ అమ్మండి",
-        addItemBtn: "+ జోడించండి",
-        addToCart: "🛒 కార్ట్",
-        detailsBuy: "🔍 వివరాలు & కొనండి",
-        editBtn: "✏️ మార్చండి",
-        removeBtn: "తొలగించు",
-        navHome: "హోమ్",
-        navSell: "అమ్మండి",
-        navCart: "కార్ట్",
-        cats: {
-          ALL: "🌐 అన్ని వస్తువులు",
-          PRODUCTS: "🛒 ఉత్పత్తులు",
-          FOOD: "🍲 ఆహారం",
-          VEHICLES: "🚗 వాహనాలు",
-          SHOP: "🛍️ షాప్",
-          BOOKS: "📘 ₹1 పుస్తకాలు",
-          JOBS: "💼 ఉద్యోగాలు",
-          NEWS: "📰 వార్తలు",
-          HEALTH: "❤️ ఆరోగ్యం",
-          REELS: "🎬 రీల్స్"
-        }
-      },
-      ar: {
-        dir: "rtl",
-        searchPlaceholder: "ابحث في Meesho وFlipkart وMyntra وAmazon...",
-        sellBtn: "+ بيع",
-        addItemBtn: "+ إضافة",
-        addToCart: "🛒 السلة",
-        detailsBuy: "🔍 التفاصيل والشراء",
-        editBtn: "✏️ تعديل",
-        removeBtn: "حذف",
-        navHome: "الرئيسية",
-        navSell: "بيع",
-        navCart: "السلة",
-        cats: {
-          ALL: "🌐 الكل",
-          PRODUCTS: "🛒 المنتجات",
-          FOOD: "🍲 الطعام",
-          VEHICLES: "🚗 المركبات",
-          SHOP: "🛍️ المتجر",
-          BOOKS: "📘 كتب ₹1",
-          JOBS: "💼 الوظائف",
-          NEWS: "📰 الأخبار",
-          HEALTH: "❤️ الصحة",
-          REELS: "🎬 ريلز"
-        }
-      }
+      en: { dir: "ltr", searchPlaceholder: "Search Meesho, Flipkart, Myntra, Amazon, food, reels...", sellBtn: "+ Sell", addItemBtn: "+ Add Item", addToCart: "🛒 Cart", detailsBuy: "🔍 Details & Play", editBtn: "✏️ Edit", removeBtn: "Remove", navHome: "Home", navCart: "Cart" },
+      ml: { dir: "ltr", searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, ഫുഡ്, റീൽസ് തിരയുക...", sellBtn: "+ വിൽക്കുക", addItemBtn: "+ ചേർക്കുക", addToCart: "🛒 കാർട്ട്", detailsBuy: "🔍 വിവരങ്ങൾ & പ്ലേ", editBtn: "✏️ എഡിറ്റ്", removeBtn: "നീക്കം", navHome: "ഹോം", navCart: "കാർട്ട്" },
+      hi: { dir: "ltr", searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, खाना, रील्स खोजें...", sellBtn: "+ बेचें", addItemBtn: "+ जोड़ें", addToCart: "🛒 कार्ट", detailsBuy: "🔍 विवरण और चलाएं", editBtn: "✏️ संपादित", removeBtn: "हटाएं", navHome: "होम", navCart: "कार्ट" },
+      ta: { dir: "ltr", searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon, உணவு, ரீல்ஸ்...", sellBtn: "+ விற்க", addItemBtn: "+ சேர்க்க", addToCart: "🛒 கார்ட்", detailsBuy: "🔍 விவரம் & இயக்கு", editBtn: "✏️ திருத்து", removeBtn: "நீக்கு", navHome: "முகப்பு", navCart: "கார்ட்" },
+      kn: { dir: "ltr", searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon ಹುಡುಕಿ...", sellBtn: "+ ಮಾರಾಟ", addItemBtn: "+ ಸೇರಿಸಿ", addToCart: "🛒 ಕಾರ್ಟ್", detailsBuy: "🔍 ವಿವರ & ಪ್ಲೇ", editBtn: "✏️ ತಿದ್ದು", removeBtn: "ತೆಗೆ", navHome: "ಮುಖಪುಟ", navCart: "ಕಾರ್ಟ್" },
+      te: { dir: "ltr", searchPlaceholder: "Meesho, Flipkart, Myntra, Amazon వెతకండి...", sellBtn: "+ అమ్మండి", addItemBtn: "+ జోడించండి", addToCart: "🛒 కార్ట్", detailsBuy: "🔍 వివరాలు & ప్లే", editBtn: "✏️ మార్చండి", removeBtn: "తొలగించు", navHome: "హోమ్", navCart: "కార్ట్" },
+      ar: { dir: "rtl", searchPlaceholder: "ابحث في Meesho وFlipkart وMyntra وAmazon...", sellBtn: "+ بيع", addItemBtn: "+ إضافة", addToCart: "🛒 السلة", detailsBuy: "🔍 التفاصيل وتشغيل", editBtn: "✏️ تعديل", removeBtn: "حذف", navHome: "الرئيسية", navCart: "السلة" }
+    };
+
+    const CAT_LABELS = {
+      ALL: "🌐 All Items",
+      PRODUCTS: "🛒 Products",
+      FOOD: "🍲 Food & 5 Detailed Recipes",
+      REELS: "🎬 Reels & Gallery Videos",
+      CARTOON_SONGS: "🎶 Cartoon Videos & Songs",
+      VEHICLES: "🚗 Vehicles",
+      SHOP: "🛍️ Shop & Store",
+      BOOKS: "📘 ₹1 Books",
+      JOBS: "💼 Jobs",
+      NEWS: "📰 News",
+      HEALTH: "❤️ Health"
     };
 
     const CATEGORY_DEFAULT_IMAGES = {
       PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=60",
       FOOD: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=60&w=600&auto=format&fit=crop",
+      REELS: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=60",
+      CARTOON_SONGS: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=60",
       VEHICLES: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=60",
       SHOP: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=60",
       BOOKS: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=60",
       JOBS: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=600&q=60",
       NEWS: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=600&q=60",
-      HEALTH: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=60",
-      REELS: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=60"
+      HEALTH: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=60"
     };
 
     const starterItems = [
       {
-        id: "r2",
+        id: "food_1_biriyani",
         cat: "FOOD",
-        title: "കുഴിമന്തി (Kuzhi Mandi)",
-        price: "Recipe / Order",
+        title: "1. ചിക്കൻ ബിരിയാണി (Chicken Biryani) — വിശദമായ പാചകക്കുറിപ്പ്",
+        price: "Recipe 1 / 5",
         link: "",
+        videoSrc: "",
+        photos: ["https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=60"],
+        descMl: "ചേരുവകൾ:\n• കൈമ / ജീരകശാല / ബസ്മതി അരി - 1 കിലോ\n• ചിക്കൻ - 1 കിലോ, സവാള - 4 എണ്ണം, തക്കാളി - 2 എണ്ണം\n• ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ് - 2 ടേബിൾസ്പൂൺ, പച്ചമുളക് - 5 എണ്ണം\n• തൈര് - ½ കപ്പ്, മല്ലിയില, പുതിനയില, നാരങ്ങാനീര്, നെയ്യ്, ബിരിയാണി മസാല\n\nതയ്യാറാക്കുന്ന വിധം:\n1. സവാള ഗോൾഡൻ ബ്രൗൺ നിറമാകുന്നതുവരെ വറുത്ത് പകുതി മാറ്റിവെക്കുക.\n2. ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, പച്ചമുളക്, തക്കാളി എന്നിവ ചേർത്ത് വഴറ്റുക.\n3. മസാലപ്പൊടികൾ, ഉപ്പ്, തൈര്, മല്ലി-പുതിനയില, ചിക്കൻ എന്നിവ ചേർത്ത് വേവിക്കുക.\n4. തിളച്ച വെള്ളത്തിൽ സുഗന്ധവ്യഞ്ജനങ്ങളും ഉപ്പും ചേർത്ത് അരി 80% വേവിച്ച് ഊറ്റുക.\n5. ചിക്കൻ മസാലയ്ക്ക് മുകളിൽ ചോറ് നിരത്തി നെയ്യും വറുത്ത സവാളയും ചേർത്ത് 15 മിനിറ്റ് ദം ചെയ്യുക.",
+        descEn: "Ingredients: Kaima/Basmati rice 1kg, Chicken 1kg, Onions 4, Tomatoes 2, Ginger-garlic paste 2 tbsp, Green chilies 5, Curd ½ cup, Coriander & mint, ghee, biryani masala.\nMethod: Fry onions; sauté ginger-garlic & tomatoes; cook spiced chicken with curd & herbs; layer 80% cooked rice with ghee & fried onions and dum-cook 15 mins.",
+        by: "MUHAMMED ADHIL • 9778197726"
+      },
+      {
+        id: "food_2_mandi",
+        cat: "FOOD",
+        title: "2. കുഴിമന്തി (Kuzhi Mandi) — വിശദമായ പാചകക്കുറിപ്പ്",
+        price: "Recipe 2 / 5",
+        link: "",
+        videoSrc: "",
         photos: ["https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=60&w=600&auto=format&fit=crop"],
-        descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ.",
-        descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal.",
+        descMl: "ചേരുവകൾ:\n• ബസ്മതി അരി - 1 കിലോ, ചിക്കൻ - 1.5 കിലോ\n• മന്തി മസാല, കുരുമുളക്, ഏലക്ക, ഗ്രാമ്പൂ, കറുവപ്പട്ട, ഉണക്ക നാരങ്ങ (ലൂമി), ക്യാപ്സിക്കം, പച്ചമുളക്, എണ്ണ, നെയ്യ്, ചാർക്കോൾ\n\nതയ്യാറാക്കുന്ന വിധം:\n1. ചിക്കനിൽ ഉപ്പ്, മഞ്ഞൾ, മന്തി മസാല, വെളുത്തുള്ളി പേസ്റ്റ്, എണ്ണ എന്നിവ പുരട്ടി 1 മണിക്കൂർ വെക്കുക.\n2. സുഗന്ധവ്യഞ്ജനങ്ങൾ ഇട്ട വെള്ളത്തിൽ ബസ്മതി അരി 70% വേവിച്ച് ഊറ്റുക.\n3. ചിക്കൻ വേവിച്ച് മുകളിൽ അരി നിരത്തി നെയ്യും ക്യാപ്സിക്കവും പച്ചമുളകും വെച്ച് 15 മിനിറ്റ് ദം ചെയ്യുക.\n4. കത്തുന്ന ചാർക്കോളിൽ നെയ്യ് ഒഴിച്ച് 3 മിനിറ്റ് അടച്ചുവെച്ച് സ്മോക്ക് ചെയ്യുക.",
+        descEn: "Ingredients: Basmati rice 1kg, Chicken 1.5kg, Mandi spices, black pepper, dried lime, capsicum, green chili, oil, ghee, charcoal.\nMethod: Marinate chicken; cook chicken and layer with 70% boiled rice; dum-cook 15 mins and smoke with charcoal + ghee.",
+        by: "MUHAMMED ADHIL • 9778197726"
+      },
+      {
+        id: "food_3_alfaham",
+        cat: "FOOD",
+        title: "3. അൽഫാം ചിക്കൻ (Alfaham Chicken) — വിശദമായ പാചകക്കുറിപ്പ്",
+        price: "Recipe 3 / 5",
+        link: "",
+        videoSrc: "",
+        photos: ["https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=60"],
+        descMl: "ചേരുവകൾ:\n• ചിക്കൻ - 1 കിലോ, കട്ടത്തൈര് - ½ കപ്പ്, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ് - 2 ടേബിൾസ്പൂൺ\n• മുളകുപൊടി, കുരുമുളകുപൊടി, ജീരകപ്പൊടി, ഗരം മസാല, നാരങ്ങാനീര്, ഓയിൽ, ഉപ്പ്\n\nതയ്യാറാക്കുന്ന വിധം:\n1. തൈരും മസാലപ്പൊടികളും നാരങ്ങാനീരും എണ്ണയും ഉപ്പും ചേർത്ത് പേസ്റ്റ് തയ്യാറാക്കുക.\n2. വരഞ്ഞ ചിക്കനിൽ മസാല പുരട്ടി 2-4 മണിക്കൂർ ഫ്രിഡ്ജിൽ വെക്കുക.\n3. ഗ്രില്ലിലോ കനലിലോ ഓവനിലോ തിരിച്ചും മറിച്ചും ഇട്ട് ഓയിൽ ബ്രഷ് ചെയ്ത് ചുട്ടെടുക്കുക.",
+        descEn: "Ingredients: Chicken 1kg, Curd ½ cup, Ginger-garlic paste 2 tbsp, Chili powder, pepper, cumin, garam masala, lemon juice, oil, salt.\nMethod: Marinate slit chicken 2–4 hours and grill over charcoal or oven with oil basting until cooked.",
+        by: "MUHAMMED ADHIL • 9778197726"
+      },
+      {
+        id: "food_4_pollichathu",
+        cat: "FOOD",
+        title: "4. ചിക്കൻ പൊള്ളിച്ചത് (Chicken Pollichathu) — വിശദമായ പാചകക്കുറിപ്പ്",
+        price: "Recipe 4 / 5",
+        link: "",
+        videoSrc: "",
+        photos: ["https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=60"],
+        descMl: "ചേരുവകൾ:\n• ചിക്കൻ - 750 ഗ്രാം, ചെറിയ ഉള്ളി - 20 എണ്ണം, സവാള - 2 എണ്ണം\n• തക്കാളി - 2 എണ്ണം, ഇഞ്ചി-വെളുത്തുള്ളി, പച്ചമുളക്, കറിവേപ്പില, മസാലപ്പൊടികൾ\n• കട്ടിയുള്ള തേങ്ങാപ്പാൽ - ½ കപ്പ്, വെളിച്ചെണ്ണ, വാട്ടിയ വാഴയില\n\nതയ്യാറാക്കുന്ന വിധം:\n1. ചിക്കനിൽ ഉപ്പും മുളകും മഞ്ഞളും പുരട്ടി വെളിച്ചെണ്ണയിൽ പകുതി വറുത്ത് മാറ്റുക.\n2. ചെറിയ ഉള്ളി, സവാള, ഇഞ്ചി-വെളുത്തുള്ളി, തക്കാളി, കറിവേപ്പില, മസാലപ്പൊടികൾ എന്നിവ വഴറ്റി തേങ്ങാപ്പാലും വറുത്ത ചിക്കനും ചേർത്ത് കുറുകിക്കുക.\n3. വാഴയിലയിൽ പൊതിഞ്ഞ് തവയിൽ വെളിച്ചെണ്ണ ഒഴിച്ച് ഇരുവശവും പൊള്ളിക്കുക.",
+        descEn: "Ingredients: Chicken 750g, Shallots 20, Onions 2, Tomatoes 2, Ginger-garlic, green chili, curry leaves, spices, thick coconut milk ½ cup, coconut oil, banana leaf.\nMethod: Shallow-fry chicken; simmer masala with coconut milk & chicken; wrap in banana leaf and roast on tawa.",
+        by: "MUHAMMED ADHIL • 9778197726"
+      },
+      {
+        id: "food_5_juices_shakes",
+        cat: "FOOD",
+        title: "5. ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes) — വിശദമായ പാചകക്കുറിപ്പ്",
+        price: "Recipe 5 / 5",
+        link: "",
+        videoSrc: "",
+        photos: ["https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=60"],
+        descMl: "1) ഷാർജ / ചോക്ലേറ്റ് ഷേക്ക്:\n• കട്ടപ്പാൽ - 500ml, പഴം - 2 എണ്ണം, ബൂസ്റ്റ് / കൊക്കോ പൗഡർ - 2 ടേബിൾസ്പൂൺ, പഞ്ചസാര, ഐസ്ക്രീം, അണ്ടിപ്പരിപ്പ്.\n• മിക്സിയിൽ നന്നായി ബ്ലെൻഡ് ചെയ്ത് ഐസ്ക്രീമും നട്സും ചേർത്ത് വിളമ്പുക.\n\n2) ഫ്രഷ് ഫ്രൂട്ട് ജ്യൂസ്:\n• പഴം/മാങ്ങ/പൈനാപ്പിൾ/തണ്ണിമത്തൻ കഷ്ണങ്ങൾ, തണുത്ത വെള്ളം, പഞ്ചസാര, നാരങ്ങാനീര്, ഐസ് ക്യൂബ്സ് എന്നിവ ബ്ലെൻഡ് ചെയ്ത് അരിച്ച് കുടിക്കാം.",
+        descEn: "1) Sharjah/Chocolate Shake: Blend 500ml frozen milk, 2 bananas, 2 tbsp Boost/cocoa, sugar; top with ice cream & nuts.\n2) Fresh Fruit Juices: Blend fresh fruit pieces, chilled water, sugar, lemon juice & ice cubes; strain and serve cold.",
         by: "MUHAMMED ADHIL • 9778197726"
       }
     ];
+
+    const KIDS_ALPHABETS = {
+      en: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((ch, idx) => ({
+        big: `${ch}${ch.toLowerCase()}`,
+        sub: `Say: "${ch}"`,
+        speak: ch,
+        freq: 330 + (idx % 12) * 26
+      })),
+      ml: [
+        { big: "അ", sub: "A", speak: "അ" }, { big: "ആ", sub: "Aa", speak: "ആ" }, { big: "ഇ", sub: "I", speak: "ഇ" }, { big: "ഈ", sub: "Ee", speak: "ഈ" },
+        { big: "ഉ", sub: "U", speak: "ഉ" }, { big: "ഊ", sub: "Oo", speak: "ഊ" }, { big: "ഋ", sub: "Ru", speak: "ഋ" }, { big: "എ", sub: "E", speak: "എ" },
+        { big: "ഏ", sub: "Ae", speak: "ഏ" }, { big: "ഐ", sub: "Ai", speak: "ഐ" }, { big: "ഒ", sub: "O", speak: "ഒ" }, { big: "ഓ", sub: "Oo", speak: "ഓ" },
+        { big: "ഔ", sub: "Au", speak: "ഔ" }, { big: "ക", sub: "Ka", speak: "ക" }, { big: "ഖ", sub: "Kha", speak: "ഖ" }, { big: "ഗ", sub: "Ga", speak: "ഗ" },
+        { big: "ഘ", sub: "Gha", speak: "ഘ" }, { big: "ങ", sub: "Nga", speak: "ങ" }, { big: "ച", sub: "Cha", speak: "ച" }, { big: "ഛ", sub: "Chha", speak: "ഛ" },
+        { big: "ജ", sub: "Ja", speak: "ജ" }, { big: "ഝ", sub: "Jha", speak: "ഝ" }, { big: "ഞ", sub: "Nya", speak: "ഞ" }, { big: "ട", sub: "Ta", speak: "ട" },
+        { big: "ഠ", sub: "Tha", speak: "ഠ" }, { big: "ഡ", sub: "Da", speak: "ഡ" }, { big: "ഢ", sub: "Dha", speak: "ഢ" }, { big: "ണ", sub: "Na", speak: "ണ" },
+        { big: "ത", sub: "Tha", speak: "ത" }, { big: "ഥ", sub: "Thha", speak: "ഥ" }, { big: "ദ", sub: "Da", speak: "ദ" }, { big: "ധ", sub: "Dha", speak: "ധ" },
+        { big: "ന", sub: "Na", speak: "ന" }, { big: "പ", sub: "Pa", speak: "പ" }, { big: "ഫ", sub: "Pha", speak: "ഫ" }, { big: "ബ", sub: "Ba", speak: "ബ" },
+        { big: "ഭ", sub: "Bha", speak: "ഭ" }, { big: "മ", sub: "Ma", speak: "മ" }, { big: "യ", sub: "Ya", speak: "യ" }, { big: "ര", sub: "Ra", speak: "ര" },
+        { big: "ല", sub: "La", speak: "ല" }, { big: "വ", sub: "Va", speak: "വ" }, { big: "ശ", sub: "Sha", speak: "ശ" }, { big: "ഷ", sub: "Shha", speak: "ഷ" },
+        { big: "സ", sub: "Sa", speak: "സ" }, { big: "ഹ", sub: "Ha", speak: "ഹ" }, { big: "ള", sub: "Lla", speak: "ള" }, { big: "ഴ", sub: "Zha", speak: "ഴ" },
+        { big: "റ", sub: "Rra", speak: "റ" }
+      ],
+      hi: "अ आ इ ई उ ऊ ऋ ए ऐ ओ औ क ख ग घ ङ च छ ज झ ञ ट ठ ड ढ ण त थ द ध न प फ ब भ म य र ल व श ष स ह".split(" ").map(ch => ({ big: ch, sub: "Hindi", speak: ch })),
+      ta: "அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ க ங ச ஞ ட ண த ந ப ம ய ர ல வ ழ ள ற ன".split(" ").map(ch => ({ big: ch, sub: "Tamil", speak: ch })),
+      kn: "ಅ ಆ ಇ ಈ ಉ ಊ ಋ ಎ ಏ ಐ ಒ ಓ ಔ ಕ ಖ ಗ ಘ ಙ ಚ ಛ ಜ ಝ ಞ ಟ ಠ ಡ ಢ ಣ ತ ಥ ದ ಧ ನ ಪ ಫ ಬ ಭ ಮ ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ".split(" ").map(ch => ({ big: ch, sub: "Kannada", speak: ch })),
+      te: "అ ఆ ఇ ఈ ఉ ఊ ఋ ఎ ఏ ఐ ఒ ఓ ఔ క ఖ గ ఘ ఙ చ ఛ జ ఝ ఞ ట ಠ డ ఢ ణ త థ ద ధ న ప ఫ బ భ మ య ర ల వ శ ష స హ ళ".split(" ").map(ch => ({ big: ch, sub: "Telugu", speak: ch })),
+      ar: "ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي".split(" ").map(ch => ({ big: ch, sub: "Arabic", speak: ch }))
+    };
 
     const defaultData = {
       siteName: "BAZAARO",
       heroTitle: "BAZAARO — India's Trending Public Super-Hub",
       bossTag: "OWNER • MUHAMMED ADHIL • 9778197726",
-      siteDesc: "Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • First 3 Months Free (₹1/mo after)",
+      siteDesc: "Owner: MUHAMMED ADHIL • 9778197726 / 7012253516 • Add your Meesho / Amazon / Flipkart / Myntra affiliate links to earn commission",
       upi: "9778197726@naviaxis",
       logo: "https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO",
       lang: "en",
@@ -1109,21 +928,130 @@
     let currentCategory = "ALL";
     let uploadedLogoTemp = null;
     let postPhotosTemp = [];
+    let postVideoTemp = "";
     let isSyncing = false;
+    let zoomLevel = 1;
+    let lastSpokenObj = { text: "A", lang: "en", label: "A" };
+    let audioCtx = null;
 
-    function updateClockFast() {
-      const now = new Date();
-      document.getElementById("liveDateClockText").textContent =
-        now.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric", weekday: "short" }) +
-        " • " +
-        now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    function scrollToLettersSection() {
+      const el = document.getElementById("kidsLearningCard");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
 
-    // Immediate non-blocking render on load (Zero white screen!)
+    function playChimeSound(freq = 440) {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!audioCtx) audioCtx = new AudioContextClass();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.15, audioCtx.currentTime + 0.14);
+
+        gain.gain.setValueAtTime(0.14, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+      } catch (e) {}
+    }
+
+    function speakLetterItem(bigLabel, speakTextStr, langCode, freq = 440) {
+      lastSpokenObj = { text: speakTextStr, lang: langCode, label: bigLabel };
+      const bannerText = document.getElementById("nowSpeakingText");
+      if (bannerText) bannerText.textContent = `🔊 "${speakTextStr}" (${bigLabel})`;
+      playChimeSound(freq);
+
+      try {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          const utter = new SpeechSynthesisUtterance(speakTextStr);
+          const map = { en: "en-US", ml: "ml-IN", hi: "hi-IN", ta: "ta-IN", kn: "kn-IN", te: "te-IN", ar: "ar-SA" };
+          utter.lang = map[langCode] || "en-US";
+          utter.rate = 0.85;
+          utter.pitch = 1.05;
+
+          const voices = window.speechSynthesis.getVoices();
+          const matched = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(langCode));
+          if (matched) utter.voice = matched;
+          window.speechSynthesis.speak(utter);
+        }
+      } catch (e) {}
+    }
+
+    function replayLastLetter() {
+      speakLetterItem(lastSpokenObj.label, lastSpokenObj.text, lastSpokenObj.lang, 480);
+    }
+
+    function speakText(text, langCode) {
+      speakLetterItem(text.slice(0, 24) + "...", text, langCode, 440);
+    }
+
+    function stopSpeech() {
+      try { if ("speechSynthesis" in window) window.speechSynthesis.cancel(); } catch (e) {}
+    }
+
+    function renderKidsLetters(langCode, btnEl) {
+      document.querySelectorAll(".kids-tab-btn").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+
+      const list = KIDS_ALPHABETS[langCode] || KIDS_ALPHABETS.en;
+      document.getElementById("lettersGridContainer").innerHTML = list.map((item, idx) => {
+        const safeSpeak = item.speak.replace(/'/g, "");
+        const safeBig = item.big.replace(/'/g, "");
+        const freq = item.freq || (340 + (idx % 10) * 26);
+        return `
+          <div class="letter-tile" onclick="speakLetterItem('${safeBig}', '${safeSpeak}', '${langCode}', ${freq})">
+            <span class="letter-big">${item.big}</span>
+            <span class="letter-sub">${item.sub}</span>
+            <span class="letter-play">🔊 Play "${safeSpeak}"</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function zoomPageStep() {
+      zoomLevel = zoomLevel >= 1.3 ? 1 : Number((zoomLevel + 0.1).toFixed(1));
+      document.body.style.zoom = zoomLevel;
+    }
+
+    function openZoomImage(src) {
+      document.getElementById("zoomedModalImg").src = src;
+      openModal("photoZoomModal");
+    }
+
+    function update3DDateTime() {
+      const now = new Date();
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      document.getElementById("liveYear").textContent = now.getFullYear();
+      document.getElementById("liveMonth").textContent = months[now.getMonth()];
+      document.getElementById("liveDate").textContent = String(now.getDate()).padStart(2, "0");
+      document.getElementById("liveDay").textContent = days[now.getDay()];
+
+      let hrs = now.getHours();
+      const mins = String(now.getMinutes()).padStart(2, "0");
+      const secs = String(now.getSeconds()).padStart(2, "0");
+      const ampm = hrs >= 12 ? "PM" : "AM";
+      hrs = hrs % 12 || 12;
+      document.getElementById("liveClockHMS").textContent = `${String(hrs).padStart(2, "0")}:${mins}:${secs} ${ampm}`;
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
-      updateClockFast();
-      setInterval(updateClockFast, 1000);
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+      }
+      update3DDateTime();
+      setInterval(update3DDateTime, 1000);
       applyLanguageUI();
+      renderKidsLetters("en");
       syncUI();
       setTimeout(() => {
         pullFromFirebase(true);
@@ -1161,14 +1089,8 @@
       document.getElementById("topSellBtn").textContent = pack.sellBtn;
       document.getElementById("addItemBtnLabel").textContent = pack.addItemBtn;
       document.getElementById("navHomeLabel").textContent = pack.navHome;
-      document.getElementById("navSellLabel").textContent = pack.navSell;
       document.getElementById("navCartLabel").textContent = pack.navCart;
-
-      document.querySelectorAll("#categoryBar .cat-pill").forEach(pill => {
-        const c = pill.getAttribute("data-cat");
-        if (c && pack.cats[c]) pill.textContent = pack.cats[c];
-      });
-      document.getElementById("activeCategoryHeading").textContent = pack.cats[currentCategory] || pack.cats.ALL;
+      document.getElementById("activeCategoryHeading").textContent = CAT_LABELS[currentCategory] || CAT_LABELS.ALL;
     }
 
     function normalizeItemPhotos(item) {
@@ -1181,15 +1103,16 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
       } catch (e) {
-        // Trim old items if local storage quota is full
-        state.items = state.items.slice(0, 15);
+        state.items = state.items.slice(0, 12);
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (err) {}
       }
     }
 
-    function resetLocalCacheFast() {
-      localStorage.removeItem(STORAGE_KEY);
-      location.reload();
+    async function resetLocalCacheFast() {
+      state.items = [...starterItems];
+      saveLocalSafe();
+      syncUI();
+      await pushPublicStateToFirebase();
     }
 
     async function pullFromFirebase(seedIfEmpty) {
@@ -1205,7 +1128,11 @@
         document.getElementById("syncStatusBadge").textContent = "● FIREBASE LIVE";
 
         if (cloud) {
-          if (Array.isArray(cloud.items) && cloud.items.length > 0) state.items = cloud.items;
+          if (Array.isArray(cloud.items) && cloud.items.length > 0) {
+            const existingIds = new Set(cloud.items.map(i => i.id));
+            const missingStarter = starterItems.filter(s => !existingIds.has(s.id));
+            state.items = [...cloud.items, ...missingStarter];
+          }
           if (Array.isArray(cloud.liveUsers)) state.liveUsers = cloud.liveUsers;
           if (cloud.site) {
             state.siteName = cloud.site.siteName || state.siteName;
@@ -1256,11 +1183,15 @@
 
     async function pushPublicStateToFirebase() {
       try {
+        const lightweightItems = state.items.slice(0, 40).map(item => ({
+          ...item,
+          videoSrc: item.videoSrc && item.videoSrc.startsWith("data:video") ? "" : (item.videoSrc || "")
+        }));
         await fetch(`${DB_URL}/bazaaro_public.json`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            items: state.items.slice(0, 40),
+            items: lightweightItems,
             liveUsers: state.liveUsers.slice(0, 60),
             site: {
               siteName: state.siteName,
@@ -1425,16 +1356,23 @@
       if (f) compressImageFile(f, 180, 0.65, d => uploadedLogoTemp = d);
     }
 
-    function handleMultiplePhotosUpload(e) {
+    function handleMultipleMediaUpload(e) {
       const files = Array.from(e.target.files || []).slice(0, MAX_PHOTOS);
       if (!files.length) return;
       postPhotosTemp = [];
+      postVideoTemp = "";
       let done = 0;
+
       files.forEach(file => {
-        compressImageFile(file, 360, 0.45, dataUrl => {
-          postPhotosTemp.push(dataUrl);
+        if (file.type && file.type.startsWith("video/")) {
+          postVideoTemp = URL.createObjectURL(file);
           if (++done === files.length) renderPhotoPreviews();
-        });
+        } else {
+          compressImageFile(file, 360, 0.45, dataUrl => {
+            postPhotosTemp.push(dataUrl);
+            if (++done === files.length) renderPhotoPreviews();
+          });
+        }
       });
     }
 
@@ -1444,10 +1382,10 @@
     }
 
     function renderPhotoPreviews() {
-      document.getElementById("postPhotoPreviewGrid").innerHTML = postPhotosTemp
-        .slice(0, MAX_PHOTOS)
-        .map(src => `<img class="photo-preview-thumb" src="${src}" alt="Preview" />`)
-        .join("");
+      const grid = document.getElementById("postPhotoPreviewGrid");
+      const videoHtml = postVideoTemp ? `<video class="photo-preview-thumb" src="${postVideoTemp}" controls></video>` : "";
+      const imgHtml = postPhotosTemp.slice(0, MAX_PHOTOS).map(src => `<img class="photo-preview-thumb" src="${src}" alt="Preview" />`).join("");
+      grid.innerHTML = videoHtml + imgHtml;
     }
 
     function normalizeLink(raw) {
@@ -1462,7 +1400,8 @@
       if (u.includes("flipkart")) return "🛍️ Buy on Flipkart";
       if (u.includes("myntra")) return "👗 Buy on Myntra";
       if (u.includes("amazon") || u.includes("amzn")) return "📦 Buy on Amazon";
-      return "⚡ Buy / Open Link";
+      if (u.includes("youtube") || u.includes("youtu.be")) return "▶️ Play Video / Song";
+      return "⚡ Open Link";
     }
 
     async function saveSiteSettings() {
@@ -1496,15 +1435,17 @@
 
     function openSellModal(defaultCat) {
       document.getElementById("editingItemId").value = "";
-      document.getElementById("postModalHeading").textContent = "🛒 Sell / Add Item (Up to 6 Photos)";
+      document.getElementById("postModalHeading").textContent =
+        defaultCat === "REELS" ? "🎬 Add Reel / Gallery Video" : "🛒 Sell / Add Item (Up to 6 Photos)";
       document.getElementById("savePostBtn").textContent = "Publish Live";
       document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
       document.getElementById("postTitle").value = "";
-      document.getElementById("postPrice").value = "";
+      document.getElementById("postPrice").value = defaultCat === "REELS" ? "Reel" : "";
       document.getElementById("postProductLink").value = "";
       document.getElementById("postPhotoFiles").value = "";
       document.getElementById("postPhotoUrls").value = "";
       postPhotosTemp = [];
+      postVideoTemp = "";
       renderPhotoPreviews();
       document.getElementById("postSellerContact").value = state.user ? `${state.user.name} • ${state.user.phone}` : "";
       document.getElementById("postContent").value = "";
@@ -1516,7 +1457,7 @@
       if (!target) return;
       const existingPhotos = normalizeItemPhotos(target);
       document.getElementById("editingItemId").value = target.id;
-      document.getElementById("postModalHeading").textContent = "✏️ Edit Item & Photos";
+      document.getElementById("postModalHeading").textContent = "✏️ Edit Title, Description & Media";
       document.getElementById("savePostBtn").textContent = "Save Changes";
       document.getElementById("postCategory").value = target.cat || "PRODUCTS";
       document.getElementById("postTitle").value = target.title || "";
@@ -1524,6 +1465,7 @@
       document.getElementById("postProductLink").value = target.link || "";
       document.getElementById("postPhotoFiles").value = "";
       postPhotosTemp = [...existingPhotos];
+      postVideoTemp = target.videoSrc || "";
       document.getElementById("postPhotoUrls").value = existingPhotos.filter(p => /^https?:\/\//i.test(p)).join("\n");
       renderPhotoPreviews();
       document.getElementById("postSellerContact").value = target.by || "";
@@ -1535,25 +1477,30 @@
       const editId = document.getElementById("editingItemId").value.trim();
       const cat = document.getElementById("postCategory").value;
       const title = document.getElementById("postTitle").value.trim();
-      const price = document.getElementById("postPrice").value.trim() || "For Sale";
+      const price = document.getElementById("postPrice").value.trim() || (cat === "REELS" ? "Reel" : "For Sale");
       const link = normalizeLink(document.getElementById("postProductLink").value);
-      const contact = document.getElementById("postSellerContact").value.trim() || (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
+      const contact = document.getElementById("postSellerContact").value.trim() || (state.user ? `${state.user.name} • ${state.user.phone}` : "Creator");
       const txt = document.getElementById("postContent").value.trim();
 
-      if (!title || !txt) return alert("Enter Name and Details.");
+      if (!title || !txt) return alert("Enter Title and Description.");
 
       const finalPhotos = postPhotosTemp.length > 0
         ? postPhotosTemp.slice(0, MAX_PHOTOS)
         : [CATEGORY_DEFAULT_IMAGES[cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS];
 
+      const videoUrl = postVideoTemp || (/\.mp4|\.webm|\.mov/i.test(link) ? link : "");
+
       if (editId) {
         state.items = state.items.map(item =>
-          item.id === editId ? { ...item, cat, title, price, link, photos: finalPhotos, descMl: txt, descEn: txt, by: contact } : item
+          item.id === editId
+            ? { ...item, cat, title, price, link, videoSrc: videoUrl || item.videoSrc || "", photos: finalPhotos, descMl: txt, descEn: txt, by: contact }
+            : item
         );
       } else {
         state.items.unshift({
           id: "item_" + Date.now(),
           cat, title, price, link,
+          videoSrc: videoUrl,
           photos: finalPhotos,
           descMl: txt, descEn: txt,
           by: contact
@@ -1561,6 +1508,7 @@
       }
 
       postPhotosTemp = [];
+      postVideoTemp = "";
       saveLocalSafe();
       syncUI();
       closeModal("postModal");
@@ -1581,15 +1529,20 @@
       const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
       const fullDesc = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
 
+      const mediaHtml = item.videoSrc
+        ? `<video class="item-video-player" src="${item.videoSrc}" controls autoplay playsinline></video>`
+        : `<img id="detailActivePhoto" class="detail-main-photo" src="${photos[0]}" alt="${item.title}" onclick="openZoomImage(this.src)" />
+           ${photos.length > 1 ? `<div class="detail-thumbs-row">${photos.map((src, i) => `<img class="detail-thumb-img ${i === 0 ? "active" : ""}" src="${src}" onclick="switchDetailPhoto(this, '${src}')" />`).join("")}</div>` : ""}`;
+
       document.getElementById("detailModalTitle").textContent = item.title;
       document.getElementById("detailModalBody").innerHTML = `
-        <img id="detailActivePhoto" class="detail-main-photo" src="${photos[0]}" alt="${item.title}" />
-        ${photos.length > 1 ? `<div class="detail-thumbs-row">${photos.map((src, i) => `<img class="detail-thumb-img ${i === 0 ? "active" : ""}" src="${src}" onclick="switchDetailPhoto(this, '${src}')" />`).join("")}</div>` : ""}
+        ${mediaHtml}
         <div class="item-top"><span class="item-cat-tag">${item.cat}</span><span class="item-price-tag">${item.price}</span></div>
         <div style="font-size:15px; font-weight:800; margin:5px 0;">${item.title}</div>
-        <div style="font-size:12.5px; color:var(--text-muted); line-height:1.5; white-space:pre-line;">${fullDesc}</div>
-        <div style="margin-top:8px; font-size:11.5px; color:var(--text-muted);"><strong>Seller:</strong> ${item.by}</div>
+        <div style="font-size:12.5px; color:var(--text-muted); line-height:1.6; max-height:240px; overflow-y:auto; white-space:pre-line;">${fullDesc}</div>
+        <div style="margin-top:8px; font-size:11.5px; color:var(--text-muted);"><strong>Creator / Seller:</strong> ${item.by}</div>
         <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-secondary" onclick="speakText('${(fullDesc || "").replace(/'/g, "").slice(0, 400)}', '${state.lang || "en"}')">🔊 Read Aloud</button>
           <button class="btn btn-accent" style="flex:1;" onclick="addToCart('${item.id}')">🛒 Add to Cart</button>
           ${safeLink
             ? `<a class="btn btn-primary" style="flex:1;" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>`
@@ -1658,25 +1611,29 @@
 
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
-        container.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted); font-size:12.5px;">No items yet. Tap <b>${pack.addItemBtn}</b> to add photos & links.</div>`;
+        container.innerHTML = `<div style="text-align:center; padding:14px; color:var(--text-muted); font-size:12.5px;">No items in this category yet. Tap <b>${pack.addItemBtn}</b> to add.</div>`;
         return;
       }
 
       container.innerHTML = filtered.map(item => {
         const photos = normalizeItemPhotos(item);
+        const imgSrc = photos[0];
         const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
         const descText = state.lang === "ml" && item.descMl ? item.descMl : (item.descEn || item.descMl);
+
+        const visualBlock = item.videoSrc
+          ? `<video class="item-video-player" src="${item.videoSrc}" controls playsinline preload="metadata"></video>`
+          : `<div class="item-photo-wrap">
+               <img class="item-photo" loading="lazy" src="${imgSrc}" alt="${item.title}" onclick="openZoomImage('${imgSrc}')" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
+               ${photos.length > 1 ? `<span class="photo-count-badge">📷 ${photos.length}</span>` : ""}
+             </div>`;
+
         return `
           <div class="item-card">
-            <div style="cursor:pointer;" onclick="openItemDetailsModal('${item.id}')">
-              <div class="item-photo-wrap">
-                <img class="item-photo" loading="lazy" src="${photos[0]}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
-                ${photos.length > 1 ? `<span class="photo-count-badge">📷 ${photos.length}</span>` : ""}
-              </div>
-              <div class="item-top"><span class="item-cat-tag">${item.cat}</span><span class="item-price-tag">${item.price}</span></div>
-              <div class="item-title">${item.title}</div>
-              <div class="item-desc">${descText}</div>
-            </div>
+            ${visualBlock}
+            <div class="item-top"><span class="item-cat-tag">${item.cat}</span><span class="item-price-tag">${item.price}</span></div>
+            <div class="item-title" style="cursor:pointer;" onclick="openItemDetailsModal('${item.id}')">${item.title}</div>
+            <div class="item-desc-scroll">${descText}</div>
             <div class="item-actions-row">
               <button class="cart-add-btn" onclick="addToCart('${item.id}')">${pack.addToCart}</button>
               <button class="details-open-btn" onclick="openItemDetailsModal('${item.id}')">${pack.detailsBuy}</button>
