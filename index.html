@@ -44,7 +44,6 @@
       transition: background 0.25s, color 0.25s;
     }
 
-    /* Splash Screen */
     #splashScreen {
       position: fixed;
       inset: 0;
@@ -95,7 +94,6 @@
       letter-spacing: 0.7px;
     }
 
-    /* Top Header */
     header {
       position: sticky;
       top: 0;
@@ -122,10 +120,10 @@
       background: var(--surface-2);
       border: 1px solid var(--border);
       color: var(--text);
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
-      font-size: 17px;
+      font-size: 18px;
       cursor: pointer;
       flex-shrink: 0;
     }
@@ -189,7 +187,6 @@
       padding: 12px;
     }
 
-    /* 3D Glowing Live Date Bar (Home Screen Only) */
     .date-3d-wrapper {
       perspective: 900px;
       margin-bottom: 12px;
@@ -198,16 +195,12 @@
       background: linear-gradient(145deg, #0f172a, #1e1b4b 50%, #090d16);
       border: 1px solid rgba(56, 189, 248, 0.35);
       border-radius: 18px;
-      padding: 11px 13px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
+      padding: 12px 13px;
       box-shadow:
         0 10px 24px rgba(0, 0, 0, 0.55),
         0 0 18px rgba(59, 130, 246, 0.35),
         inset 0 1px 1px rgba(255, 255, 255, 0.22);
-      transform: rotateX(6deg);
+      transform: rotateX(5deg);
       position: relative;
       overflow: hidden;
     }
@@ -227,6 +220,13 @@
       0% { left: -60%; }
       100% { left: 140%; }
     }
+    .date-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
     .date-3d-cubes {
       display: flex;
       align-items: center;
@@ -238,7 +238,7 @@
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-bottom: 3px solid #2563eb;
       border-radius: 11px;
-      padding: 5px 10px;
+      padding: 5px 9px;
       text-align: center;
       box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45), 0 0 10px rgba(37, 99, 235, 0.3);
     }
@@ -248,7 +248,7 @@
     }
     .cube-label {
       display: block;
-      font-size: 8.5px;
+      font-size: 8px;
       font-weight: 700;
       letter-spacing: 0.7px;
       color: #94a3b8;
@@ -256,7 +256,7 @@
     }
     .cube-val {
       display: block;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 900;
       color: #ffffff;
       text-shadow: 0 2px 0 #1d4ed8, 0 4px 10px rgba(56, 189, 248, 0.85);
@@ -265,18 +265,33 @@
       color: #fde68a;
       text-shadow: 0 2px 0 #b45309, 0 4px 10px rgba(245, 158, 11, 0.85);
     }
+    .time-row-3d {
+      margin-top: 9px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .clock-3d-display {
+      font-size: 16px;
+      font-weight: 900;
+      color: #7dd3fc;
+      letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+    }
     .live-dot-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      padding: 4px 8px;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.38);
+      padding: 3px 8px;
       border-radius: 999px;
       white-space: nowrap;
     }
 
-    /* Hero Card */
     .hero-card {
       background: linear-gradient(135deg, #172554 0%, #1e1b4b 55%, #0f172a 100%);
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -310,6 +325,15 @@
       margin-top: 3px;
       line-height: 1.4;
     }
+    .owner-info-box {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 9px 11px;
+      font-size: 12px;
+      color: #f8fafc;
+    }
     .badge-row {
       display: flex;
       flex-wrap: wrap;
@@ -331,7 +355,6 @@
       border-color: rgba(245, 158, 11, 0.35);
     }
 
-    /* Straight Single-Line Categories Strip on Home Page */
     .cat-strip-wrap {
       margin-bottom: 12px;
     }
@@ -353,9 +376,7 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-    .cat-strip::-webkit-scrollbar {
-      display: none;
-    }
+    .cat-strip::-webkit-scrollbar { display: none; }
     .cat-pill {
       flex: 0 0 auto;
       background: var(--surface);
@@ -368,23 +389,19 @@
       cursor: pointer;
       white-space: nowrap;
       box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-      transition: all 0.2s;
     }
     .cat-pill.active {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       border-color: #60a5fa;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
     }
 
-    /* Search Bar inside Category View */
     .search-bar {
       display: flex;
       gap: 8px;
       margin-bottom: 12px;
     }
 
-    /* Card & Items */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -415,7 +432,7 @@
     .item-top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 8px;
       margin-bottom: 6px;
     }
@@ -451,9 +468,19 @@
       border-top: 1px solid var(--border);
       font-size: 11.5px;
       color: var(--text-muted);
+      gap: 8px;
+    }
+    .del-btn {
+      background: rgba(239, 68, 68, 0.16);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    /* Buttons & Inputs */
     .btn {
       padding: 9px 13px;
       border-radius: 12px;
@@ -488,7 +515,6 @@
       font-size: 13px;
     }
 
-    /* Stats inside "You" Profile Modal */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -502,7 +528,68 @@
     .stat-num { font-size: 19px; font-weight: 800; color: var(--primary-light); }
     .stat-label { font-size: 11px; color: var(--text-muted); }
 
-    /* Modals & Drawer */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+      z-index: 550;
+    }
+    .drawer-backdrop.open { display: block; }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      left: -310px;
+      width: 295px;
+      max-width: 86vw;
+      height: 100%;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      z-index: 600;
+      padding: 16px;
+      overflow-y: auto;
+      transition: left 0.25s ease;
+    }
+    .drawer.open { left: 0; }
+    .drawer-cat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin: 10px 0 14px;
+    }
+    .drawer-cat-tile {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 8px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .drawer-cat-tile:hover, .drawer-cat-tile.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary-light);
+    }
+    .drawer-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--surface-2);
+      color: var(--text);
+      border: none;
+      padding: 10px 12px;
+      border-radius: 11px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -540,35 +627,6 @@
       cursor: pointer;
     }
 
-    .drawer {
-      position: fixed;
-      top: 0;
-      left: -270px;
-      width: 260px;
-      height: 100%;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      z-index: 600;
-      padding: 16px;
-      transition: left 0.25s ease;
-    }
-    .drawer.open { left: 0; }
-    .drawer-btn {
-      display: block;
-      width: 100%;
-      text-align: left;
-      background: var(--surface-2);
-      color: var(--text);
-      border: none;
-      padding: 10px 12px;
-      border-radius: 11px;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -618,75 +676,93 @@
 </head>
 <body>
 
-  <!-- Splash Screen -->
   <div id="splashScreen">
     <div class="splash-logo">
       <img id="splashLogoImg" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="BAZAARO" />
     </div>
     <div class="splash-title" id="splashTitleText">BAZAARO</div>
-    <div class="splash-sub" id="splashSubText">MY BOSS: MUHAMMED ADHIL</div>
+    <div class="splash-sub" id="splashSubText">OWNER • MUHAMMED ADHIL • 9778197726</div>
   </div>
 
-  <!-- Side Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="toggleDrawer()"></div>
+
   <div class="drawer" id="sideDrawer">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-      <strong id="drawerBrandName">BAZAARO</strong>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <strong id="drawerBrandName" style="font-size:16px;">BAZAARO</strong>
       <button class="close-x" onclick="toggleDrawer()">✕</button>
     </div>
+
+    <div style="font-size:11px; font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:0.6px;">
+      ✨ All Categories
+    </div>
+    <div class="drawer-cat-grid" id="drawerCatGrid">
+      <button class="drawer-cat-tile active" onclick="selectCategoryByName('ALL'); toggleDrawer()">🌐 All Items</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('PRODUCTS'); toggleDrawer()">🛒 Sell Products</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('FOOD'); toggleDrawer()">🍲 Food & Kitchen</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('VEHICLES'); toggleDrawer()">🚗 Vehicles</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('SHOP'); toggleDrawer()">🛍️ Shop & Store</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('BOOKS'); toggleDrawer()">📘 ₹1 Books/Class</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('JOBS'); toggleDrawer()">💼 Jobs & Work</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('NEWS'); toggleDrawer()">📰 News</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('HEALTH'); toggleDrawer()">❤️ Health</button>
+      <button class="drawer-cat-tile" onclick="selectCategoryByName('REELS'); toggleDrawer()">🎬 Reels</button>
+    </div>
+
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openFoodSellModal()">🍲 Sell Food Item</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openModal('postModal')">➕ Add Public Listing</button>
-    <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner Only)</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Admin Panel</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Any Product</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item</button>
+    <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Verification</button>
     <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
     <button class="drawer-btn" onclick="toggleDrawer(); shareApp()">📤 Share BAZAARO</button>
   </div>
 
-  <!-- Top Header -->
   <header>
     <div class="brand-left">
       <button class="menu-btn" onclick="toggleDrawer()">☰</button>
       <img id="headerLogo" class="site-avatar" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Logo" />
       <div style="min-width:0;">
         <div class="brand-name" id="headerSiteName">BAZAARO</div>
-        <div class="boss-tag" id="headerBossTag">MY BOSS: MUHAMMED ADHIL</div>
+        <div class="boss-tag" id="headerBossTag">OWNER • MUHAMMED ADHIL • 9778197726</div>
       </div>
     </div>
     <div class="header-actions">
-      <!-- Shows "Edit Site" ONLY if logged in as Owner -->
       <button class="pill-btn admin" id="ownerEditTopBtn" style="display:none;" onclick="openModal('editModal')">✏️ Edit Site</button>
-      <!-- Switches from "Create Account" to "You" after login -->
       <button class="pill-btn primary" id="accountHeaderBtn" onclick="handleAccountClick()">Create Account</button>
     </div>
   </header>
 
   <div class="container">
-    <!-- 3D Glowing Live Date Bar (Home Screen Only) -->
     <div class="date-3d-wrapper">
       <div class="date-3d-card">
-        <div class="date-3d-cubes">
-          <div class="cube-box">
-            <span class="cube-label">Year</span>
-            <span class="cube-val" id="liveYear">2026</span>
+        <div class="date-row-top">
+          <div class="date-3d-cubes">
+            <div class="cube-box">
+              <span class="cube-label">Year</span>
+              <span class="cube-val" id="liveYear">2026</span>
+            </div>
+            <div class="cube-box gold-glow">
+              <span class="cube-label">Month</span>
+              <span class="cube-val" id="liveMonth">Nov</span>
+            </div>
+            <div class="cube-box">
+              <span class="cube-label">Date</span>
+              <span class="cube-val" id="liveDate">27</span>
+            </div>
+            <div class="cube-box gold-glow">
+              <span class="cube-label">Day</span>
+              <span class="cube-val" id="liveDay">Fri</span>
+            </div>
           </div>
-          <div class="cube-box gold-glow">
-            <span class="cube-label">Month</span>
-            <span class="cube-val" id="liveMonth">Nov</span>
-          </div>
-          <div class="cube-box">
-            <span class="cube-label">Date</span>
-            <span class="cube-val" id="liveDate">27</span>
-          </div>
-          <div class="cube-box gold-glow">
-            <span class="cube-label">Day</span>
-            <span class="cube-val" id="liveDay">Fri</span>
-          </div>
+          <div class="live-dot-tag" id="syncStatusBadge">● FIREBASE LIVE</div>
         </div>
-        <div class="live-dot-tag">✨ LIVE</div>
+        <div class="time-row-3d">
+          <span style="font-size:11px; color:#94a3b8; font-weight:700;">TIME (H : M : S)</span>
+          <span class="clock-3d-display" id="liveClockHMS">11:23:00 PM</span>
+        </div>
       </div>
     </div>
 
-    <!-- Hero Card -->
     <div class="hero-card">
       <div class="hero-top">
         <img id="heroLogo" class="hero-logo" src="https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO" alt="Hero Logo" />
@@ -695,6 +771,10 @@
           <div class="hero-desc" id="heroSiteDesc">First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516</div>
         </div>
       </div>
+      <div class="owner-info-box">
+        <strong>Owner:</strong> <span id="ownerNameLine">MUHAMMED ADHIL</span> &nbsp;|&nbsp;
+        <strong>Phone:</strong> <span id="ownerPhoneLine">9778197726 / 7012253516</span>
+      </div>
       <div class="badge-row">
         <span class="badge">🛡️ 100% Secured</span>
         <span class="badge gold">100% FREE (Exempt)</span>
@@ -702,59 +782,54 @@
       </div>
     </div>
 
-    <!-- Straight Horizontal Categories Bar on Home Page (No Followers Box on Home) -->
     <div class="cat-strip-wrap">
-      <div class="cat-strip-title">Categories (Swipe Left/Right)</div>
+      <div class="cat-strip-title">Categories</div>
       <div class="cat-strip" id="categoryBar">
-        <button class="cat-pill active" onclick="selectCategory('ALL', this)">🌐 All (A–Z)</button>
+        <button class="cat-pill active" onclick="selectCategory('ALL', this)">🌐 All</button>
+        <button class="cat-pill" onclick="selectCategory('PRODUCTS', this)">🛒 Products</button>
         <button class="cat-pill" onclick="selectCategory('FOOD', this)">🍲 Food & Kitchen</button>
         <button class="cat-pill" onclick="selectCategory('VEHICLES', this)">🚗 Vehicles</button>
-        <button class="cat-pill" onclick="selectCategory('SHOP', this)">🛍️ Shop & Products</button>
-        <button class="cat-pill" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books & Classes</button>
-        <button class="cat-pill" onclick="selectCategory('JOBS', this)">💼 Jobs & Services</button>
-        <button class="cat-pill" onclick="selectCategory('NEWS', this)">📰 News & Updates</button>
-        <button class="cat-pill" onclick="selectCategory('HEALTH', this)">❤️ Health & Doctors</button>
-        <button class="cat-pill" onclick="selectCategory('REELS', this)">🎬 Reels & Videos</button>
+        <button class="cat-pill" onclick="selectCategory('SHOP', this)">🛍️ Shop & Store</button>
+        <button class="cat-pill" onclick="selectCategory('BOOKS', this)">📘 ₹1 Books</button>
+        <button class="cat-pill" onclick="selectCategory('JOBS', this)">💼 Jobs</button>
+        <button class="cat-pill" onclick="selectCategory('NEWS', this)">📰 News</button>
+        <button class="cat-pill" onclick="selectCategory('HEALTH', this)">❤️ Health</button>
+        <button class="cat-pill" onclick="selectCategory('REELS', this)">🎬 Reels</button>
       </div>
     </div>
 
-    <!-- Search Bar -->
     <div class="search-bar">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search A to Z items, food, vehicles, jobs..." oninput="renderCategoryItems()" />
-      <button class="btn btn-accent" onclick="openFoodSellModal()">+ Sell Food</button>
+      <input type="text" id="searchInput" class="form-control" placeholder="Search products, food, items..." oninput="renderCategoryItems()" />
+      <button class="btn btn-accent" onclick="openSellModal('PRODUCTS')">+ Sell</button>
     </div>
 
-    <!-- Category Content Card (Shows A to Z Items for Selected Category) -->
     <div class="card">
       <div class="card-head">
-        <span class="card-title" id="activeCategoryHeading">🌐 All Categories — A to Z Directory</span>
-        <button class="pill-btn primary" onclick="openModal('postModal')">+ Add Item</button>
+        <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
+        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
       </div>
 
-      <!-- Language Toggle specifically shown inside Food & Kitchen -->
-      <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px;">
-        <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം Recipes</button>
-        <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English Recipes</button>
-        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openFoodSellModal()">🍲 Sell Food</button>
+      <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px; flex-wrap:wrap;">
+        <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം</button>
+        <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English</button>
+        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food</button>
       </div>
 
       <div id="categoryItemsContainer"></div>
     </div>
   </div>
 
-  <!-- Floating AI Help Button -->
   <button class="fab-ai" onclick="openModal('aiModal')">🤖 24/7 AI Help</button>
 
-  <!-- Bottom Navigation (Includes Direct "Sell Food") -->
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="selectCategoryByName('ALL'); window.scrollTo({top:0, behavior:'smooth'})">
       <span>🏠</span><span>Home</span>
     </button>
-    <button class="nav-btn" onclick="openFoodSellModal()">
-      <span>🍲</span><span>Sell Food</span>
+    <button class="nav-btn" onclick="openSellModal('PRODUCTS')">
+      <span>🛒</span><span>Sell Item</span>
     </button>
-    <button class="nav-btn" onclick="openModal('postModal')">
-      <span>➕</span><span>Add Post</span>
+    <button class="nav-btn" onclick="openSellModal('FOOD')">
+      <span>🍲</span><span>Sell Food</span>
     </button>
     <button class="nav-btn" onclick="openModal('qrModal')">
       <span>📱</span><span>QR/UPI</span>
@@ -764,7 +839,7 @@
     </button>
   </nav>
 
-  <!-- Create Account Modal (Shown Only Before Login) -->
+  <!-- Create Account Modal -->
   <div class="modal-backdrop" id="createAccountModal">
     <div class="modal">
       <div class="modal-head">
@@ -777,36 +852,31 @@
       </div>
       <div class="form-group">
         <label>Mobile Number</label>
-        <input type="tel" id="regPhone" class="form-control" placeholder="Enter 10-digit mobile number" />
-      </div>
-      <div class="form-group">
-        <label>City / Place</label>
-        <input type="text" id="regCity" class="form-control" placeholder="e.g., Nellikuzhy, Kothamangalam" />
+        <input type="tel" id="regPhone" class="form-control" placeholder="Enter mobile number" />
       </div>
       <button class="btn btn-primary" style="width:100%;" onclick="completeAccountLogin()">Create Account & Login</button>
     </div>
   </div>
 
-  <!-- "You" Profile & Followers Modal (Shown After Login) -->
+  <!-- "You" Modal -->
   <div class="modal-backdrop" id="youModal">
     <div class="modal">
       <div class="modal-head">
-        <h3>👤 You — Account & Profile</h3>
+        <h3>👤 You — Account</h3>
         <button class="close-x" onclick="closeModal('youModal')">✕</button>
       </div>
       <div class="item-card">
         <div style="font-size:16px; font-weight:800;" id="youUserName">User</div>
         <div style="font-size:12px; color:var(--text-muted);" id="youUserPhone">Phone</div>
         <div id="ownerBadgeInYou" style="display:none; margin-top:6px;">
-          <span class="badge gold">👑 Verified Owner — Edit Access Enabled</span>
+          <span class="badge gold">👑 Owner Edit Access</span>
         </div>
       </div>
 
-      <!-- Followers / Following / Posts Inside "You" -->
       <div class="stats-grid">
         <div>
           <div class="stat-num" id="youPostsCount">0</div>
-          <div class="stat-label">Posts</div>
+          <div class="stat-label">Items</div>
         </div>
         <div>
           <div class="stat-num" id="youFollowersCount">0</div>
@@ -818,21 +888,15 @@
         </div>
       </div>
 
-      <div style="display:flex; gap:8px; margin-bottom:10px;">
-        <button class="btn btn-primary" style="flex:1;" onclick="toggleTestFollow()">➕ Follow / Test</button>
-        <button class="btn btn-secondary" style="flex:1;" onclick="closeModal('youModal'); openModal('msgModal')">💬 Messages</button>
-      </div>
-
-      <!-- Owner-Only Edit Website Button inside "You" -->
       <button class="btn btn-accent" id="youEditWebsiteBtn" style="width:100%; display:none; margin-bottom:8px;" onclick="closeModal('youModal'); openModal('editModal')">
-        ✏️ Edit Website (Name, Logo, Description)
+        ✏️ Edit Website
       </button>
 
       <button class="btn btn-secondary" style="width:100%; color:#ef4444;" onclick="logoutAccount()">Logout</button>
     </div>
   </div>
 
-  <!-- Owner-Only Edit Website Modal -->
+  <!-- Owner Edit Modal -->
   <div class="modal-backdrop" id="editModal">
     <div class="modal">
       <div class="modal-head">
@@ -848,7 +912,7 @@
         <input type="text" id="inputHeroTitle" class="form-control" />
       </div>
       <div class="form-group">
-        <label>Boss / Owner Subtitle</label>
+        <label>Owner Line</label>
         <input type="text" id="inputBossTag" class="form-control" />
       </div>
       <div class="form-group">
@@ -860,26 +924,27 @@
         <input type="text" id="inputUpi" class="form-control" />
       </div>
       <div class="form-group">
-        <label>Upload Website Logo / Photo</label>
+        <label>Upload Logo / Photo</label>
         <input type="file" id="inputLogoFile" accept="image/*" class="form-control" onchange="previewLogoFile(event)" />
       </div>
       <button class="btn btn-primary" style="width:100%;" onclick="saveSiteSettings()">💾 Save Website Changes</button>
     </div>
   </div>
 
-  <!-- Sell Food / Add Post Modal -->
+  <!-- Sell Product / Food / Add Item Modal -->
   <div class="modal-backdrop" id="postModal">
     <div class="modal">
       <div class="modal-head">
-        <h3 id="postModalHeading">➕ Add Listing / Sell Food</h3>
+        <h3 id="postModalHeading">🛒 Sell Product / Add Item</h3>
         <button class="close-x" onclick="closeModal('postModal')">✕</button>
       </div>
       <div class="form-group">
-        <label>Select Category</label>
+        <label>Category</label>
         <select id="postCategory" class="form-control">
+          <option value="PRODUCTS">🛒 Sell Products</option>
           <option value="FOOD">🍲 Food & Kitchen (Sell Food)</option>
           <option value="VEHICLES">🚗 Vehicles</option>
-          <option value="SHOP">🛍️ Shop & Products</option>
+          <option value="SHOP">🛍️ Shop & Store</option>
           <option value="BOOKS">📘 ₹1 Books & Classes</option>
           <option value="JOBS">💼 Jobs & Services</option>
           <option value="NEWS">📰 News & Updates</option>
@@ -888,18 +953,22 @@
         </select>
       </div>
       <div class="form-group">
-        <label>Item / Food Name</label>
-        <input type="text" id="postTitle" class="form-control" placeholder="e.g., Homemade Chicken Biryani / Activa Scooter" />
+        <label>Product / Food / Item Name</label>
+        <input type="text" id="postTitle" class="form-control" placeholder="Enter product or item name" />
       </div>
       <div class="form-group">
-        <label>Price / Offer (Optional)</label>
-        <input type="text" id="postPrice" class="form-control" placeholder="e.g., ₹120 / ₹1 / Free" />
+        <label>Price (₹)</label>
+        <input type="text" id="postPrice" class="form-control" placeholder="e.g., ₹250 / ₹1 / Contact for price" />
       </div>
       <div class="form-group">
-        <label>Full Details & Contact</label>
-        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter ingredients, condition, location, phone..."></textarea>
+        <label>Seller Name & Contact Number</label>
+        <input type="text" id="postSellerContact" class="form-control" placeholder="Name & Phone number" />
       </div>
-      <button class="btn btn-success" style="width:100%;" onclick="addPublicPost()">🚀 Publish Now</button>
+      <div class="form-group">
+        <label>Details</label>
+        <textarea id="postContent" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+      </div>
+      <button class="btn btn-success" style="width:100%;" onclick="addPublicPost()">Publish Live to Everyone</button>
     </div>
   </div>
 
@@ -912,36 +981,18 @@
       </div>
       <div class="item-card" style="text-align:center;">
         <div style="font-size:16px; font-weight:800;" id="qrUpiDisplay">9778197726@naviaxis</div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">100% Secured • Exempt Numbers: 9778197726, 7012253516</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">100% Secured • Owner: MUHAMMED ADHIL • 9778197726, 7012253516</div>
       </div>
     </div>
   </div>
 
-  <!-- Messages Modal -->
-  <div class="modal-backdrop" id="msgModal">
-    <div class="modal">
-      <div class="modal-head">
-        <h3>💬 Direct Messages</h3>
-        <button class="close-x" onclick="closeModal('msgModal')">✕</button>
-      </div>
-      <div id="msgList" style="max-height:190px; overflow-y:auto; margin-bottom:10px;"></div>
-      <div style="display:flex; gap:8px;">
-        <input type="text" id="msgInput" class="form-control" placeholder="Write a message..." />
-        <button class="btn btn-primary" onclick="sendMsg()">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Owner Admin Verification Modal -->
+  <!-- Owner Verification Modal -->
   <div class="modal-backdrop" id="adminModal">
     <div class="modal">
       <div class="modal-head">
         <h3>🛡️ Owner Verification</h3>
         <button class="close-x" onclick="closeModal('adminModal')">✕</button>
       </div>
-      <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
-        Website editing is restricted strictly to Owner numbers (<b>9778197726</b> / <b>7012253516</b>).
-      </p>
       <div class="form-group">
         <label>Enter Owner Mobile Number</label>
         <input type="tel" id="adminVerifyPhone" class="form-control" placeholder="9778197726" />
@@ -958,7 +1009,7 @@
         <button class="close-x" onclick="closeModal('aiModal')">✕</button>
       </div>
       <div style="display:flex; gap:8px;">
-        <input type="text" id="aiQuestion" class="form-control" placeholder="Ask anything about BAZAARO..." />
+        <input type="text" id="aiQuestion" class="form-control" placeholder="Ask anything..." />
         <button class="btn btn-primary" onclick="askAi()">Ask</button>
       </div>
       <div id="aiReply" class="item-card" style="margin-top:10px; display:none;"></div>
@@ -966,182 +1017,166 @@
   </div>
 
   <script>
+    const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
 
-    // Auto-Updating 3D Live Date
-    function updateLive3DDate() {
+    function updateLiveDateTime() {
       const now = new Date();
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
       document.getElementById("liveYear").textContent = now.getFullYear();
       document.getElementById("liveMonth").textContent = months[now.getMonth()];
       document.getElementById("liveDate").textContent = String(now.getDate()).padStart(2, "0");
       document.getElementById("liveDay").textContent = days[now.getDay()];
+
+      let hrs = now.getHours();
+      const mins = String(now.getMinutes()).padStart(2, "0");
+      const secs = String(now.getSeconds()).padStart(2, "0");
+      const ampm = hrs >= 12 ? "PM" : "AM";
+      hrs = hrs % 12 || 12;
+      document.getElementById("liveClockHMS").textContent =
+        `${String(hrs).padStart(2, "0")}:${mins}:${secs} ${ampm}`;
     }
 
-    // Complete A to Z Built-in Directory across All Categories
-    const builtInCatalog = [
-      // FOOD & KITCHEN (Malayalam & English)
+    const starterFoodRecipes = [
       {
+        id: "r1",
         cat: "FOOD",
         title: "ചിക്കൻ ബിരിയാണി (Chicken Biryani)",
-        price: "Recipe + Sell Ready",
-        descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി (2 കപ്പ്), ചിക്കൻ (1 കി.ഗ്രാം), സവാള (4), തക്കാളി (2), ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. തയ്യാറാക്കുന്ന വിധം: ചിക്കൻ മസാല പുരട്ടി വേവിക്കുക. നെയ്യിൽ അരി വഴറ്റി തിളച്ച വെള്ളത്തിൽ വേവിച്ച് ചിക്കനുമായി ദം ഇടുക.",
-        descEn: "Ingredients: Kaima/Basmati rice (2 cups), Chicken (1 kg), Onion (4), Tomato (2), Ginger-Garlic paste, Curd, Biryani masala, Ghee, Coriander & Mint. Method: Cook spiced chicken masala, parboil rice in ghee, layer together and dum cook for 15 mins.",
-        by: "BAZAARO Kitchen Hub"
+        price: "Recipe",
+        descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി, ചിക്കൻ, സവാള, തക്കാളി, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. രീതി: മസാല ചിക്കൻ വേവിച്ച്, നെയ്യിൽ വേവിച്ച അരി ചേർത്ത് ദം ഇടുക.",
+        descEn: "Ingredients: Kaima/Basmati rice, chicken, onion, tomato, ginger-garlic paste, curd, biryani masala, ghee, coriander & mint. Method: Cook spiced chicken, layer with ghee-cooked rice, and dum cook.",
+        by: "MUHAMMED ADHIL • 9778197726"
       },
       {
+        id: "r2",
         cat: "FOOD",
         title: "കുഴിമന്തി (Kuzhi Mandi)",
-        price: "Recipe + Sell Ready",
-        descMl: "ചേരുവകൾ: ബസ്മതി അരി, വലിയ ചിക്കൻ കഷ്ണങ്ങൾ, മന്തി മസാല, കുരുമുളക് പൊടി, ഉണക്ക നാരങ്ങ (Loomi), ക്യാപ്സിക്കം, സൺഫ്ലവർ ഓയിൽ, ചാർക്കോൾ (പുകയ്ക്കാൻ). തയ്യാറാക്കുന്ന വിധം: മസാല പുരട്ടിയ ചിക്കൻ ആവിയിൽ/ഓവനിൽ വേവിച്ച് അരിയുടെ മുകളിൽ വെച്ച് കനൽ പുക നൽകി ദം ചെയ്യുക.",
-        descEn: "Ingredients: Long-grain Basmati rice, Chicken quarters, Mandi spice mix, Black pepper, Dried lime (Loomi), Capsicum, Oil, Charcoal. Method: Roast/steam spiced chicken, cook rice in chicken stock, place chicken on top and infuse charcoal smoke.",
-        by: "BAZAARO Kitchen Hub"
+        price: "Recipe",
+        descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ. രീതി: ചിക്കൻ വേവിച്ച് അരിക്ക് മുകളിൽ വെച്ച് ചാർക്കോൾ പുക നൽകുക.",
+        descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal. Method: Steam/roast chicken over spiced rice and smoke with charcoal.",
+        by: "MUHAMMED ADHIL • 9778197726"
       },
       {
+        id: "r3",
         cat: "FOOD",
         title: "അൽഫാം ചിക്കൻ (Alfaham Chicken)",
-        price: "Recipe + Sell Ready",
-        descMl: "ചേരുവകൾ: ചിക്കൻ, തൈര്, ഇഞ്ചി-വെളുത്തുള്ളി, കാശ്മീരി മുളകുപൊടി, കുരുമുളക്, ജീരകപ്പൊടി, നാരങ്ങാനീര്, ഒലിവ് ഓയിൽ. തയ്യാറാക്കുന്ന വിധം: മസാല പുരട്ടി 3 മണിക്കൂർ വെച്ച ശേഷം കനലിലോ ഗ്രില്ലിലോ തിരിച്ചും മറിച്ചും ചുട്ടെടുക്കുക.",
-        descEn: "Ingredients: Chicken, Thick curd, Ginger-garlic, Kashmiri chili, Pepper, Cumin, Lemon juice, Olive oil. Method: Marinate chicken for 3 hours and grill over charcoal or in an oven until smoky and tender.",
-        by: "BAZAARO Kitchen Hub"
+        price: "Recipe",
+        descMl: "ചേരുവകൾ: ചിക്കൻ, തൈര്, ഇഞ്ചി-വെളുത്തുള്ളി, മുളകുപൊടി, കുരുമുളക്, ജീരകം, നാരങ്ങാനീര്, ഓയിൽ. രീതി: മസാല പുരട്ടി ഗ്രില്ലിലോ കനലിലോ ചുട്ടെടുക്കുക.",
+        descEn: "Ingredients: Chicken, curd, ginger-garlic, chili powder, pepper, cumin, lemon juice, oil. Method: Marinate and grill over charcoal or oven until done.",
+        by: "MUHAMMED ADHIL • 9778197726"
       },
       {
+        id: "r4",
         cat: "FOOD",
         title: "ചിക്കൻ പൊള്ളിച്ചത് (Chicken Pollichathu)",
-        price: "Recipe + Sell Ready",
-        descMl: "ചേരുവകൾ: ചിക്കൻ, ചെറിയ ഉള്ളി, തക്കാളി, പച്ചമുളക്, കറിവേപ്പില, തേങ്ങാപ്പാൽ, മഞ്ഞൾപ്പൊടി, മുളകുപൊടി, വാഴയില. തയ്യാറാക്കുന്ന വിധം: വറുത്ത ചിക്കൻ ഉള്ളി-തേങ്ങാപ്പാൽ മസാലയിൽ പൊതിഞ്ഞ് വാഴയിലയിൽ കെട്ടി തവയിൽ പൊള്ളിച്ചെടുക്കുക.",
-        descEn: "Ingredients: Fried chicken pieces, Shallots, Tomato, Green chilies, Curry leaves, Thick coconut milk, Banana leaf. Method: Coat fried chicken in rich coconut-shallot masala, wrap in wilted banana leaf and roast on a tawa.",
-        by: "BAZAARO Kitchen Hub"
+        price: "Recipe",
+        descMl: "ചേരുവകൾ: വറുത്ത ചിക്കൻ, ചെറിയ ഉള്ളി, തക്കാളി, പച്ചമുളക്, കറിവേപ്പില, തേങ്ങാപ്പാൽ, വാഴയില. രീതി: മസാലയിൽ ചേർത്ത് വാഴയിലയിൽ പൊതിഞ്ഞ് തവയിൽ പൊള്ളിക്കുക.",
+        descEn: "Ingredients: Fried chicken, shallots, tomato, green chili, curry leaves, coconut milk, banana leaf. Method: Coat in masala, wrap in banana leaf, and roast on tawa.",
+        by: "MUHAMMED ADHIL • 9778197726"
       },
       {
+        id: "r5",
         cat: "FOOD",
-        title: "ഫ്രഷ് ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes)",
-        price: "₹40 – ₹90",
-        descMl: "മാംഗോ/പൈനാപ്പിൾ/വാട്ടർമെലൺ ജ്യൂസ്: പഴം, തണുത്ത വെള്ളം/പാൽ, പഞ്ചസാര, ഐസ് ക്യൂബ്സ് എന്നിവ മിക്സിയിൽ അടിച്ചെടുക്കുക. ഷാർജ/ചോക്ലേറ്റ്/ഓറിയോ ഷേക്ക്: കട്ടപ്പാൽ, പഴം/ബിസ്കറ്റ്, ബൂസ്റ്റ്/കൊക്കോ പൗഡർ, വാനില ഐസ്ക്രീം ചേർത്ത് ബ്ലെൻഡ് ചെയ്യുക.",
-        descEn: "Fresh Juices: Blend fresh fruit pulp, chilled water/milk, sugar & ice. Thick Shakes (Sharjah/Oreo/Chocolate): Blend frozen milk, banana/Oreo, cocoa/Boost, sugar & vanilla ice cream.",
-        by: "BAZAARO Juice Corner"
-      },
-      // VEHICLES
-      {
-        cat: "VEHICLES",
-        title: "Used Scooters & Bikes — Nellikuzhy & Kothamangalam",
-        price: "Starting ₹28,000",
-        descMl: "നല്ല കണ്ടീഷനിലുള്ള സ്കൂട്ടറുകളും ബൈക്കുകളും നേരിട്ട് വാങ്ങാനും വിൽക്കാനും.",
-        descEn: "Verified local two-wheelers, cars, and commercial vehicles for direct buy & sell.",
-        by: "BAZAARO Auto Hub"
-      },
-      {
-        cat: "VEHICLES",
-        title: "Goods Auto & Taxi Booking Service",
-        price: "24/7 Local",
-        descMl: "കോതമംഗലം, നെല്ലിക്കുഴി ഭാഗങ്ങളിൽ ഓട്ടോ, ടാക്സി, ഗുഡ്സ് വാഹന സേവനങ്ങൾ.",
-        descEn: "Instant local taxi, auto, and goods carrier bookings in Kothamangalam & Nellikuzhy.",
-        by: "Kerala Transport Desk"
-      },
-      // SHOP & PRODUCTS
-      {
-        cat: "SHOP",
-        title: "CM Stores Nellikuzhy — Groceries & Daily Essentials",
-        price: "Best Wholesale Rate",
-        descMl: "വീട്ടിലേക്കാവശ്യമായ പലവ്യഞ്ജനങ്ങൾ, പച്ചക്കറികൾ, നിത്യോപയോഗ സാധനങ്ങൾ.",
-        descEn: "Complete grocery, household items, and daily essentials with home delivery support.",
-        by: "CM Stores Nellikuzhy"
-      },
-      {
-        cat: "SHOP",
-        title: "Bismi Footwear & Bags — Kothamangalam",
-        price: "New Collections",
-        descMl: "ലേഡീസ്, ജെന്റ്സ്, കിഡ്സ് ചെരുപ്പുകളും സ്കൂൾ/ട്രാവൽ ബാഗുകളും.",
-        descEn: "Trendy footwear, school bags, and travel accessories at affordable prices.",
-        by: "Bismi Footwear & Bags"
-      },
-      // ₹1 BOOKS & CLASSES
-      {
-        cat: "BOOKS",
-        title: "₹1 Digital Study Notes, Spoken English & AI Classes",
-        price: "₹1 Only",
-        descMl: "വെറും 1 രൂപയ്ക്ക് പഠന നോട്ടുകൾ, AI വീഡിയോ നിർമ്മാണ ക്ലാസുകൾ, ബിസിനസ് ഗൈഡുകൾ.",
-        descEn: "Access digital e-books, exam notes, and beginner AI & digital marketing classes for just ₹1.",
-        by: "Aether AI Academy"
-      },
-      // JOBS & SERVICES
-      {
-        cat: "JOBS",
-        title: "Aether AI Creative Studio — Video, Poster & Website Services",
-        price: "From ₹100",
-        descMl: "AI പ്രൊമോഷണൽ വീഡിയോകൾ, പോസ്റ്ററുകൾ, പാട്ടുകൾ, വെബ്സൈറ്റ് നിർമ്മാണം.",
-        descEn: "Custom AI promo videos, Malayalam songs, posters, and business websites.",
-        by: "Aether AI Creative Studio"
-      },
-      {
-        cat: "JOBS",
-        title: "Local Sales, Delivery & Office Staff Openings",
-        price: "Full / Part Time",
-        descMl: "എറണാകുളം, കോതമംഗലം മേഖലകളിലെ പുതിയ തൊഴിലവസരങ്ങൾ.",
-        descEn: "Verified retail sales, delivery executive, and computer operator vacancies.",
-        by: "BAZAARO Jobs Board"
-      },
-      // NEWS
-      {
-        cat: "NEWS",
-        title: "Kerala & Local Nellikuzhy Breaking Updates",
-        price: "Live News",
-        descMl: "നാട്ടിലെ പ്രധാന വാർത്തകളും അറിയിപ്പുകളും തത്സമയം അറിയാം.",
-        descEn: "Latest local community announcements, business news, and public alerts.",
-        by: "BAZAARO News Desk"
-      },
-      // HEALTH
-      {
-        cat: "HEALTH",
-        title: "24/7 Emergency Ambulance, Clinics & Pharmacy Directory",
-        price: "Emergency Help",
-        descMl: "അടുത്തുള്ള ആശുപത്രികൾ, ഡോക്ടർമാർ, മെഡിക്കൽ സ്റ്റോറുകൾ, ആംബുലൻസ് നമ്പറുകൾ.",
-        descEn: "Quick directory for nearby doctors, clinics, pharmacies, and emergency contacts.",
-        by: "BAZAARO Health Care"
-      },
-      // REELS
-      {
-        cat: "REELS",
-        title: "BAZAARO Trending Reels & Short Videos",
-        price: "Watch Free",
-        descMl: "ഫുഡ് വ്ലോഗുകൾ, AI ഷോർട്ട് വീഡിയോകൾ, ലോക്കൽ ഓഫർ റീലുകൾ.",
-        descEn: "Watch & share short promotional reels, food reviews, and creative AI shorts.",
-        by: "Madeena Vlog & Creators"
+        title: "ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes)",
+        price: "Recipe",
+        descMl: "പഴങ്ങൾ/കട്ടപ്പാൽ, പഞ്ചസാര, ഐസ് ക്യൂബ്സ്, ചോക്ലേറ്റ്/ബൂസ്റ്റ്/ഓറിയോ എന്നിവ ചേർത്ത് മിക്സിയിൽ ബ്ലെൻഡ് ചെയ്ത് ഫ്രഷ് ജ്യൂസും ഷേക്കും തയ്യാറാക്കാം.",
+        descEn: "Blend fresh fruits or chilled/frozen milk with sugar, ice, cocoa/Boost/Oreo for quick juices and shakes.",
+        by: "MUHAMMED ADHIL • 9778197726"
       }
     ];
 
     const defaultData = {
       siteName: "BAZAARO",
       heroTitle: "BAZAARO — India's Trending Public Super-Hub",
-      bossTag: "MY BOSS: MUHAMMED ADHIL",
+      bossTag: "OWNER • MUHAMMED ADHIL • 9778197726",
       siteDesc: "First 3 Months Free • After 3 Months: Auto Lock on 1st of Every Month (₹1/mo) • Exempt: 9778197726, 7012253516",
       upi: "9778197726@naviaxis",
       logo: "https://api.dicebear.com/7.x/shapes/svg?seed=BAZAARO",
-      user: null, // null until Create Account / Login is done
+      user: null,
       isOwnerVerified: false,
       followers: 0,
       following: 0,
-      isFollowed: false,
-      customPosts: [],
-      messages: []
+      items: starterFoodRecipes
     };
 
-    let state = JSON.parse(localStorage.getItem("bazaaro_atoz_v4")) || defaultData;
+    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v1")) || defaultData;
     let currentCategory = "ALL";
     let foodLang = "ml";
     let uploadedLogoTemp = null;
 
-    window.addEventListener("load", () => {
-      updateLive3DDate();
-      setInterval(updateLive3DDate, 10000);
+    window.addEventListener("load", async () => {
+      updateLiveDateTime();
+      setInterval(updateLiveDateTime, 1000);
       syncUI();
-      setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1200);
+      await pullFromFirebase(true);
+      setInterval(() => pullFromFirebase(false), 4000);
+      setTimeout(() => document.getElementById("splashScreen").classList.add("hide"), 1000);
     });
 
-    function persist() {
-      localStorage.setItem("bazaaro_atoz_v4", JSON.stringify(state));
+    async function pullFromFirebase(seedIfEmpty) {
+      try {
+        const res = await fetch(`${DB_URL}/bazaaro_public.json`);
+        if (!res.ok) return;
+        const cloud = await res.json();
+        const badge = document.getElementById("syncStatusBadge");
+        if (badge) badge.textContent = "● FIREBASE LIVE";
+
+        if (cloud && Array.isArray(cloud.items) && cloud.items.length > 0) {
+          state.items = cloud.items;
+          if (cloud.site) {
+            state.siteName = cloud.site.siteName || state.siteName;
+            state.heroTitle = cloud.site.heroTitle || state.heroTitle;
+            state.bossTag = cloud.site.bossTag || state.bossTag;
+            state.siteDesc = cloud.site.siteDesc || state.siteDesc;
+            state.upi = cloud.site.upi || state.upi;
+            if (cloud.site.logo) state.logo = cloud.site.logo;
+          }
+          localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
+          renderCategoryItems();
+          syncHeaderHeroOnly();
+        } else if (seedIfEmpty) {
+          await pushPublicStateToFirebase();
+        }
+      } catch (err) {
+        const badge = document.getElementById("syncStatusBadge");
+        if (badge) badge.textContent = "● OFFLINE CACHE";
+      }
+    }
+
+    async function pushPublicStateToFirebase() {
+      try {
+        await fetch(`${DB_URL}/bazaaro_public.json`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: state.items,
+            site: {
+              siteName: state.siteName,
+              heroTitle: state.heroTitle,
+              bossTag: state.bossTag,
+              siteDesc: state.siteDesc,
+              upi: state.upi,
+              logo: state.logo
+            },
+            updatedAt: Date.now()
+          })
+        });
+      } catch (err) {
+        console.log("Firebase sync retry:", err);
+      }
+    }
+
+    function persistLocalOnly() {
+      localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
       syncUI();
+    }
+
+    async function persistAndSyncCloud() {
+      localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
+      syncUI();
+      await pushPublicStateToFirebase();
     }
 
     function isOwnerUser() {
@@ -1150,7 +1185,7 @@
       return false;
     }
 
-    function syncUI() {
+    function syncHeaderHeroOnly() {
       document.title = state.siteName;
       document.getElementById("splashTitleText").textContent = state.siteName;
       document.getElementById("splashSubText").textContent = state.bossTag;
@@ -1164,8 +1199,12 @@
       document.getElementById("heroSiteDesc").textContent = state.siteDesc;
       document.getElementById("heroUpiBadge").textContent = "UPI: " + state.upi;
       document.getElementById("qrUpiDisplay").textContent = state.upi;
+      document.getElementById("youPostsCount").textContent = state.items.length;
+    }
 
-      // Account Button State: "Create Account" before login -> "You" after login
+    function syncUI() {
+      syncHeaderHeroOnly();
+
       const accHeaderBtn = document.getElementById("accountHeaderBtn");
       const drawerAccBtn = document.getElementById("drawerAccountBtn");
       const bottomAccLabel = document.getElementById("bottomAccountLabel");
@@ -1175,9 +1214,8 @@
         accHeaderBtn.className = "pill-btn you-btn";
         drawerAccBtn.textContent = "👤 You (" + state.user.name + ")";
         bottomAccLabel.textContent = "You";
-
-        document.getElementById("youUserName").textContent = state.user.name + (state.user.city ? " • " + state.user.city : "");
-        document.getElementById("youUserPhone").textContent = "Mobile: " + state.user.phone;
+        document.getElementById("youUserName").textContent = state.user.name;
+        document.getElementById("youUserPhone").textContent = "Phone: " + state.user.phone;
       } else {
         accHeaderBtn.textContent = "Create Account";
         accHeaderBtn.className = "pill-btn primary";
@@ -1185,19 +1223,15 @@
         bottomAccLabel.textContent = "Account";
       }
 
-      // Owner-Only Edit Access Check
       const ownerAllowed = isOwnerUser();
       document.getElementById("ownerEditTopBtn").style.display = ownerAllowed ? "inline-block" : "none";
       document.getElementById("drawerEditSiteBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("youEditWebsiteBtn").style.display = ownerAllowed ? "block" : "none";
       document.getElementById("ownerBadgeInYou").style.display = ownerAllowed ? "block" : "none";
 
-      // Update Stats inside "You" modal
-      document.getElementById("youPostsCount").textContent = state.customPosts.length;
       document.getElementById("youFollowersCount").textContent = state.followers;
       document.getElementById("youFollowingCount").textContent = state.following;
 
-      // Populate Edit Form
       document.getElementById("inputSiteName").value = state.siteName;
       document.getElementById("inputHeroTitle").value = state.heroTitle;
       document.getElementById("inputBossTag").value = state.bossTag;
@@ -1205,38 +1239,30 @@
       document.getElementById("inputUpi").value = state.upi;
 
       renderCategoryItems();
-      renderMessages();
     }
 
-    // Account Creation & "You" Navigation
     function handleAccountClick() {
-      if (state.user) {
-        openModal("youModal");
-      } else {
-        openModal("createAccountModal");
-      }
+      if (state.user) openModal("youModal");
+      else openModal("createAccountModal");
     }
 
     function completeAccountLogin() {
       const name = document.getElementById("regName").value.trim();
       const phone = document.getElementById("regPhone").value.trim();
-      const city = document.getElementById("regCity").value.trim();
       if (!name || !phone) {
-        alert("Please enter your Name and Mobile Number.");
+        alert("Please enter your Name and Phone Number.");
         return;
       }
-      state.user = { name, phone, city };
-      if (OWNER_NUMBERS.includes(phone)) {
-        state.isOwnerVerified = true;
-      }
-      persist();
+      state.user = { name, phone };
+      if (OWNER_NUMBERS.includes(phone)) state.isOwnerVerified = true;
+      persistLocalOnly();
       closeModal("createAccountModal");
     }
 
     function logoutAccount() {
       state.user = null;
       state.isOwnerVerified = false;
-      persist();
+      persistLocalOnly();
       closeModal("youModal");
     }
 
@@ -1244,24 +1270,15 @@
       const ph = document.getElementById("adminVerifyPhone").value.trim();
       if (OWNER_NUMBERS.includes(ph)) {
         state.isOwnerVerified = true;
-        if (!state.user) {
-          state.user = { name: "Muhammed Adhil", phone: ph, city: "Nellikuzhy" };
-        }
-        persist();
+        if (!state.user) state.user = { name: "MUHAMMED ADHIL", phone: ph };
+        persistLocalOnly();
         closeModal("adminModal");
         openModal("editModal");
       } else {
-        alert("Access Denied: Only Owner can edit website details.");
+        alert("Access Denied.");
       }
     }
 
-    function toggleTestFollow() {
-      state.isFollowed = !state.isFollowed;
-      state.followers = state.isFollowed ? state.followers + 1 : Math.max(0, state.followers - 1);
-      persist();
-    }
-
-    // Owner Save Website Settings
     function previewLogoFile(e) {
       const f = e.target.files[0];
       if (!f) return;
@@ -1270,29 +1287,31 @@
       r.readAsDataURL(f);
     }
 
-    function saveSiteSettings() {
+    async function saveSiteSettings() {
       if (!isOwnerUser()) {
         alert("Only Owner can edit website settings.");
         return;
       }
       state.siteName = document.getElementById("inputSiteName").value.trim() || "BAZAARO";
       state.heroTitle = document.getElementById("inputHeroTitle").value.trim() || state.siteName;
-      state.bossTag = document.getElementById("inputBossTag").value.trim() || "MY BOSS: MUHAMMED ADHIL";
+      state.bossTag = document.getElementById("inputBossTag").value.trim() || "OWNER • MUHAMMED ADHIL • 9778197726";
       state.siteDesc = document.getElementById("inputSiteDesc").value.trim();
       state.upi = document.getElementById("inputUpi").value.trim();
       if (uploadedLogoTemp) {
         state.logo = uploadedLogoTemp;
         uploadedLogoTemp = null;
       }
-      persist();
+      await persistAndSyncCloud();
       closeModal("editModal");
     }
 
-    // Category Selection & A to Z Rendering
     function selectCategory(cat, btn) {
       currentCategory = cat;
       document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
       if (btn) btn.classList.add("active");
+      document.querySelectorAll(".drawer-cat-tile").forEach(t => {
+        t.classList.toggle("active", t.getAttribute("onclick").includes("'" + cat + "'"));
+      });
       updateCategoryHeader();
       renderCategoryItems();
     }
@@ -1302,24 +1321,28 @@
       document.querySelectorAll(".cat-pill").forEach(p => {
         p.classList.toggle("active", p.getAttribute("onclick").includes("'" + cat + "'"));
       });
+      document.querySelectorAll(".drawer-cat-tile").forEach(t => {
+        t.classList.toggle("active", t.getAttribute("onclick").includes("'" + cat + "'"));
+      });
       updateCategoryHeader();
       renderCategoryItems();
     }
 
     function updateCategoryHeader() {
       const titles = {
-        ALL: "🌐 All Categories — A to Z Directory",
-        FOOD: "🍲 Food & Kitchen — Recipes & Food Sale",
-        VEHICLES: "🚗 Vehicles — Buy, Sell & Rentals",
-        SHOP: "🛍️ Shop & Products — Local Stores",
-        BOOKS: "📘 ₹1 Books & Digital Classes",
-        JOBS: "💼 Jobs & Services Directory",
-        NEWS: "📰 News & Live Public Updates",
-        HEALTH: "❤️ Health, Clinics & Emergency",
-        REELS: "🎬 Reels & Short Videos"
+        ALL: "🌐 All Items",
+        PRODUCTS: "🛒 Sell Products",
+        FOOD: "🍲 Food & Kitchen",
+        VEHICLES: "🚗 Vehicles",
+        SHOP: "🛍️ Shop & Store",
+        BOOKS: "📘 ₹1 Books & Classes",
+        JOBS: "💼 Jobs & Services",
+        NEWS: "📰 News & Updates",
+        HEALTH: "❤️ Health & Doctors",
+        REELS: "🎬 Reels & Videos"
       };
       document.getElementById("activeCategoryHeading").textContent = titles[currentCategory] || titles.ALL;
-      document.getElementById("foodLangBar").style.display = (currentCategory === "FOOD" || currentCategory === "ALL") ? "flex" : "none";
+      document.getElementById("foodLangBar").style.display = currentCategory === "FOOD" ? "flex" : "none";
     }
 
     function setFoodLang(lang) {
@@ -1329,50 +1352,61 @@
       renderCategoryItems();
     }
 
-    function openFoodSellModal() {
-      document.getElementById("postCategory").value = "FOOD";
-      document.getElementById("postModalHeading").textContent = "🍲 Sell Food Item";
+    function openSellModal(defaultCat) {
+      document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
+      document.getElementById("postModalHeading").textContent =
+        defaultCat === "FOOD" ? "🍲 Sell Food Item" : "🛒 Sell Product / Add Item";
+      if (state.user) {
+        document.getElementById("postSellerContact").value = `${state.user.name} • ${state.user.phone}`;
+      }
       openModal("postModal");
     }
 
-    function addPublicPost() {
+    async function addPublicPost() {
       const cat = document.getElementById("postCategory").value;
       const title = document.getElementById("postTitle").value.trim();
-      const price = document.getElementById("postPrice").value.trim() || "Available";
+      const price = document.getElementById("postPrice").value.trim() || "For Sale";
+      const contact = document.getElementById("postSellerContact").value.trim() || (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
       const txt = document.getElementById("postContent").value.trim();
       if (!title || !txt) {
-        alert("Please enter Item/Food Name and Details.");
+        alert("Please enter Name and Details.");
         return;
       }
-      state.customPosts.unshift({
+      state.items.unshift({
+        id: "item_" + Date.now(),
         cat,
         title,
         price,
         descMl: txt,
         descEn: txt,
-        by: state.user ? state.user.name + " (" + state.user.phone + ")" : "Public Seller"
+        by: contact
       });
       document.getElementById("postTitle").value = "";
       document.getElementById("postPrice").value = "";
       document.getElementById("postContent").value = "";
-      persist();
+      await persistAndSyncCloud();
       closeModal("postModal");
+    }
+
+    async function deleteItem(id) {
+      state.items = state.items.filter(x => x.id !== id);
+      await persistAndSyncCloud();
     }
 
     function renderCategoryItems() {
       const q = document.getElementById("searchInput").value.trim().toLowerCase();
-      const allItems = [...state.customPosts, ...builtInCatalog];
-
-      const filtered = allItems.filter(item => {
+      const filtered = state.items.filter(item => {
         const matchCat = currentCategory === "ALL" || item.cat === currentCategory;
-        const textBlob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by).toLowerCase();
-        const matchQuery = !q || textBlob.includes(q);
+        const blob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by + " " + item.price).toLowerCase();
+        const matchQuery = !q || blob.includes(q);
         return matchCat && matchQuery;
       });
 
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
-        container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">No items found in this category yet. Tap <b>+ Add Item</b> to post!</div>`;
+        container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">
+          No items listed here yet. Tap <b>+ Add Item</b> to sell or list here.
+        </div>`;
         return;
       }
 
@@ -1385,32 +1419,9 @@
           <div class="item-title">${item.title}</div>
           <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
           <div class="item-footer">
-            <span>By: <strong>${item.by}</strong></span>
-            <button class="pill-btn" onclick="openModal('msgModal')">💬 Contact</button>
+            <span><strong>${item.by}</strong></span>
+            <button class="del-btn" onclick="deleteItem('${item.id}')">Remove</button>
           </div>
-        </div>
-      `).join("");
-    }
-
-    // Messages & AI Help
-    function sendMsg() {
-      const inp = document.getElementById("msgInput");
-      const val = inp.value.trim();
-      if (!val) return;
-      state.messages.push({ val, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-      inp.value = "";
-      persist();
-    }
-
-    function renderMessages() {
-      const el = document.getElementById("msgList");
-      if (!state.messages.length) {
-        el.innerHTML = `<div style="font-size:12px; color:var(--text-muted); text-align:center;">No messages yet.</div>`;
-        return;
-      }
-      el.innerHTML = state.messages.map(m => `
-        <div class="item-card" style="padding:8px 10px; font-size:12px;">
-          ${m.val} <span style="color:var(--text-muted); float:right;">${m.time}</span>
         </div>
       `).join("");
     }
@@ -1420,19 +1431,21 @@
       if (!q) return;
       const rep = document.getElementById("aiReply");
       rep.style.display = "block";
-      rep.innerHTML = `<strong>AI Help:</strong> Swipe the category bar on Home to browse <b>Food & Kitchen, Vehicles, Shop, ₹1 Books, Jobs, News, Health & Reels</b>. Tap <b>🍲 Sell Food</b> to list food items.`;
+      rep.innerHTML = `<strong>AI Help:</strong> Items added here sync to Firebase Realtime Database so everyone on the app can see them live.`;
     }
 
     function openModal(id) { document.getElementById(id).classList.add("open"); }
     function closeModal(id) { document.getElementById(id).classList.remove("open"); }
-    function toggleDrawer() { document.getElementById("sideDrawer").classList.toggle("open"); }
+    function toggleDrawer() {
+      document.getElementById("sideDrawer").classList.toggle("open");
+      document.getElementById("drawerBackdrop").classList.toggle("open");
+    }
     function toggleTheme() { document.body.classList.toggle("light-theme"); }
     function shareApp() {
       if (navigator.share) navigator.share({ title: state.siteName, url: window.location.href });
       else alert("Link: " + window.location.href);
     }
 
-    // Show Food language toggle on initial load
     updateCategoryHeader();
   </script>
 </body>
