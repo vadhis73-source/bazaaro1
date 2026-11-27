@@ -164,6 +164,8 @@
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
     }
     .pill-btn.primary {
       background: var(--primary);
@@ -427,7 +429,16 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 12px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .item-photo {
+      width: 100%;
+      max-height: 230px;
+      object-fit: cover;
+      border-radius: 11px;
+      margin-bottom: 9px;
+      border: 1px solid var(--border);
+      background: #0f172a;
     }
     .item-top {
       display: flex;
@@ -450,7 +461,7 @@
       color: #fbbf24;
     }
     .item-title {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
       margin-bottom: 4px;
     }
@@ -459,16 +470,43 @@
       color: var(--text-muted);
       line-height: 1.45;
     }
+    .item-link-btn {
+      display: inline-block;
+      margin-top: 9px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 7px 12px;
+      border-radius: 9px;
+    }
     .item-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 9px;
+      margin-top: 10px;
       padding-top: 8px;
       border-top: 1px solid var(--border);
       font-size: 11.5px;
       color: var(--text-muted);
       gap: 8px;
+      flex-wrap: wrap;
+    }
+    .item-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .edit-item-btn {
+      background: rgba(59, 130, 246, 0.18);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.38);
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
     }
     .del-btn {
       background: rgba(239, 68, 68, 0.16);
@@ -479,6 +517,20 @@
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
+    }
+
+    .photo-preview-box {
+      margin-top: 8px;
+      border-radius: 11px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: none;
+    }
+    .photo-preview-box img {
+      width: 100%;
+      max-height: 165px;
+      object-fit: cover;
+      display: block;
     }
 
     .btn {
@@ -709,8 +761,8 @@
     </div>
 
     <button class="drawer-btn" id="drawerAccountBtn" onclick="toggleDrawer(); handleAccountClick()">👤 Create Account</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Any Product</button>
-    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('PRODUCTS')">🛒 Sell Product / Add Link</button>
+    <button class="drawer-btn" onclick="toggleDrawer(); openSellModal('FOOD')">🍲 Sell Food Item (+ Photo)</button>
     <button class="drawer-btn" id="drawerEditSiteBtn" style="display:none;" onclick="toggleDrawer(); openModal('editModal')">✏️ Edit Website (Owner)</button>
     <button class="drawer-btn" onclick="toggleDrawer(); openModal('adminModal')">🛡️ Owner Verification</button>
     <button class="drawer-btn" onclick="toggleDrawer(); toggleTheme()">🌓 Dark / Light Theme</button>
@@ -758,7 +810,7 @@
         </div>
         <div class="time-row-3d">
           <span style="font-size:11px; color:#94a3b8; font-weight:700;">TIME (H : M : S)</span>
-          <span class="clock-3d-display" id="liveClockHMS">11:23:00 PM</span>
+          <span class="clock-3d-display" id="liveClockHMS">11:42:00 PM</span>
         </div>
       </div>
     </div>
@@ -799,20 +851,20 @@
     </div>
 
     <div class="search-bar">
-      <input type="text" id="searchInput" class="form-control" placeholder="Search products, food, items..." oninput="renderCategoryItems()" />
-      <button class="btn btn-accent" onclick="openSellModal('PRODUCTS')">+ Sell</button>
+      <input type="text" id="searchInput" class="form-control" placeholder="Search Meesho, Flipkart, Myntra, Amazon, items..." oninput="renderCategoryItems()" />
+      <button class="btn btn-accent" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Sell</button>
     </div>
 
     <div class="card">
       <div class="card-head">
         <span class="card-title" id="activeCategoryHeading">🌐 All Items</span>
-        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item</button>
+        <button class="pill-btn primary" onclick="openSellModal(currentCategory === 'ALL' ? 'PRODUCTS' : currentCategory)">+ Add Item / Link</button>
       </div>
 
       <div id="foodLangBar" style="display:none; margin-bottom:10px; gap:6px; flex-wrap:wrap;">
         <button class="pill-btn primary" id="langMlBtn" onclick="setFoodLang('ml')">മലയാളം</button>
         <button class="pill-btn" id="langEnBtn" onclick="setFoodLang('en')">English</button>
-        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food</button>
+        <button class="pill-btn" style="background:#f59e0b; color:#0f172a;" onclick="openSellModal('FOOD')">🍲 Sell Food (+ Photo)</button>
       </div>
 
       <div id="categoryItemsContainer"></div>
@@ -931,20 +983,21 @@
     </div>
   </div>
 
-  <!-- Sell Product / Food / Add Item Modal -->
+  <!-- Add / Edit Item & Product Link Modal -->
   <div class="modal-backdrop" id="postModal">
     <div class="modal">
       <div class="modal-head">
         <h3 id="postModalHeading">🛒 Sell Product / Add Item</h3>
         <button class="close-x" onclick="closeModal('postModal')">✕</button>
       </div>
+      <input type="hidden" id="editingItemId" value="" />
       <div class="form-group">
         <label>Category</label>
         <select id="postCategory" class="form-control">
           <option value="PRODUCTS">🛒 Sell Products</option>
           <option value="FOOD">🍲 Food & Kitchen (Sell Food)</option>
           <option value="VEHICLES">🚗 Vehicles</option>
-          <option value="SHOP">🛍️ Shop & Store</option>
+          <option value="SHOP">🛍️ Shop & Store (Meesho / Flipkart / Myntra / Amazon)</option>
           <option value="BOOKS">📘 ₹1 Books & Classes</option>
           <option value="JOBS">💼 Jobs & Services</option>
           <option value="NEWS">📰 News & Updates</option>
@@ -961,6 +1014,21 @@
         <input type="text" id="postPrice" class="form-control" placeholder="e.g., ₹250 / ₹1 / Contact for price" />
       </div>
       <div class="form-group">
+        <label>Meesho / Flipkart / Myntra / Amazon / Product Link (Optional)</label>
+        <input type="url" id="postProductLink" class="form-control" placeholder="https://www.meesho.com/... or https://amzn.to/..." />
+      </div>
+      <div class="form-group">
+        <label>Photo from Gallery / Camera</label>
+        <input type="file" id="postPhotoFile" accept="image/*" class="form-control" onchange="handlePostPhotoUpload(event)" />
+      </div>
+      <div class="form-group">
+        <label>Or Photo Link (Optional)</label>
+        <input type="url" id="postPhotoUrl" class="form-control" placeholder="https://..." oninput="handlePostPhotoUrlInput(event)" />
+      </div>
+      <div class="photo-preview-box" id="postPhotoPreviewBox">
+        <img id="postPhotoPreviewImg" src="" alt="Preview" />
+      </div>
+      <div class="form-group" style="margin-top:10px;">
         <label>Seller Name & Contact Number</label>
         <input type="text" id="postSellerContact" class="form-control" placeholder="Name & Phone number" />
       </div>
@@ -968,7 +1036,7 @@
         <label>Details</label>
         <textarea id="postContent" class="form-control" rows="3" placeholder="Enter details..."></textarea>
       </div>
-      <button class="btn btn-success" style="width:100%;" onclick="addPublicPost()">Publish Live to Everyone</button>
+      <button class="btn btn-success" id="savePostBtn" style="width:100%;" onclick="savePublicPost()">Publish Live to Everyone</button>
     </div>
   </div>
 
@@ -1020,6 +1088,18 @@
     const DB_URL = "https://bazaaro-c507b-default-rtdb.firebaseio.com";
     const OWNER_NUMBERS = ["9778197726", "7012253516"];
 
+    const CATEGORY_DEFAULT_IMAGES = {
+      PRODUCTS: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=70",
+      FOOD: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=70",
+      VEHICLES: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=70",
+      SHOP: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=70",
+      BOOKS: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=70",
+      JOBS: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=70",
+      NEWS: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=70",
+      HEALTH: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=70",
+      REELS: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=70"
+    };
+
     function updateLiveDateTime() {
       const now = new Date();
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -1045,6 +1125,8 @@
         cat: "FOOD",
         title: "ചിക്കൻ ബിരിയാണി (Chicken Biryani)",
         price: "Recipe",
+        link: "",
+        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
         descMl: "ചേരുവകൾ: കൈമ/ബസ്മതി അരി, ചിക്കൻ, സവാള, തക്കാളി, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്, തൈര്, ബിരിയാണി മസാല, നെയ്യ്, മല്ലിയില, പുതിനയില. രീതി: മസാല ചിക്കൻ വേവിച്ച്, നെയ്യിൽ വേവിച്ച അരി ചേർത്ത് ദം ഇടുക.",
         descEn: "Ingredients: Kaima/Basmati rice, chicken, onion, tomato, ginger-garlic paste, curd, biryani masala, ghee, coriander & mint. Method: Cook spiced chicken, layer with ghee-cooked rice, and dum cook.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1054,6 +1136,8 @@
         cat: "FOOD",
         title: "കുഴിമന്തി (Kuzhi Mandi)",
         price: "Recipe",
+        link: "",
+        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
         descMl: "ചേരുവകൾ: ബസ്മതി അരി, ചിക്കൻ, മന്തി മസാല, കുരുമുളക്, ഉണക്ക നാരങ്ങ, ക്യാപ്സിക്കം, ഓയിൽ, ചാർക്കോൾ. രീതി: ചിക്കൻ വേവിച്ച് അരിക്ക് മുകളിൽ വെച്ച് ചാർക്കോൾ പുക നൽകുക.",
         descEn: "Ingredients: Basmati rice, chicken, mandi spices, black pepper, dried lime, capsicum, oil, charcoal. Method: Steam/roast chicken over spiced rice and smoke with charcoal.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1063,6 +1147,8 @@
         cat: "FOOD",
         title: "അൽഫാം ചിക്കൻ (Alfaham Chicken)",
         price: "Recipe",
+        link: "",
+        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
         descMl: "ചേരുവകൾ: ചിക്കൻ, തൈര്, ഇഞ്ചി-വെളുത്തുള്ളി, മുളകുപൊടി, കുരുമുളക്, ജീരകം, നാരങ്ങാനീര്, ഓയിൽ. രീതി: മസാല പുരട്ടി ഗ്രില്ലിലോ കനലിലോ ചുട്ടെടുക്കുക.",
         descEn: "Ingredients: Chicken, curd, ginger-garlic, chili powder, pepper, cumin, lemon juice, oil. Method: Marinate and grill over charcoal or oven until done.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1072,6 +1158,8 @@
         cat: "FOOD",
         title: "ചിക്കൻ പൊള്ളിച്ചത് (Chicken Pollichathu)",
         price: "Recipe",
+        link: "",
+        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
         descMl: "ചേരുവകൾ: വറുത്ത ചിക്കൻ, ചെറിയ ഉള്ളി, തക്കാളി, പച്ചമുളക്, കറിവേപ്പില, തേങ്ങാപ്പാൽ, വാഴയില. രീതി: മസാലയിൽ ചേർത്ത് വാഴയിലയിൽ പൊതിഞ്ഞ് തവയിൽ പൊള്ളിക്കുക.",
         descEn: "Ingredients: Fried chicken, shallots, tomato, green chili, curry leaves, coconut milk, banana leaf. Method: Coat in masala, wrap in banana leaf, and roast on tawa.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1081,6 +1169,8 @@
         cat: "FOOD",
         title: "ജ്യൂസുകൾ & ഷേക്കുകൾ (Juices & Shakes)",
         price: "Recipe",
+        link: "",
+        photo: CATEGORY_DEFAULT_IMAGES.FOOD,
         descMl: "പഴങ്ങൾ/കട്ടപ്പാൽ, പഞ്ചസാര, ഐസ് ക്യൂബ്സ്, ചോക്ലേറ്റ്/ബൂസ്റ്റ്/ഓറിയോ എന്നിവ ചേർത്ത് മിക്സിയിൽ ബ്ലെൻഡ് ചെയ്ത് ഫ്രഷ് ജ്യൂസും ഷേക്കും തയ്യാറാക്കാം.",
         descEn: "Blend fresh fruits or chilled/frozen milk with sugar, ice, cocoa/Boost/Oreo for quick juices and shakes.",
         by: "MUHAMMED ADHIL • 9778197726"
@@ -1101,10 +1191,11 @@
       items: starterFoodRecipes
     };
 
-    let state = JSON.parse(localStorage.getItem("bazaaro_fb_v1")) || defaultData;
+    let state = JSON.parse(localStorage.getItem("bazaaro_fb_link_v1")) || defaultData;
     let currentCategory = "ALL";
     let foodLang = "ml";
     let uploadedLogoTemp = null;
+    let postPhotoTemp = "";
 
     window.addEventListener("load", async () => {
       updateLiveDateTime();
@@ -1133,7 +1224,7 @@
             state.upi = cloud.site.upi || state.upi;
             if (cloud.site.logo) state.logo = cloud.site.logo;
           }
-          localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
+          localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
           renderCategoryItems();
           syncHeaderHeroOnly();
         } else if (seedIfEmpty) {
@@ -1169,12 +1260,12 @@
     }
 
     function persistLocalOnly() {
-      localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
       syncUI();
     }
 
     async function persistAndSyncCloud() {
-      localStorage.setItem("bazaaro_fb_v1", JSON.stringify(state));
+      localStorage.setItem("bazaaro_fb_link_v1", JSON.stringify(state));
       syncUI();
       await pushPublicStateToFirebase();
     }
@@ -1282,9 +1373,79 @@
     function previewLogoFile(e) {
       const f = e.target.files[0];
       if (!f) return;
-      const r = new FileReader();
-      r.onload = ev => uploadedLogoTemp = ev.target.result;
-      r.readAsDataURL(f);
+      compressImageFile(f, 240, 0.75, dataUrl => {
+        uploadedLogoTemp = dataUrl;
+      });
+    }
+
+    function compressImageFile(file, maxSize, quality, callback) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          let w = img.width;
+          let h = img.height;
+          if (w > h && w > maxSize) {
+            h = Math.round((h * maxSize) / w);
+            w = maxSize;
+          } else if (h > maxSize) {
+            w = Math.round((w * maxSize) / h);
+            h = maxSize;
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+          callback(canvas.toDataURL("image/jpeg", quality));
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handlePostPhotoUpload(e) {
+      const f = e.target.files[0];
+      if (!f) return;
+      compressImageFile(f, 640, 0.68, dataUrl => {
+        postPhotoTemp = dataUrl;
+        document.getElementById("postPhotoUrl").value = "";
+        showPhotoPreview(dataUrl);
+      });
+    }
+
+    function handlePostPhotoUrlInput(e) {
+      const url = e.target.value.trim();
+      postPhotoTemp = url;
+      showPhotoPreview(url);
+    }
+
+    function showPhotoPreview(src) {
+      const box = document.getElementById("postPhotoPreviewBox");
+      const img = document.getElementById("postPhotoPreviewImg");
+      if (src) {
+        img.src = src;
+        box.style.display = "block";
+      } else {
+        img.src = "";
+        box.style.display = "none";
+      }
+    }
+
+    function normalizeLink(raw) {
+      const val = (raw || "").trim();
+      if (!val) return "";
+      if (/^https?:\/\//i.test(val)) return val;
+      return "https://" + val;
+    }
+
+    function detectStoreLabel(url) {
+      const u = (url || "").toLowerCase();
+      if (u.includes("meesho")) return "🛒 Open on Meesho";
+      if (u.includes("flipkart")) return "🛍️ Open on Flipkart";
+      if (u.includes("myntra")) return "👗 Open on Myntra";
+      if (u.includes("amazon") || u.includes("amzn")) return "📦 Open on Amazon";
+      return "🔗 Open Product Link";
     }
 
     async function saveSiteSettings() {
@@ -1353,37 +1514,99 @@
     }
 
     function openSellModal(defaultCat) {
-      document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
+      document.getElementById("editingItemId").value = "";
       document.getElementById("postModalHeading").textContent =
-        defaultCat === "FOOD" ? "🍲 Sell Food Item" : "🛒 Sell Product / Add Item";
-      if (state.user) {
-        document.getElementById("postSellerContact").value = `${state.user.name} • ${state.user.phone}`;
-      }
+        defaultCat === "FOOD" ? "🍲 Sell Food Item (+ Photo)" : "🛒 Sell Product / Add Link";
+      document.getElementById("savePostBtn").textContent = "Publish Live to Everyone";
+      document.getElementById("postCategory").value = defaultCat || "PRODUCTS";
+      document.getElementById("postTitle").value = "";
+      document.getElementById("postPrice").value = "";
+      document.getElementById("postProductLink").value = "";
+      document.getElementById("postPhotoFile").value = "";
+      document.getElementById("postPhotoUrl").value = "";
+      postPhotoTemp = "";
+      showPhotoPreview("");
+      document.getElementById("postSellerContact").value = state.user
+        ? `${state.user.name} • ${state.user.phone}`
+        : "";
+      document.getElementById("postContent").value = "";
       openModal("postModal");
     }
 
-    async function addPublicPost() {
+    function openEditItemModal(id) {
+      const target = state.items.find(x => x.id === id);
+      if (!target) return;
+
+      document.getElementById("editingItemId").value = target.id;
+      document.getElementById("postModalHeading").textContent = "✏️ Edit Item, Photo & Link";
+      document.getElementById("savePostBtn").textContent = "Save Changes Live";
+      document.getElementById("postCategory").value = target.cat || "PRODUCTS";
+      document.getElementById("postTitle").value = target.title || "";
+      document.getElementById("postPrice").value = target.price || "";
+      document.getElementById("postProductLink").value = target.link || "";
+      document.getElementById("postPhotoFile").value = "";
+      postPhotoTemp = target.photo || "";
+      document.getElementById("postPhotoUrl").value =
+        target.photo && target.photo.startsWith("http") ? target.photo : "";
+      showPhotoPreview(postPhotoTemp);
+      document.getElementById("postSellerContact").value = target.by || "";
+      document.getElementById("postContent").value = target.descMl || target.descEn || "";
+      openModal("postModal");
+    }
+
+    async function savePublicPost() {
+      const editId = document.getElementById("editingItemId").value.trim();
       const cat = document.getElementById("postCategory").value;
       const title = document.getElementById("postTitle").value.trim();
       const price = document.getElementById("postPrice").value.trim() || "For Sale";
-      const contact = document.getElementById("postSellerContact").value.trim() || (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
+      const link = normalizeLink(document.getElementById("postProductLink").value);
+      const contact =
+        document.getElementById("postSellerContact").value.trim() ||
+        (state.user ? `${state.user.name} • ${state.user.phone}` : "Seller");
       const txt = document.getElementById("postContent").value.trim();
+
       if (!title || !txt) {
         alert("Please enter Name and Details.");
         return;
       }
-      state.items.unshift({
-        id: "item_" + Date.now(),
-        cat,
-        title,
-        price,
-        descMl: txt,
-        descEn: txt,
-        by: contact
-      });
-      document.getElementById("postTitle").value = "";
-      document.getElementById("postPrice").value = "";
-      document.getElementById("postContent").value = "";
+
+      const finalPhoto =
+        postPhotoTemp ||
+        CATEGORY_DEFAULT_IMAGES[cat] ||
+        CATEGORY_DEFAULT_IMAGES.PRODUCTS;
+
+      if (editId) {
+        state.items = state.items.map(item =>
+          item.id === editId
+            ? {
+                ...item,
+                cat,
+                title,
+                price,
+                link,
+                photo: finalPhoto,
+                descMl: txt,
+                descEn: txt,
+                by: contact
+              }
+            : item
+        );
+      } else {
+        state.items.unshift({
+          id: "item_" + Date.now(),
+          cat,
+          title,
+          price,
+          link,
+          photo: finalPhoto,
+          descMl: txt,
+          descEn: txt,
+          by: contact
+        });
+      }
+
+      postPhotoTemp = "";
+      document.getElementById("editingItemId").value = "";
       await persistAndSyncCloud();
       closeModal("postModal");
     }
@@ -1397,7 +1620,7 @@
       const q = document.getElementById("searchInput").value.trim().toLowerCase();
       const filtered = state.items.filter(item => {
         const matchCat = currentCategory === "ALL" || item.cat === currentCategory;
-        const blob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by + " " + item.price).toLowerCase();
+        const blob = (item.title + " " + item.descMl + " " + item.descEn + " " + item.by + " " + item.price + " " + (item.link || "")).toLowerCase();
         const matchQuery = !q || blob.includes(q);
         return matchCat && matchQuery;
       });
@@ -1405,25 +1628,34 @@
       const container = document.getElementById("categoryItemsContainer");
       if (!filtered.length) {
         container.innerHTML = `<div style="text-align:center; padding:18px; color:var(--text-muted); font-size:13px;">
-          No items listed here yet. Tap <b>+ Add Item</b> to sell or list here.
+          No items listed here yet. Tap <b>+ Add Item / Link</b> to add products, photos, or store links.
         </div>`;
         return;
       }
 
-      container.innerHTML = filtered.map(item => `
-        <div class="item-card">
-          <div class="item-top">
-            <span class="item-cat-tag">${item.cat}</span>
-            <span class="item-price-tag">${item.price}</span>
+      container.innerHTML = filtered.map(item => {
+        const imgSrc = item.photo || CATEGORY_DEFAULT_IMAGES[item.cat] || CATEGORY_DEFAULT_IMAGES.PRODUCTS;
+        const safeLink = item.link && /^https?:\/\//i.test(item.link) ? item.link : "";
+        return `
+          <div class="item-card">
+            <img class="item-photo" src="${imgSrc}" alt="${item.title}" onerror="this.src='${CATEGORY_DEFAULT_IMAGES.PRODUCTS}'" />
+            <div class="item-top">
+              <span class="item-cat-tag">${item.cat}</span>
+              <span class="item-price-tag">${item.price}</span>
+            </div>
+            <div class="item-title">${item.title}</div>
+            <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
+            ${safeLink ? `<a class="item-link-btn" href="${safeLink}" target="_blank" rel="noopener noreferrer">${detectStoreLabel(safeLink)}</a>` : ""}
+            <div class="item-footer">
+              <span><strong>${item.by}</strong></span>
+              <div class="item-actions">
+                <button class="edit-item-btn" onclick="openEditItemModal('${item.id}')">✏️ Edit</button>
+                <button class="del-btn" onclick="deleteItem('${item.id}')">Remove</button>
+              </div>
+            </div>
           </div>
-          <div class="item-title">${item.title}</div>
-          <div class="item-desc">${foodLang === "ml" ? item.descMl : item.descEn}</div>
-          <div class="item-footer">
-            <span><strong>${item.by}</strong></span>
-            <button class="del-btn" onclick="deleteItem('${item.id}')">Remove</button>
-          </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     function askAi() {
@@ -1431,7 +1663,7 @@
       if (!q) return;
       const rep = document.getElementById("aiReply");
       rep.style.display = "block";
-      rep.innerHTML = `<strong>AI Help:</strong> Items added here sync to Firebase Realtime Database so everyone on the app can see them live.`;
+      rep.innerHTML = `<strong>AI Help:</strong> Paste any Meesho, Flipkart, Myntra, or Amazon link when adding an item to show a direct buy/open button.`;
     }
 
     function openModal(id) { document.getElementById(id).classList.add("open"); }
